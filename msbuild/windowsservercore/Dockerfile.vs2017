@@ -1,0 +1,21 @@
+FROM webkitdev/tools
+
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+
+#--------------------------------------------------------------------
+# Install MS Build Tools 2017
+#--------------------------------------------------------------------
+
+RUN $url = 'https://aka.ms/vs/15/release/vs_BuildTools.exe'; \
+    Write-Host ('Downloading MSBuild installer from {0} ...' -f $url); \
+    (New-Object System.Net.WebClient).DownloadFile($url, 'msbuild-install.exe'); \
+    Write-Host 'Installing MSBuild ...'; \
+    Start-Process msbuild-install.exe -Wait \
+        -ArgumentList @( \
+            '–quiet', \
+            '–add', \
+            'Microsoft.VisualStudio.Workload.VCTools', \
+            '–includeRecommended' \
+        ); \
+    Write-Host 'Removing MSBuild installer ...'; \
+    Remove-Item msbuild-install.exe -Force;
