@@ -4,6 +4,13 @@ Docker images for doing WebKit development
 ## Windows development
 
 The `webkitdev` images contain the tools necessary to build WebKit on Windows.
+To run the images follow the instructions for [Docker for Windows]
+(https://docs.docker.com/docker-for-windows/). After installation Docker will
+be able to run Linux containers. To switch over to Windows containers follow
+[this visual]
+(https://stefanscherer.github.io/run-linux-and-windows-containers-on-windows-10/).
+
+Currently 1.13.1 is the tested version. The beta channel has not been tested.
 
 ### Building WinCairo
 
