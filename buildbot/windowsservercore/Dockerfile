@@ -1,4 +1,4 @@
-FROM webkitdev/tools
+FROM webkitdev/msbuild
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
