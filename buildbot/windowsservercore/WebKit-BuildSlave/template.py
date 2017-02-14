@@ -6,7 +6,7 @@ def get_options():
         # buildbot.tac
         'master': os.environ.get('BUILD_MASTER_NAME', 'build.webkit.org'),
         'port': os.environ.get('BUILD_MASTER_PORT', '17000'),
-        'name': os.environ.get('BUILD_SLAVE_NAME'),
+        'slave': os.environ.get('BUILD_SLAVE_NAME'),
         'password': os.environ.get('BUILD_SLAVE_PASSWORD'),
         # info/admin
         'name': os.environ.get('ADMIN_NAME'),
