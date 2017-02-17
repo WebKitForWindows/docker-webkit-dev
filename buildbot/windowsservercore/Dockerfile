@@ -79,4 +79,4 @@ COPY WebKit-BuildSlave C:\\WebKit-BuildSlave
 #--------------------------------------------------------------------
 
 WORKDIR C:\\WebKit-BuildSlave
-CMD powershell python template.py; buildslave start;
+CMD .\run.cmd
