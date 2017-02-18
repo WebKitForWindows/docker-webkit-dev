@@ -13,7 +13,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 ENV PERL_VERSION 5.24.1.1
 
 RUN $perlUrl = ('http://strawberryperl.com/download/{0}/strawberry-perl-{0}-64bit.msi' -f $env:PERL_VERSION); \
-    Write-Host ('Downloading Perl installer from {0} ...' -f $perlUrl);
+    Write-Host ('Downloading Perl installer from {0} ...' -f $perlUrl); \
     (New-Object System.Net.WebClient).DownloadFile($perlUrl, 'perl-install.msi'); \
     Write-Host 'Installing Perl ...'; \
     Start-Process msiexec -Wait \
@@ -148,3 +148,8 @@ RUN $bisonUrl = ('https://downloads.sourceforge.net/project/gnuwin32/bison/{0}/b
     Expand-Archive -Path bison-binaries.zip -DestinationPath C:\gnuwin32 -Force; \
     Write-Host 'Removing Bison binaries ...'; \
     Remove-Item bison-binaries.zip -Force;
+
+RUN $systemPathKey = 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment'; \
+    $systemPath = (Get-ItemProperty -Path $systemPathKey -Name PATH).path; \
+	$updatedPath = ('{0};C:\gnuwin32\bin' -f $systemPath); \
+	Set-ItemProperty -Path $systemPathKey -Name PATH –Value $updatedPath;
