@@ -14,7 +14,13 @@ set HTTP_PROXY=
 type nul > "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com"
 
 :: Set Visual Studio environment variables of X64
-call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+@call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+
+:: Set Ninja variables
+where cl.exe > cl-path
+set CC=<cl-path
+set CXX=<cl-path
+del cl-path
 
 :: Run the python script to generate the environment
 python buildbot.py

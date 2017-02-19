@@ -3,6 +3,24 @@ FROM webkitdev/msbuild
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 #--------------------------------------------------------------------
+# Install ninja
+#--------------------------------------------------------------------
+
+ENV NINJA_BUILD_VERSION 1.7.2
+
+RUN $ninjaUrl = ('https://github.com/ninja-build/ninja/releases/download/v{0}/ninja-win.zip' -f $env:NINJA_BUILD_VERSION); \
+    Write-Host ('Downloading Ninja binaries from {0} ...' -f $ninjaUrl); \
+    (New-Object System.Net.WebClient).DownloadFile($ninjaUrl, 'ninja-binaries.zip'); \
+    Write-Host 'Unzipping Ninja binaries ...'; \
+    Expand-Archive -Path ninja-binaries.zip -DestinationPath C:\ninja -Force; \
+    Write-Host 'Removing Ninja binaries ...'; \
+    Remove-Item ninja-binaries.zip -Force; \
+    $systemPathKey = 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment'; \
+    $systemPath = (Get-ItemProperty -Path $systemPathKey -Name PATH).path; \
+	$updatedPath = ('{0};C:\ninja' -f $systemPath); \
+	Set-ItemProperty -Path $systemPathKey -Name PATH –Value $updatedPath;
+
+#--------------------------------------------------------------------
 # Install MS Visual C++ Compiler for Python 2.7
 #--------------------------------------------------------------------
 
@@ -72,6 +90,10 @@ RUN Write-Host 'Installing buildbot ...'; \
             ('buildbot-slave=={0}' -f $env:BUILDBOT_VERSION) \
         );
 
+#--------------------------------------------------------------------
+# Copy files
+#--------------------------------------------------------------------
+	
 COPY WebKit-BuildSlave C:\\WebKit-BuildSlave
 
 #--------------------------------------------------------------------
