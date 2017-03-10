@@ -7,8 +7,9 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 #--------------------------------------------------------------------
 
 ENV SVN_VERSION 1.9.5
+ENV SVN_BUILD_NUMBER 27581
 
-RUN $svnUrl = ('https://downloads.sourceforge.net/project/tortoisesvn/{0}/Application/TortoiseSVN-{0}.27581-x64-svn-1.9.5.msi' -f $env:SVN_VERSION); \
+RUN $svnUrl = ('https://downloads.sourceforge.net/project/tortoisesvn/{0}/Application/TortoiseSVN-{0}.{1}-x64-svn-1.9.5.msi' -f $env:SVN_VERSION, $env:SVN_BUILD_NUMBER); \
     Write-Host ('Downloading SVN installer from {0} ..' -f $svnUrl); \
     (New-Object System.Net.WebClient).DownloadFile($svnUrl, 'svn-install.msi'); \
     \
@@ -31,15 +32,16 @@ RUN $svnUrl = ('https://downloads.sourceforge.net/project/tortoisesvn/{0}/Applic
     Write-Host 'Removing SVN installer ...'; \
     Remove-Item svn-install.msi -Force; \
     \
-    Write-Host 'SVN install complete';
+    Write-Host 'SVN install complete.';
 
 #--------------------------------------------------------------------
 # Install Git for Windows x64 CLI
 #--------------------------------------------------------------------
 
-ENV GIT_VERSION 2.11.0
+ENV GIT_VERSION 2.12.0
+ENV GIT_BUILD_NUMBER 1
 
-RUN $gitUrl = ('https://github.com/git-for-windows/git/releases/download/v{0}.windows.3/Git-{0}.3-64-bit.exe' -f $env:GIT_VERSION); \
+RUN $gitUrl = ('https://github.com/git-for-windows/git/releases/download/v{0}.windows.{1}/Git-{0}-64-bit.exe' -f $env:GIT_VERSION, $env:GIT_BUILD_NUMBER); \
     Write-Host ('Downloading Git installer from {0} ..' -f $gitUrl); \
     (New-Object System.Net.WebClient).DownloadFile($gitUrl, 'git-install.exe'); \
     Write-Host 'Installing Git ...'; \
@@ -62,4 +64,4 @@ RUN $gitUrl = ('https://github.com/git-for-windows/git/releases/download/v{0}.wi
     Write-Host 'Removing Git installer ...'; \
     Remove-Item git-install.exe -Force; \
     \
-    Write-Host 'Git install complete';
+    Write-Host 'Git install complete.';
