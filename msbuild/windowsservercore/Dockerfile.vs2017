@@ -6,16 +6,21 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # Install MS Build Tools 2017
 #--------------------------------------------------------------------
 
-RUN $url = 'https://aka.ms/vs/15/release/vs_BuildTools.exe'; \
-    Write-Host ('Downloading MSBuild installer from {0} ...' -f $url); \
-    (New-Object System.Net.WebClient).DownloadFile($url, 'msbuild-install.exe'); \
-    Write-Host 'Installing MSBuild ...'; \
-    Start-Process msbuild-install.exe -Wait \
+RUN $url = 'https://download.microsoft.com/download/5/A/8/5A8B8314-CA70-4225-9AF0-9E957C9771F7/vs_BuildTools.exe'; \
+    Write-Host ('Downloading Visual Studio 2017 installer from {0} ...' -f $url); \
+    (New-Object System.Net.WebClient).DownloadFile($url, 'vs-install.exe'); \
+    Write-Host ('Downloaded {0} bytes' -f (Get-Item 'vs-install.exe').length); \
+    \
+    Write-Host 'Installing Visual Studio Build Tools 2017 ...'; \
+    Start-Process vs-install.exe -Wait \
         -ArgumentList @( \
-            '–quiet', \
-            '–add', \
-            'Microsoft.VisualStudio.Workload.VCTools', \
-            '–includeRecommended' \
+            '--quiet', \
+            '--norestart', \
+            '--wait', \
+            '--add', 'Microsoft.VisualStudio.Workload.VCTools', '--includeOptional' \
         ); \
-    Write-Host 'Removing MSBuild installer ...'; \
-    Remove-Item msbuild-install.exe -Force;
+    \
+    Write-Host 'Removing Visual Studio 2017 installer ...'; \
+    Remove-Item vs-install.exe -Force; \
+    \
+    Write-Host 'Visual Studio Build Tools 2017 install complete.';
