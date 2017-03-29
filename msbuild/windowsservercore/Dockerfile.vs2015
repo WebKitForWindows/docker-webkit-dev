@@ -3,7 +3,7 @@ FROM webkitdev/tools
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 #--------------------------------------------------------------------
-# Install MS Build Tools 2017
+# Install MS Build Tools 2015
 #--------------------------------------------------------------------
 
-RUN Install-VSBuildTools2017;
+RUN Install-VSBuildTools2015;
