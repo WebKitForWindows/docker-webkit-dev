@@ -20,9 +20,15 @@ Remove-Item Env:BUILD_SLAVE_PASSWORD;
 
 # Run any additional startup scripts
 $scriptPath = Join-Path $PSScriptRoot 'Scripts';
-$scripts = Get-ChildItem -Path $scriptPath -Filter '*.ps1';
 
 Write-Host ('Looking in {0} for additional startup scripts' -f $scriptPath);
+
+$scripts = @();
+
+if (Test-Path $scriptPath) {
+  $scripts = Get-ChildItem -Path $scriptPath -Filter '*.ps1';
+}
+
 Write-Host ('{0} scripts found' -f $scripts.Count);
 
 foreach ($script in $scripts) {
