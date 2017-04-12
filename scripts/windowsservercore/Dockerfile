@@ -39,7 +39,7 @@ RUN Install-Module VSSetup \
 # Install WebKitDev Module
 #--------------------------------------------------------------------
 
-ENV WEBKIT_DEV_VERSION 0.1.0
+ENV WEBKIT_DEV_VERSION 0.1.1
 
 RUN Install-Module WebKitDev \
     -Scope AllUsers \
