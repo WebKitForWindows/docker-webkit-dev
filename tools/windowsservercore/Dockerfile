@@ -39,7 +39,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.8.0
+ENV CMAKE_VERSION 3.8.1
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
