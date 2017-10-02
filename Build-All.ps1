@@ -1,3 +1,5 @@
+$ErrorActionPreference = 'Stop';
+
 Function Build-WebKitDockerImage {
   Param(
     [Parameter(Mandatory)]
