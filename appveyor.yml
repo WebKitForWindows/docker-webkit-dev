@@ -1,0 +1,9 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+
+install:
+  - docker version
+
+build_script:
+  - ./Build-All.ps1
+  
