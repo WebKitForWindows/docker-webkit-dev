@@ -41,6 +41,8 @@ RUN Write-Host 'Installing buildbot ...'; \
 # Copy files
 #--------------------------------------------------------------------
 
+RUN New-Item c:\WebKit-BuildSlave PowerShell -type directory;
+
 COPY ./WebKit-BuildSlave /
 
 #--------------------------------------------------------------------
