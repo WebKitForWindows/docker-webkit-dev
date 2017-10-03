@@ -5,4 +5,7 @@ install:
   - docker version
 
 build_script:
-  - ps: .\Build-All.ps1
+  - ps: |
+      [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
+      (New-Object System.Net.WebClient).DownloadFile('https://bootstrap.pypa.io/get-pip.py', 'get-pip.py');
+  
