@@ -35,15 +35,13 @@ RUN Write-Host 'Installing buildbot ...'; \
     \
     pip install -q ('buildbot-slave=={0}' -f $env:BUILDBOT_VERSION); \
     pip show buildbot-slave; \
-    buildslave --version; \
+    buildslave --version;
 
 #--------------------------------------------------------------------
 # Copy files
 #--------------------------------------------------------------------
 
-RUN New-Item c:\WebKit-BuildSlave PowerShell -type directory;
-
-COPY ./WebKit-BuildSlave /
+COPY WebKit-BuildSlave /
 
 #--------------------------------------------------------------------
 # Entrypoint
