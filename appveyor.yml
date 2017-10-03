@@ -5,4 +5,4 @@ install:
   - docker version
 
 build_script:
-  - ps: ps: .\Build-All.ps1
+  - ps: .\Build-All.ps1
