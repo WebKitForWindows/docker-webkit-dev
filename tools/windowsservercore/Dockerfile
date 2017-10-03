@@ -18,7 +18,7 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 # Install Python
 #--------------------------------------------------------------------
 
-ENV PYTHON_VERSION 2.7.13
+ENV PYTHON_VERSION 2.7.14
 ENV PYTHONIOENCODING utf-8
 ENV PYTHON_PIP_VERSION 9.0.1
 
