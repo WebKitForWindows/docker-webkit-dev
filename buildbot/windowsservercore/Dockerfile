@@ -41,7 +41,7 @@ RUN Write-Host 'Installing buildbot ...'; \
 # Copy files
 #--------------------------------------------------------------------
 
-COPY WebKit-BuildSlave /
+COPY ./WebKit-BuildSlave /
 
 #--------------------------------------------------------------------
 # Entrypoint
