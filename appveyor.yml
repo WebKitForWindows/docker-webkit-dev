@@ -17,9 +17,12 @@ build_script:
   - docker build -t webkitdev/scm  .\scm\windowsservercore
   - docker build -t webkitdev/tools .\scripts\windowsservercore
   - docker build -t webkitdev/msbuild .\msbuild\windowsservercore
+  - docker build -t webkitdev/buildbot .\buildbot\windowsservercore
 
 deploy_script:
   - docker login -u=%DOCKER_USER% -p=%DOCKER_PASS%
   - docker push webkitdev/scripts
   - docker push webkitdev/scm
   - docker push webkitdev/tools
+  - docker push webkitdev/msbuild
+  - docker push webkitdev/buildbot
