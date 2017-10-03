@@ -22,10 +22,11 @@ ENV PYTHON_VERSION 2.7.13
 ENV PYTHONIOENCODING utf-8
 ENV PYTHON_PIP_VERSION 9.0.1
 
-RUN Install-Python \
+RUN [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; \
+    Install-Python \
     -Version $env:PYTHON_VERSION \
     -PipVersion $env:PYTHON_PIP_VERSION \
-    -InstallationPath C:\tools\python
+    -InstallationPath C:\tools\python;
 
 #--------------------------------------------------------------------
 # Install Ruby
