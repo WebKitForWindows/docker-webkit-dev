@@ -30,7 +30,7 @@ RUN Install-Module 7Zip4Powershell \
 # Install VSSetup Module
 #--------------------------------------------------------------------
 
-ENV VS_SETUP_VERSION 1.0.47.27524
+ENV VS_SETUP_VERSION 2.0.1.32208
 
 RUN Install-Module VSSetup \
     -Scope AllUsers \

@@ -10,7 +10,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # technically use it for a build-bot.
 #--------------------------------------------------------------------
 
-ENV PERL_VERSION 5.24.1.1
+ENV PERL_VERSION 5.26.0.1
 
 RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 
@@ -18,7 +18,7 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 # Install Python
 #--------------------------------------------------------------------
 
-ENV PYTHON_VERSION 2.7.13
+ENV PYTHON_VERSION 2.7.14
 ENV PYTHONIOENCODING utf-8
 ENV PYTHON_PIP_VERSION 9.0.1
 
@@ -40,7 +40,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.8.1
+ENV CMAKE_VERSION 3.9.3
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -50,7 +50,7 @@ RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
 RUN Register-SystemPath -Path C:\tools\ninja
 
-ENV NINJA_VERSION 1.7.2
+ENV NINJA_VERSION 1.8.2
 
 RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 
