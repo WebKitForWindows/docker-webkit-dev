@@ -7,7 +7,7 @@ Function Build-WebKitDockerImage {
   )
 
   $path = Join-Path $PSScriptRoot (Join-Path $tag 'windowsservercore');
-  $cmd = 'docker build -t webkitdev/{0} {1}' -f $tag, $path;
+  $cmd = 'docker build --squash -t webkitdev/{0} {1}' -f $tag, $path;
 
   Write-Host $cmd;
   Invoke-Expression $cmd;
