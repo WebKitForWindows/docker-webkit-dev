@@ -75,5 +75,5 @@ RUN Register-SystemPath -Path C:\tools\flex\bin; \
 
 ENV BISON_VERSION 2.4.1
 
-RUN Register-SystemPath -Path C:\tools\gnuwin32\bison; \
+RUN Register-SystemPath -Path C:\tools\bison\bin; \
     Install-Bison -Version $env:BISON_VERSION -InstallationPath C:\tools\bison;
