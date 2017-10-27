@@ -65,12 +65,12 @@ RUN Register-SystemPath -Path C:\tools\nasm; \
 
 ENV GPERF_VERSION 3.0.1
 
-RUN Register-SystemPath -Path C:\tools\gperf\bin \
+RUN Register-SystemPath -Path C:\tools\gperf\bin; \
     Install-Gperf -Version $env:GPERF_VERSION -InstallationPath C:\tools\gperf;
 
 ENV FLEX_VERSION 2.5.4a-1
 
-RUN Register-SystemPath -Path C:\tools\flex\bin \
+RUN Register-SystemPath -Path C:\tools\flex\bin; \
     Install-Flex -Version $env:FLEX_VERSION -InstallationPath C:\tools\flex;
 
 ENV BISON_VERSION 2.4.1
