@@ -22,8 +22,7 @@ ENV PYTHON_VERSION 2.7.14
 ENV PYTHONIOENCODING utf-8
 ENV PYTHON_PIP_VERSION 9.0.1
 
-RUN [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; \
-    Install-Python \
+RUN Install-Python \
     -Version $env:PYTHON_VERSION \
     -PipVersion $env:PYTHON_PIP_VERSION \
     -InstallationPath C:\tools\python;
@@ -48,26 +47,33 @@ RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 # Install Ninja build system
 #--------------------------------------------------------------------
 
-RUN Register-SystemPath -Path C:\tools\ninja
-
 ENV NINJA_VERSION 1.8.2
 
-RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
+RUN Register-SystemPath -Path C:\tools\ninja; \
+    Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
+
+#--------------------------------------------------------------------
+# Install NASM
+#--------------------------------------------------------------------
+
+RUN Register-SystemPath -Path C:\tools\nasm; \
+    Install-Nasm -Version 2.13.01 -InstallationPath C:\tools\nasm;
 
 #--------------------------------------------------------------------
 # Install GNU tools
 #--------------------------------------------------------------------
 
-RUN Register-SystemPath -Path C:\tools\gnuwin32\bin;
-
 ENV GPERF_VERSION 3.0.1
 
-RUN Install-Gperf -Version $env:GPERF_VERSION -InstallationPath C:\tools\gnuwin32;
+RUN Register-SystemPath -Path C:\tools\gperf\bin \
+    Install-Gperf -Version $env:GPERF_VERSION -InstallationPath C:\tools\gperf;
 
 ENV FLEX_VERSION 2.5.4a-1
 
-RUN Install-Flex -Version $env:FLEX_VERSION -InstallationPath C:\tools\gnuwin32;
+RUN Register-SystemPath -Path C:\tools\flex\bin \
+    Install-Flex -Version $env:FLEX_VERSION -InstallationPath C:\tools\flex;
 
 ENV BISON_VERSION 2.4.1
 
-RUN Install-Bison -Version $env:BISON_VERSION -InstallationPath C:\tools\gnuwin32;
+RUN Register-SystemPath -Path C:\tools\gnuwin32\bison; \
+    Install-Bison -Version $env:BISON_VERSION -InstallationPath C:\tools\bison;
