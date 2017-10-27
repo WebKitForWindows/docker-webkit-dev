@@ -31,7 +31,7 @@ RUN Install-Python \
 # Install Ruby
 #--------------------------------------------------------------------
 
-ENV RUBY_VERSION 2.3.3
+ENV RUBY_VERSION 2.4.2-2
 
 RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby
 
@@ -39,7 +39,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.9.3
+ENV CMAKE_VERSION 3.9.4
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
