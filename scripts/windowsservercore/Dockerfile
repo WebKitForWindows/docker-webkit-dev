@@ -10,7 +10,7 @@ RUN [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityPro
 
 ENV NUGET_VERSION 2.8.5.208
 
-RUN  \
+RUN Install-PackageProvider NuGet \
     -Scope AllUsers \
     -RequiredVersion $env:NUGET_VERSION \
     -Force
