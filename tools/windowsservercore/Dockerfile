@@ -56,8 +56,10 @@ RUN Register-SystemPath -Path C:\tools\ninja; \
 # Install NASM
 #--------------------------------------------------------------------
 
+ENV NASM_VERSION 2.13.01
+
 RUN Register-SystemPath -Path C:\tools\nasm; \
-    Install-Nasm -Version 2.13.01 -InstallationPath C:\tools\nasm;
+    Install-Nasm -Version $env:NASM_VERSION -InstallationPath C:\tools\nasm;
 
 #--------------------------------------------------------------------
 # Install GNU tools
