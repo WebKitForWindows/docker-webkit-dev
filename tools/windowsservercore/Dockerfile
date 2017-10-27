@@ -10,7 +10,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # technically use it for a build-bot.
 #--------------------------------------------------------------------
 
-ENV PERL_VERSION 5.26.0.1
+ENV PERL_VERSION 5.26.1.1
 
 RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 
