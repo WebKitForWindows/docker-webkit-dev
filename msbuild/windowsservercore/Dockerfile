@@ -8,5 +8,5 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 
 RUN Install-VSBuildTools2017 -Workloads \
     Microsoft.VisualStudio.Workload.VCTools, \
-    Microsoft.VisualStudio.Component.Windows81SDK,
+    Microsoft.VisualStudio.Component.Windows81SDK, \
     Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Win81;
