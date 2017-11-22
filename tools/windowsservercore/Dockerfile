@@ -28,6 +28,16 @@ RUN Install-Python \
     -InstallationPath C:\tools\python;
 
 #--------------------------------------------------------------------
+# Install pywin32
+#--------------------------------------------------------------------
+
+ENV PYWIN32_VERSION 219
+
+RUN Write-Host Write-Host 'Installing pywin32 ...'; \
+    pip install -q ('pypiwin32=={0}' -f $env:PYWIN32_VERSION); \
+    pip show pypiwin32;
+
+#--------------------------------------------------------------------
 # Install Ruby
 #--------------------------------------------------------------------
 
@@ -39,7 +49,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.9.4
+ENV CMAKE_VERSION 3.9.5
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 

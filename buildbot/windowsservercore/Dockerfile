@@ -3,16 +3,6 @@ FROM webkitdev/msbuild
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 #--------------------------------------------------------------------
-# Install pywin32
-#--------------------------------------------------------------------
-
-ENV PYWIN32_VERSION 219
-
-RUN Write-Host Write-Host 'Installing pywin32 ...'; \
-    pip install -q ('pypiwin32=={0}' -f $env:PYWIN32_VERSION); \
-    pip show pypiwin32;
-
-#--------------------------------------------------------------------
 # Install twisted
 #--------------------------------------------------------------------
 
