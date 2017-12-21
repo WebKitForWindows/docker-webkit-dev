@@ -35,6 +35,8 @@ foreach ($script in $scripts) {
 # Setup credentials
 Set-Location WebKit;
 
+Write-Host ('git config core.autocrlf false');
+git config core.autocrlf false;
 Write-Host ('git config bugzilla.username {0}' -f $env:BUGZILLA_USERNAME);
 git config bugzilla.username $env:BUGZILLA_USERNAME;
 Write-Host 'git config bugzilla.password ********'
