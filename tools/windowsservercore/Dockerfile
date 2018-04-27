@@ -20,7 +20,7 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 
 ENV PYTHON_VERSION 2.7.14
 ENV PYTHONIOENCODING utf-8
-ENV PYTHON_PIP_VERSION 9.0.1
+ENV PYTHON_PIP_VERSION 10.0.1
 
 RUN Install-Python \
     -Version $env:PYTHON_VERSION \
@@ -41,7 +41,7 @@ RUN Write-Host Write-Host 'Installing pywin32 ...'; \
 # Install Ruby
 #--------------------------------------------------------------------
 
-ENV RUBY_VERSION 2.4.2-2
+ENV RUBY_VERSION 2.4.4-1
 
 RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby
 
@@ -49,7 +49,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.9.5
+ENV CMAKE_VERSION 3.10.2
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -61,6 +61,14 @@ ENV NINJA_VERSION 1.8.2
 
 RUN Register-SystemPath -Path C:\tools\ninja; \
     Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
+
+#--------------------------------------------------------------------
+# Install XAMPP
+#--------------------------------------------------------------------
+
+ENV XAMPP_VERSION 7.2.4
+
+RUN Install-Xampp -Version $env:XAMPP_VERSION;
 
 #--------------------------------------------------------------------
 # Install GNU tools
@@ -80,3 +88,8 @@ ENV BISON_VERSION 2.4.1
 
 RUN Register-SystemPath -Path C:\tools\bison\bin; \
     Install-Bison -Version $env:BISON_VERSION -InstallationPath C:\tools\bison;
+
+ENV DIFFUTILS_VERSION 2.8.7.1
+
+RUN Register-SystemPath -Path C:\tools\diffutils\bin; \
+    Install-DiffUtils -Version $env:DIFFUTILS_VERSION -InstallationPath C:\tools\diffutils;
