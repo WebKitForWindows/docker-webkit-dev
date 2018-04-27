@@ -1,8 +1,6 @@
-FROM microsoft/windowsservercore:10.0.14393.1198
+FROM microsoft/windowsservercore:1709
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
-
-RUN [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
 
 #--------------------------------------------------------------------
 # Install NuGet
@@ -14,11 +12,12 @@ RUN Install-PackageProvider NuGet \
     -Scope AllUsers \
     -RequiredVersion $env:NUGET_VERSION \
     -Force
+
 #--------------------------------------------------------------------
 # Install WebKitDev Module
 #--------------------------------------------------------------------
 
-ENV WEBKIT_DEV_VERSION 0.1.6
+ENV WEBKIT_DEV_VERSION 0.1.9
 
 RUN Install-Module WebKitDev \
     -Scope AllUsers \
