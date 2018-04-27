@@ -3,6 +3,30 @@ Write-Host ('Queue: {0}' -f $env:EWS_QUEUE_NAME);
 Write-Host ('Name: {0}' -f $env:EWS_SERVER_NAME);
 Write-Host ('Iterations: {0}' -f $env:EWS_ITERATIONS)
 
+# Print the host information
+$cs = Get-WMIObject -Class Win32_ComputerSystem;
+Write-Host ('Host system');
+Write-Host ('Processors: {0}' -f $cs.NumberOfProcessors);
+Write-Host ('Logical processors: {0}' -f $cs.NumberOfLogicalProcessors);
+Write-Host ('Total Physical Memory: {0:f2}gb' -f ($cs.TotalPhysicalMemory /1Gb));
+
+# Sanity check the configuration to make sure it is setup properly
+$minProcessors = 4;
+
+if ($cs.NumberOfLogicalProcessors -lt $minProcessors) {
+  Write-Error ('WebKit builds need to have at least {0} processors available.
+Make sure the number of processors is specified when starting the container
+  docker run --cpu-count={0}' -f $minProcessors);
+}
+
+$minPhysicalMemory = 12;
+
+if ($cs.TotalPhysicalMemory -lt ($minPhysicalMemory * 1Gb)) {
+  Write-Error ('WebKit builds need to have at least {0}Gbs of memory available.
+Make sure the amount of memory is specified when starting the container
+  docker run --memory={0}g' -f $minPhysicalMemory);
+}
+
 # Initialize the Visual Studio environment
 Write-Host 'Initializing Visual Studio environment';
 
