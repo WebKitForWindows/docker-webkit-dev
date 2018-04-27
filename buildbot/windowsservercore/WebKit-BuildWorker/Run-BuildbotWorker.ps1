@@ -14,6 +14,7 @@ For local development set the BUILD_WORKER_PASSWORD environment variable using
 While in production use docker secrets and set the location of the file using the BUILD_WORKER_PASSWORD_FILE environment variable');
   }
 
+  Write-Host ('Loading password from {0}', $env:BUILD_WORKER_PASSWORD_FILE);
   $Env:BUILD_WORKER_PASSWORD = Get-Content -Path $env:BUILD_WORKER_PASSWORD_FILE;
 }
 
