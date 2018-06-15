@@ -10,7 +10,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # technically use it for a build-bot.
 #--------------------------------------------------------------------
 
-ENV PERL_VERSION 5.26.1.1
+ENV PERL_VERSION 5.26.2.1
 
 RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 
@@ -18,7 +18,7 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 # Install Python
 #--------------------------------------------------------------------
 
-ENV PYTHON_VERSION 2.7.14
+ENV PYTHON_VERSION 2.7.15
 ENV PYTHONIOENCODING utf-8
 ENV PYTHON_PIP_VERSION 10.0.1
 
@@ -31,11 +31,11 @@ RUN Install-Python \
 # Install pywin32
 #--------------------------------------------------------------------
 
-ENV PYWIN32_VERSION 219
+ENV PYWIN32_VERSION 223
 
 RUN Write-Host Write-Host 'Installing pywin32 ...'; \
-    pip install -q ('pypiwin32=={0}' -f $env:PYWIN32_VERSION); \
-    pip show pypiwin32;
+    pip install -q ('pywin32=={0}' -f $env:PYWIN32_VERSION); \
+    pip show pywin32;
 
 #--------------------------------------------------------------------
 # Install Ruby
@@ -66,9 +66,15 @@ RUN Register-SystemPath -Path C:\tools\ninja; \
 # Install XAMPP
 #--------------------------------------------------------------------
 
-ENV XAMPP_VERSION 7.2.4
+ENV XAMPP_VERSION 7.2.6
 
 RUN Install-Xampp -Version $env:XAMPP_VERSION;
+
+#--------------------------------------------------------------------
+# Install Fonts
+#--------------------------------------------------------------------
+
+RUN Install-AhemFont;
 
 #--------------------------------------------------------------------
 # Install GNU tools
@@ -93,3 +99,13 @@ ENV DIFFUTILS_VERSION 2.8.7.1
 
 RUN Register-SystemPath -Path C:\tools\diffutils\bin; \
     Install-DiffUtils -Version $env:DIFFUTILS_VERSION -InstallationPath C:\tools\diffutils;
+
+ENV MAKE_VERSION 3.81
+
+RUN Register-SystemPath -Path C:\tools\make\bin; \
+    Install-Make -Version $env:MAKE_VERSION -InstallationPath C:\tools\make;
+
+ENV PATCH_VERSION 2.5.9
+
+RUN Register-SystemPath -Path C:\tools\patch\bin; \
+    Install-Patch -Version $env:PATCH_VERSION -InstallationPath C:\tools\patch;

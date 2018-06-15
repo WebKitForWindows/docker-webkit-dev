@@ -9,6 +9,7 @@ Function Build-WebKitDockerImage {
   $path = Join-Path $PSScriptRoot (Join-Path $tag 'windowsservercore');
   $cmd = 'docker build -t webkitdev/{0} {1}' -f $tag, $path;
 
+  Write-Host ('Starting build at {0}' -f (Get-Date))
   Write-Host $cmd;
   Invoke-Expression $cmd;
 }
