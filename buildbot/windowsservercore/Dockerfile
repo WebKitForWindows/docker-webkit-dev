@@ -6,7 +6,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # Install twisted
 #--------------------------------------------------------------------
 
-ENV TWISTED_VERSION 17.1.0
+ENV TWISTED_VERSION 18.9.0
 
 RUN Write-Host 'Installing twisted ...'; \
     pip install -q ('Twisted=={0}' -f $env:TWISTED_VERSION); \
@@ -16,7 +16,7 @@ RUN Write-Host 'Installing twisted ...'; \
 # Install buildbot
 #--------------------------------------------------------------------
 
-ENV BUILDBOT_VERSION 0.8.12
+ENV BUILDBOT_VERSION 0.8.14
 
 RUN Write-Host 'Installing buildbot ...'; \
     pip install -q ('buildbot=={0}' -f $env:BUILDBOT_VERSION); \

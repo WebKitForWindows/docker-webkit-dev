@@ -1,4 +1,4 @@
-FROM microsoft/windowsservercore:1709
+FROM mcr.microsoft.com/windows/servercore:1803
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
@@ -11,7 +11,7 @@ ENV NUGET_VERSION 2.8.5.208
 RUN Install-PackageProvider NuGet \
     -Scope AllUsers \
     -RequiredVersion $env:NUGET_VERSION \
-    -Force
+    -Force;
 
 #--------------------------------------------------------------------
 # Install WebKitDev Module
@@ -22,4 +22,4 @@ ENV WEBKIT_DEV_VERSION 0.1.12
 RUN Install-Module WebKitDev \
     -Scope AllUsers \
     -RequiredVersion $env:WEBKIT_DEV_VERSION \
-    -Force
+    -Force;

@@ -10,7 +10,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # technically use it for a build-bot.
 #--------------------------------------------------------------------
 
-ENV PERL_VERSION 5.26.2.1
+ENV PERL_VERSION 5.28.1.1
 
 RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 
@@ -20,7 +20,7 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 
 ENV PYTHON_VERSION 2.7.15
 ENV PYTHONIOENCODING utf-8
-ENV PYTHON_PIP_VERSION 10.0.1
+ENV PYTHON_PIP_VERSION 18.1
 
 RUN Install-Python \
     -Version $env:PYTHON_VERSION \
@@ -31,7 +31,7 @@ RUN Install-Python \
 # Install pywin32
 #--------------------------------------------------------------------
 
-ENV PYWIN32_VERSION 223
+ENV PYWIN32_VERSION 224
 
 RUN Write-Host Write-Host 'Installing pywin32 ...'; \
     pip install -q ('pywin32=={0}' -f $env:PYWIN32_VERSION); \
@@ -41,15 +41,15 @@ RUN Write-Host Write-Host 'Installing pywin32 ...'; \
 # Install Ruby
 #--------------------------------------------------------------------
 
-ENV RUBY_VERSION 2.4.4-1
+ENV RUBY_VERSION 2.5.3-1
 
-RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby
+RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 
 #--------------------------------------------------------------------
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.10.2
+ENV CMAKE_VERSION 3.13.1
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -66,7 +66,7 @@ RUN Register-SystemPath -Path C:\tools\ninja; \
 # Install XAMPP
 #--------------------------------------------------------------------
 
-ENV XAMPP_VERSION 7.2.6
+ENV XAMPP_VERSION 7.2.12
 
 RUN Install-Xampp -Version $env:XAMPP_VERSION;
 
