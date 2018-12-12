@@ -1,4 +1,6 @@
-# Verify that a build slave name is present
+$ErrorActionPreference = 'Stop';
+
+# Verify that a build worker name is present
 if (-not (Test-Path Env:BUILD_WORKER_NAME)) {
   Write-Error('WebKit buildbots require a name for the worker to connect.
 For local development set the BUILD_WORKER_NAME environment variable using
@@ -31,6 +33,12 @@ Write-Host ('Processors: {0}' -f $cs.NumberOfProcessors);
 Write-Host ('Logical processors: {0}' -f $cs.NumberOfLogicalProcessors);
 Write-Host ('Total Physical Memory: {0:f2}gb' -f ($cs.TotalPhysicalMemory /1Gb));
 
+$ld = Get-WMIObject -Class Win32_LogicalDisk;
+Write-Host $ld;
+Write-Host ('Disk information {0}' -f ($ld.DeviceID));
+Write-Host ('Total Disk Space: {0:f2}gb' -f ($ld.Size /1Gb));
+Write-Host ('Available Disk Space: {0:f2}gb' -f ($ld.FreeSpace /1Gb));
+
 # Sanity check the configuration to make sure it is setup properly
 $minProcessors = 4;
 
@@ -48,10 +56,25 @@ Make sure the amount of memory is specified when starting the container
   docker run --memory={0}g' -f $minPhysicalMemory);
 }
 
+$minDiskSpace = 30;
+
+if ($ld.Size -lt ($minDiskSpace * 1Gb)) {
+  Write-Error ('WebKit builds need to have at least {0}Gbs of disk space available.
+Make sure the amount of disk space is set in the storage-opts setting of the daemon
+  "storage-opts": [ "size={0}GB" ]' -f $minDiskSpace);
+}
+
 # Initialize the Visual Studio environment
 Write-Host 'Initializing Visual Studio environment';
 
 Select-VSEnvironment;
+
+if ($env:COMPILER -eq 'Clang') {
+  Initialize-NinjaEnvironment -CC 'clang-cl' -CXX 'clang-cl';
+  Write-Host 'Using Clang Compiler';
+} else {
+  Write-Host 'Using Microsoft Visual C++ Compiler';
+}
 
 # Create the configuration
 #
