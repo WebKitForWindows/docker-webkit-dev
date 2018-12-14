@@ -1,4 +1,4 @@
-FROM webkitdev/scm
+FROM webkitdev/scm:{{tag}}
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
@@ -68,7 +68,8 @@ RUN Register-SystemPath -Path C:\tools\ninja; \
 
 ENV XAMPP_VERSION 7.2.12
 
-RUN Install-Xampp -Version $env:XAMPP_VERSION;
+RUN Install-Xampp -Version $env:XAMPP_VERSION; \
+    Update-XamppPerlLocation -perlPath C:\tools\perl;
 
 #--------------------------------------------------------------------
 # Install Fonts

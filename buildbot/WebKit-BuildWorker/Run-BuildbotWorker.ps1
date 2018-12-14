@@ -1,3 +1,5 @@
+#Requires -Modules WebKitDev
+
 $ErrorActionPreference = 'Stop';
 
 # Verify that a build worker name is present
@@ -66,15 +68,18 @@ Make sure the amount of disk space is set in the storage-opts setting of the dae
 
 # Initialize the Visual Studio environment
 Write-Host 'Initializing Visual Studio environment';
-
-Select-VSEnvironment;
+Initialize-VSEnvironment -Architecture 'amd64' -Toolset '14.14' -Path (Get-VSBuildTools2017VCVarsAllPath);
 
 if ($env:COMPILER -eq 'Clang') {
-  Initialize-NinjaEnvironment -CC 'clang-cl' -CXX 'clang-cl';
-  Write-Host 'Using Clang Compiler';
+  $compilerExe = 'clang-cl.exe';
 } else {
-  Write-Host 'Using Microsoft Visual C++ Compiler';
+  $compilerExe = 'cl.exe';
 }
+
+$compilerPath = (Get-Command $compilerExe).Path;
+
+Write-Host ('Found compiler at {0}' -f $compilerPath);
+Initialize-NinjaEnvironment -CC $compilerPath -CXX $compilerPath;
 
 # Create the configuration
 #
