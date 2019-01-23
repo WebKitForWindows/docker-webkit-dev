@@ -4,7 +4,7 @@
   ],
   "dockerfile": {
     "fileMatch": [
-      "base/Dockerfile\\.(1703|1803|1809)"
+      "base/Dockerfile\\.(1709|1803|1809)"
     ],
     "pinDigests": true
   },
