@@ -1,2 +1,6 @@
 # Ignore generated dockerfiles
 Dockerfile.*
+
+!base/Dockerfile.1709
+!base/Dockerfile.1803
+!base/Dockerfile.1809
