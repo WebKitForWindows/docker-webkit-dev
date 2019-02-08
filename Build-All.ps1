@@ -23,6 +23,7 @@ Function Build-WebKitDockerImage {
   Invoke-Expression $cmd;
 }
 
+Build-WebKitDockerImage -Image base -Tag $tag;
 Build-WebKitDockerImage -Image scripts -Tag $tag;
 Build-WebKitDockerImage -Image scm -Tag $tag;
 Build-WebKitDockerImage -Image tools -Tag $tag;

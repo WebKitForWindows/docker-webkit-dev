@@ -20,6 +20,7 @@ Function Publish-WebKitDockerImage {
   Invoke-Expression $cmd;
 }
 
+Publish-WebKitDockerImage -Image base -Tag $tag;
 Publish-WebKitDockerImage -Image scripts -Tag $tag;
 Publish-WebKitDockerImage -Image scm -Tag $tag;
 Publish-WebKitDockerImage -Image tools -Tag $tag;
