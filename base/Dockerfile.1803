@@ -1,1 +1,1 @@
-FROM mcr.microsoft.com/windows/servercore:1803@sha256:260689daae3d9fb5bfca2881cab21e7ca07ae83849bb0511220b83ec6fe99bd5
+FROM mcr.microsoft.com/windows/servercore:1803@sha256:f64ba9ff2219073f553b2e9f148002a726e31c3b69a811d74e7e405826fa27bb
