@@ -41,7 +41,7 @@ RUN Write-Host Write-Host 'Installing pywin32 ...'; \
 # Install Ruby
 #--------------------------------------------------------------------
 
-ENV RUBY_VERSION 2.5.3-1
+ENV RUBY_VERSION 2.6.1-1
 
 RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 
@@ -49,7 +49,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.14.0-rc1
+ENV CMAKE_VERSION 3.14.0-rc2
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
