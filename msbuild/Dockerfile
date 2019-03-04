@@ -1,4 +1,5 @@
-FROM webkitdev/tools:{{tag}}
+ARG IMAGE_TAG
+FROM webkitdev/tools:$IMAGE_TAG
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 

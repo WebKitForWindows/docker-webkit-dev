@@ -1,25 +1,20 @@
-FROM webkitdev/base:{{tag}}
+ARG IMAGE_TAG
+FROM webkitdev/scripts:$IMAGE_TAG
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 #--------------------------------------------------------------------
-# Install NuGet
+# Install TortoiseSVN x64 CLI
 #--------------------------------------------------------------------
 
-ENV NUGET_VERSION 2.8.5.208
+ENV SVN_VERSION 1.11.1.28492
 
-RUN Install-PackageProvider NuGet \
-    -Scope AllUsers \
-    -RequiredVersion $env:NUGET_VERSION \
-    -Force;
+RUN Install-SVN -Version $env:SVN_VERSION;
 
 #--------------------------------------------------------------------
-# Install WebKitDev Module
+# Install Git for Windows x64 CLI
 #--------------------------------------------------------------------
 
-ENV WEBKIT_DEV_VERSION 0.1.17
+ENV GIT_VERSION 2.21.0.1
 
-RUN Install-Module WebKitDev \
-    -Scope AllUsers \
-    -RequiredVersion $env:WEBKIT_DEV_VERSION \
-    -Force;
+RUN Install-Git -Version $env:GIT_VERSION;

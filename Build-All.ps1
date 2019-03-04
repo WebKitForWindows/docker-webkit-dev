@@ -1,6 +1,6 @@
 Param(
   [Parameter(Mandatory)]
-  [ValidateSet('1709','1803','1809')]
+  [ValidateSet('1709','1803','1809','windows-1809')]
   [string] $tag
 )
 
@@ -15,8 +15,15 @@ Function Build-WebKitDockerImage {
   )
 
   $path = Join-Path $PSScriptRoot $image;
-  $file = Join-Path $path ('Dockerfile.{0}' -f $tag);
-  $cmd = 'docker build -t webkitdev/{0}:{1} -f {2} {3}' -f $image, $tag, $file, $path;
+  if ($image -eq 'base') {
+    $file = Join-Path $path ('Dockerfile.{0}' -f $tag);
+    $buildArgs = '';
+  } else {
+    $file = Join-Path $path 'Dockerfile';
+    $buildArgs = ('--build-arg IMAGE_TAG={0}' -f $tag);
+  }
+
+  $cmd = 'docker build -t webkitdev/{0}:{1} {2} -f {3} {4}' -f $image, $tag, $buildArgs, $file, $path;
 
   Write-Host ('Starting build at {0}' -f (Get-Date))
   Write-Host $cmd;

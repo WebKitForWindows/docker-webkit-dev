@@ -1,4 +1,5 @@
-FROM webkitdev/msbuild:{{tag}}
+ARG IMAGE_TAG
+FROM webkitdev/msbuild:$IMAGE_TAG
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
