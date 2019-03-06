@@ -1,0 +1,589 @@
+---
+kind: pipeline
+name: ServerCore 1803 Images
+
+platform:
+  os: windows
+  arch: amd64
+
+steps:
+- name: build-base
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1803
+    context: base
+    daemon_off: true
+    dockerfile: base/Dockerfile.1803
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/base
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-scripts
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1803
+    build_args:
+    - IMAGE_TAG=1803
+    context: scripts
+    daemon_off: true
+    dockerfile: scripts/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/scripts
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-scm
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1803
+    build_args:
+    - IMAGE_TAG=1803
+    context: scm
+    daemon_off: true
+    dockerfile: scm/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/scm
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-tools
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1803
+    build_args:
+    - IMAGE_TAG=1803
+    context: tools
+    daemon_off: true
+    dockerfile: tools/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/tools
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-msbuild
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1803
+    build_args:
+    - IMAGE_TAG=1803
+    context: msbuild
+    daemon_off: true
+    dockerfile: msbuild/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/msbuild
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-buildbot
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1803
+    build_args:
+    - IMAGE_TAG=1803
+    context: buildbot
+    daemon_off: true
+    dockerfile: buildbot/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/buildbot
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-ews
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1803
+    build_args:
+    - IMAGE_TAG=1803
+    context: ews
+    daemon_off: true
+    dockerfile: ews/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/ews
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+volumes:
+- name: docker_pipe
+  host:
+    path: \\\\.\\pipe\\docker_engine
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/tags/**"
+
+---
+kind: pipeline
+name: ServerCore 1809 Images
+
+platform:
+  os: windows
+  arch: amd64
+
+steps:
+- name: build-base
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1809
+    context: base
+    daemon_off: true
+    dockerfile: base/Dockerfile.1809
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/base
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-scripts
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1809
+    build_args:
+    - IMAGE_TAG=1809
+    context: scripts
+    daemon_off: true
+    dockerfile: scripts/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/scripts
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-scm
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1809
+    build_args:
+    - IMAGE_TAG=1809
+    context: scm
+    daemon_off: true
+    dockerfile: scm/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/scm
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-tools
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1809
+    build_args:
+    - IMAGE_TAG=1809
+    context: tools
+    daemon_off: true
+    dockerfile: tools/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/tools
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-msbuild
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1809
+    build_args:
+    - IMAGE_TAG=1809
+    context: msbuild
+    daemon_off: true
+    dockerfile: msbuild/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/msbuild
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-buildbot
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1809
+    build_args:
+    - IMAGE_TAG=1809
+    context: buildbot
+    daemon_off: true
+    dockerfile: buildbot/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/buildbot
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-ews
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1809
+    build_args:
+    - IMAGE_TAG=1809
+    context: ews
+    daemon_off: true
+    dockerfile: ews/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/ews
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+volumes:
+- name: docker_pipe
+  host:
+    path: \\\\.\\pipe\\docker_engine
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/tags/**"
+
+---
+kind: pipeline
+name: Windows 1809 Images
+
+platform:
+  os: windows
+  arch: amd64
+
+steps:
+- name: build-base
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: windows-1809
+    context: base
+    daemon_off: true
+    dockerfile: base/Dockerfile.windows-1809
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/base
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-scripts
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: windows-1809
+    build_args:
+    - IMAGE_TAG=windows-1809
+    context: scripts
+    daemon_off: true
+    dockerfile: scripts/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/scripts
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-scm
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: windows-1809
+    build_args:
+    - IMAGE_TAG=windows-1809
+    context: scm
+    daemon_off: true
+    dockerfile: scm/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/scm
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-tools
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: windows-1809
+    build_args:
+    - IMAGE_TAG=windows-1809
+    context: tools
+    daemon_off: true
+    dockerfile: tools/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/tools
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-msbuild
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: windows-1809
+    build_args:
+    - IMAGE_TAG=windows-1809
+    context: msbuild
+    daemon_off: true
+    dockerfile: msbuild/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/msbuild
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-buildbot
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: windows-1809
+    build_args:
+    - IMAGE_TAG=windows-1809
+    context: buildbot
+    daemon_off: true
+    dockerfile: buildbot/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/buildbot
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-ews
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: windows-1809
+    build_args:
+    - IMAGE_TAG=windows-1809
+    context: ews
+    daemon_off: true
+    dockerfile: ews/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/ews
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+volumes:
+- name: docker_pipe
+  host:
+    path: \\\\.\\pipe\\docker_engine
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/tags/**"
+
+---
+kind: pipeline
+name: Image Manifest
+
+platform:
+  os: windows
+  arch: amd64
+
+steps:
+- name: publish-manifest-base
+  pull: always
+  image: plugins/manifest
+  settings:
+    ignore_missing: true
+    password:
+      from_secret: docker_password
+    spec: base/manifest.tmpl
+    username:
+      from_secret: docker_username
+
+- name: publish-manifest-scripts
+  pull: always
+  image: plugins/manifest
+  settings:
+    ignore_missing: true
+    password:
+      from_secret: docker_password
+    spec: scripts/manifest.tmpl
+    username:
+      from_secret: docker_username
+
+- name: publish-manifest-scm
+  pull: always
+  image: plugins/manifest
+  settings:
+    ignore_missing: true
+    password:
+      from_secret: docker_password
+    spec: scm/manifest.tmpl
+    username:
+      from_secret: docker_username
+
+- name: publish-manifest-tools
+  pull: always
+  image: plugins/manifest
+  settings:
+    ignore_missing: true
+    password:
+      from_secret: docker_password
+    spec: tools/manifest.tmpl
+    username:
+      from_secret: docker_username
+
+- name: publish-manifest-msbuild
+  pull: always
+  image: plugins/manifest
+  settings:
+    ignore_missing: true
+    password:
+      from_secret: docker_password
+    spec: msbuild/manifest.tmpl
+    username:
+      from_secret: docker_username
+
+- name: publish-manifest-buildbot
+  pull: always
+  image: plugins/manifest
+  settings:
+    ignore_missing: true
+    password:
+      from_secret: docker_password
+    spec: buildbot/manifest.tmpl
+    username:
+      from_secret: docker_username
+
+- name: publish-manifest-ews
+  pull: always
+  image: plugins/manifest
+  settings:
+    ignore_missing: true
+    password:
+      from_secret: docker_password
+    spec: ews/manifest.tmpl
+    username:
+      from_secret: docker_username
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/tags/**"
+
+depends_on:
+- ServerCore 1803 Images
+- ServerCore 1809 Images
+- Windows 1809 Images
+
+...
