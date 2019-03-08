@@ -1,3 +1,5 @@
+# escape=`
+
 ARG IMAGE_TAG
 FROM webkitdev/scripts:$IMAGE_TAG
 

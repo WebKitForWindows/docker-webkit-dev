@@ -1,3 +1,5 @@
+# escape=`
+
 ARG IMAGE_TAG
 FROM webkitdev/msbuild:$IMAGE_TAG
 
@@ -9,8 +11,8 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 
 ENV TWISTED_VERSION 18.9.0
 
-RUN Write-Host 'Installing twisted ...'; \
-    pip install -q ('Twisted=={0}' -f $env:TWISTED_VERSION); \
+RUN Write-Host 'Installing twisted ...'; `
+    pip install -q ('Twisted=={0}' -f $env:TWISTED_VERSION); `
     pip show Twisted;
 
 #--------------------------------------------------------------------
@@ -19,13 +21,13 @@ RUN Write-Host 'Installing twisted ...'; \
 
 ENV BUILDBOT_VERSION 0.8.14
 
-RUN Write-Host 'Installing buildbot ...'; \
-    pip install -q ('buildbot=={0}' -f $env:BUILDBOT_VERSION); \
-    pip show buildbot; \
-    buildbot --version; \
-    \
-    pip install -q ('buildbot-slave=={0}' -f $env:BUILDBOT_VERSION); \
-    pip show buildbot-slave; \
+RUN Write-Host 'Installing buildbot ...'; `
+    pip install -q ('buildbot=={0}' -f $env:BUILDBOT_VERSION); `
+    pip show buildbot; `
+    buildbot --version; `
+    `
+    pip install -q ('buildbot-slave=={0}' -f $env:BUILDBOT_VERSION); `
+    pip show buildbot-slave; `
     buildslave --version;
 
 #--------------------------------------------------------------------
