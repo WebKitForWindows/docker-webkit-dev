@@ -1,1 +1,1 @@
-FROM mcr.microsoft.com/windows/servercore:1803@sha256:f64ba9ff2219073f553b2e9f148002a726e31c3b69a811d74e7e405826fa27bb
+FROM microsoft/dotnet-framework:4.7.2-runtime-windowsservercore-1803@sha256:4f042ff437d9dd377c83b1774ae0243ee2708fe2f75608b7af9d9a65e2ce360f
