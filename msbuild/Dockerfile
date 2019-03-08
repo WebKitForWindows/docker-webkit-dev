@@ -6,17 +6,20 @@ FROM webkitdev/tools:$IMAGE_TAG
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 #--------------------------------------------------------------------
-# Install MS Build Tools 2017
+# Install MS Build Tools 2019
 #--------------------------------------------------------------------
 
-# FIXME: Currently we're installing the 15.7 toolset due to ongoing issues with 15.8 and later toolsets
-
-RUN Install-VSBuildTools2017 -InstallationPath C:\MSVS -Workloads `
-    Microsoft.VisualStudio.Workload.VCTools, `
-    Microsoft.VisualStudio.Component.VC.Tools.14.14, `
-    Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop, `
-    Microsoft.VisualStudio.Component.Windows81SDK, `
-    Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Win81;
+RUN Install-VSBuildTools2019 -InstallationPath C:\MSVS -Workloads `
+    Microsoft.VisualStudio.Component.Roslyn.Compiler, `
+    Microsoft.Component.MSBuild, `
+    Microsoft.VisualStudio.Component.CoreBuildTools, `
+    Microsoft.VisualStudio.Workload.MSBuildTools, `
+    Microsoft.VisualStudio.Component.Windows10SDK, `
+    Microsoft.VisualStudio.Component.VC.CoreBuildTools, `
+    Microsoft.VisualStudio.Component.VC.Tools.x86.x64, `
+    Microsoft.VisualStudio.Component.VC.Redist.14.Latest, `
+    Microsoft.VisualStudio.Component.Windows10SDK.17763, `
+    Microsoft.VisualStudio.Workload.VCTools
 
 #--------------------------------------------------------------------
 # Install LLVM for Clang tooling support

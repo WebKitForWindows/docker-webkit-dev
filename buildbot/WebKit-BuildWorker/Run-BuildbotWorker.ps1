@@ -68,7 +68,7 @@ Make sure the amount of disk space is set in the storage-opts setting of the dae
 
 # Initialize the Visual Studio environment
 Write-Host 'Initializing Visual Studio environment';
-Initialize-VSEnvironment -Architecture 'amd64' -Toolset '14.14' -Path (Get-VSBuildTools2017VCVarsAllPath);
+Initialize-VSEnvironment -Architecture 'amd64' -Path (Get-VSBuildTools2019VCVarsAllPath);
 
 if ($env:COMPILER -eq 'Clang') {
   $compilerExe = 'clang-cl.exe';
