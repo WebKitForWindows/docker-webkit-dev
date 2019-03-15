@@ -113,7 +113,11 @@ Write-Host ('git config --global core.autocrlf false');
 git config --global core.autocrlf false;
 
 # Clone WebKit repository
-$gitUrl = Get-WebKitGitUrl;
+# 
+# There's an issue with the https clone from git.webkit.org within the container
+# so instead just use the git url.
+# $gitUrl = Get-WebKitGitUrl;
+$gitUrl = 'git://git.webkit.org/WebKit.git'
 Write-Host ('git clone {0} WebKit' -f $gitUrl);
 git clone $gitUrl WebKit
 
