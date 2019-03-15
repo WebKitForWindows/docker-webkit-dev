@@ -13,7 +13,7 @@ local images = [
 local tags = [
   #'1803',
   '1809',
-  'windows-1809',
+  #'windows-1809',
 ];
 
 local pipeline_name(tag) =

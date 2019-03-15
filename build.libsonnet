@@ -14,8 +14,7 @@ local windows_pipe_volume = 'docker_pipe';
     depends_on: if std.length(depends_on) > 0 then depends_on,
     trigger: {
       ref: [
-        'refs/heads/master',
-        'refs/heads/enable-drone',
+        'refs/heads/**',
         'refs/tags/**',
       ],
     },
