@@ -1,169 +1,5 @@
 ---
 kind: pipeline
-name: ServerCore 1803 Images
-
-platform:
-  os: windows
-  arch: amd64
-
-steps:
-- name: build-base
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 1803
-    context: base
-    daemon_off: true
-    dockerfile: base/Dockerfile.1803
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/base
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-scripts
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 1803
-    build_args:
-    - IMAGE_TAG=1803
-    context: scripts
-    daemon_off: true
-    dockerfile: scripts/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/scripts
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-scm
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 1803
-    build_args:
-    - IMAGE_TAG=1803
-    context: scm
-    daemon_off: true
-    dockerfile: scm/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/scm
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-tools
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 1803
-    build_args:
-    - IMAGE_TAG=1803
-    context: tools
-    daemon_off: true
-    dockerfile: tools/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/tools
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-msbuild
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 1803
-    build_args:
-    - IMAGE_TAG=1803
-    context: msbuild
-    daemon_off: true
-    dockerfile: msbuild/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/msbuild
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-buildbot
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 1803
-    build_args:
-    - IMAGE_TAG=1803
-    context: buildbot
-    daemon_off: true
-    dockerfile: buildbot/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/buildbot
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-ews
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 1803
-    build_args:
-    - IMAGE_TAG=1803
-    context: ews
-    daemon_off: true
-    dockerfile: ews/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/ews
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-volumes:
-- name: docker_pipe
-  host:
-    path: \\\\.\\pipe\\docker_engine
-
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/tags/**"
-
----
-kind: pipeline
 name: ServerCore 1809 Images
 
 platform:
@@ -173,7 +9,7 @@ platform:
 steps:
 - name: build-base
   pull: always
-  image: plugins/docker
+  image: plugins/docker:windows-1809
   settings:
     auto_tag: true
     auto_tag_suffix: 1809
@@ -192,7 +28,7 @@ steps:
 
 - name: build-scripts
   pull: always
-  image: plugins/docker
+  image: plugins/docker:windows-1809
   settings:
     auto_tag: true
     auto_tag_suffix: 1809
@@ -213,7 +49,7 @@ steps:
 
 - name: build-scm
   pull: always
-  image: plugins/docker
+  image: plugins/docker:windows-1809
   settings:
     auto_tag: true
     auto_tag_suffix: 1809
@@ -234,7 +70,7 @@ steps:
 
 - name: build-tools
   pull: always
-  image: plugins/docker
+  image: plugins/docker:windows-1809
   settings:
     auto_tag: true
     auto_tag_suffix: 1809
@@ -255,7 +91,7 @@ steps:
 
 - name: build-msbuild
   pull: always
-  image: plugins/docker
+  image: plugins/docker:windows-1809
   settings:
     auto_tag: true
     auto_tag_suffix: 1809
@@ -276,7 +112,7 @@ steps:
 
 - name: build-buildbot
   pull: always
-  image: plugins/docker
+  image: plugins/docker:windows-1809
   settings:
     auto_tag: true
     auto_tag_suffix: 1809
@@ -297,7 +133,7 @@ steps:
 
 - name: build-ews
   pull: always
-  image: plugins/docker
+  image: plugins/docker:windows-1809
   settings:
     auto_tag: true
     auto_tag_suffix: 1809
@@ -337,7 +173,7 @@ platform:
 steps:
 - name: build-base
   pull: always
-  image: plugins/docker
+  image: plugins/docker:windows-1809
   settings:
     auto_tag: true
     auto_tag_suffix: windows-1809
@@ -356,7 +192,7 @@ steps:
 
 - name: build-scripts
   pull: always
-  image: plugins/docker
+  image: plugins/docker:windows-1809
   settings:
     auto_tag: true
     auto_tag_suffix: windows-1809
@@ -377,7 +213,7 @@ steps:
 
 - name: build-scm
   pull: always
-  image: plugins/docker
+  image: plugins/docker:windows-1809
   settings:
     auto_tag: true
     auto_tag_suffix: windows-1809
@@ -398,7 +234,7 @@ steps:
 
 - name: build-tools
   pull: always
-  image: plugins/docker
+  image: plugins/docker:windows-1809
   settings:
     auto_tag: true
     auto_tag_suffix: windows-1809
@@ -419,7 +255,7 @@ steps:
 
 - name: build-msbuild
   pull: always
-  image: plugins/docker
+  image: plugins/docker:windows-1809
   settings:
     auto_tag: true
     auto_tag_suffix: windows-1809
@@ -440,7 +276,7 @@ steps:
 
 - name: build-buildbot
   pull: always
-  image: plugins/docker
+  image: plugins/docker:windows-1809
   settings:
     auto_tag: true
     auto_tag_suffix: windows-1809
@@ -461,7 +297,7 @@ steps:
 
 - name: build-ews
   pull: always
-  image: plugins/docker
+  image: plugins/docker:windows-1809
   settings:
     auto_tag: true
     auto_tag_suffix: windows-1809
@@ -582,7 +418,6 @@ trigger:
   - "refs/tags/**"
 
 depends_on:
-- ServerCore 1803 Images
 - ServerCore 1809 Images
 - Windows 1809 Images
 

@@ -38,7 +38,7 @@ local windows_pipe_volume = 'docker_pipe';
     local is_base = image == 'base',
     local dockerfile = if !is_base then 'Dockerfile' else 'Dockerfile.' + tag,
     name: 'build-' + image,
-    image: 'plugins/docker',
+    image: 'plugins/docker:windows-1809',
     pull: 'always',
     settings: {
       context: image,
