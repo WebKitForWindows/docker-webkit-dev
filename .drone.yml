@@ -16,12 +16,10 @@ steps:
     context: base
     daemon_off: true
     dockerfile: base/Dockerfile.1809
-    password:
-      from_secret: docker_password
+
     purge: false
     repo: webkitdev/base
-    username:
-      from_secret: docker_username
+
   volumes:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
