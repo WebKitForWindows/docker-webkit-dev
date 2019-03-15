@@ -160,6 +160,7 @@ volumes:
 trigger:
   ref:
   - refs/heads/master
+  - refs/heads/enable-drone
   - "refs/tags/**"
 
 ---
@@ -324,6 +325,7 @@ volumes:
 trigger:
   ref:
   - refs/heads/master
+  - refs/heads/enable-drone
   - "refs/tags/**"
 
 ---
@@ -415,6 +417,7 @@ steps:
 trigger:
   ref:
   - refs/heads/master
+  - refs/heads/enable-drone
   - "refs/tags/**"
 
 depends_on:

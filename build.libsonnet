@@ -15,6 +15,7 @@ local windows_pipe_volume = 'docker_pipe';
     trigger: {
       ref: [
         'refs/heads/master',
+        'refs/heads/enable-drone',
         'refs/tags/**',
       ],
     },
