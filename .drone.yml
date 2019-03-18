@@ -9,7 +9,7 @@ platform:
 steps:
 - name: build-base
   pull: always
-  image: plugins/docker:windows-1809
+  image: plugins/docker:windows-1809-amd64
   settings:
     auto_tag: true
     auto_tag_suffix: 1809
@@ -26,7 +26,7 @@ steps:
 
 - name: build-scripts
   pull: always
-  image: plugins/docker:windows-1809
+  image: plugins/docker:windows-1809-amd64
   settings:
     auto_tag: true
     auto_tag_suffix: 1809
@@ -47,7 +47,7 @@ steps:
 
 - name: build-scm
   pull: always
-  image: plugins/docker:windows-1809
+  image: plugins/docker:windows-1809-amd64
   settings:
     auto_tag: true
     auto_tag_suffix: 1809
@@ -68,7 +68,7 @@ steps:
 
 - name: build-tools
   pull: always
-  image: plugins/docker:windows-1809
+  image: plugins/docker:windows-1809-amd64
   settings:
     auto_tag: true
     auto_tag_suffix: 1809
@@ -89,7 +89,7 @@ steps:
 
 - name: build-msbuild
   pull: always
-  image: plugins/docker:windows-1809
+  image: plugins/docker:windows-1809-amd64
   settings:
     auto_tag: true
     auto_tag_suffix: 1809
@@ -110,7 +110,7 @@ steps:
 
 - name: build-buildbot
   pull: always
-  image: plugins/docker:windows-1809
+  image: plugins/docker:windows-1809-amd64
   settings:
     auto_tag: true
     auto_tag_suffix: 1809
@@ -131,7 +131,7 @@ steps:
 
 - name: build-ews
   pull: always
-  image: plugins/docker:windows-1809
+  image: plugins/docker:windows-1809-amd64
   settings:
     auto_tag: true
     auto_tag_suffix: 1809
