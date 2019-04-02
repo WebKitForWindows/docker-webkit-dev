@@ -1,1 +1,1 @@
-FROM microsoft/dotnet-framework:4.7.2-runtime-windowsservercore-ltsc2019@sha256:29f9bcd6f75743fcf05c2c7c97ffc29c397702fadf9955b45514e6da5f3fc4a7
+FROM microsoft/dotnet-framework:4.7.2-runtime-windowsservercore-ltsc2019@sha256:e9697e1042ed1a292ec8be53f339aa805069c7328947c3777be4437d2dc4885e
