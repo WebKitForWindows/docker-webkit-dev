@@ -32,41 +32,42 @@ For local development set the BUILD_WORKER_PASSWORD environment variable using
 While in production use docker secrets and set the location of the file using the BUGZILLA_PASSWORD_FILE environment variable');
   }
 
-  Write-Host ('Loading password from {0}', $env:BUGZILLA_PASSWORD_FILE);
+  Write-Output ('Loading password from {0}', $env:BUGZILLA_PASSWORD_FILE);
   $Env:BUGZILLA_PASSWORD = Get-Content -Path $env:BUGZILLA_PASSWORD_FILE;
 }
 
 # Notification about security patches
 if (-not (Test-Path Env:WEBKIT_STATUS_API_KEY)) {
   if (-not (Test-Path Env:WEBKIT_STATUS_API_KEY_FILE)) {
-    Write-Host('WebKit EWS can process security patches if an API key is provided
+    Write-Output('WebKit EWS can process security patches if an API key is provided
 For local development set the WEBKIT_STATUS_API_KEY environment variable using
   docker run -e WEBKIT_STATUS_API_KEY=<api-key>
 While in production use docker secrets and set the location of the file using the WEBKIT_STATUS_API_KEY_FILE environment variable');
   } else {
-    Write-Host ('Loading status key from {0}', $env:WEBKIT_STATUS_API_KEY_FILE);
+    Write-Output ('Loading status key from {0}', $env:WEBKIT_STATUS_API_KEY_FILE);
     $Env:WEBKIT_STATUS_API_KEY = Get-Content -Path $env:WEBKIT_STATUS_API_KEY_FILE;
   }
 }
 
 # Output information
-Write-Host 'EWS information';
-Write-Host ('Queue: {0}' -f $env:EWS_QUEUE_NAME);
-Write-Host ('Name: {0}' -f $env:EWS_SERVER_NAME);
-Write-Host ('Iterations: {0}' -f $env:EWS_ITERATIONS);
-Write-Host;
+Write-Output 'EWS information';
+Write-Output ('Queue: {0}' -f $env:EWS_QUEUE_NAME);
+Write-Output ('Name: {0}' -f $env:EWS_SERVER_NAME);
+Write-Output ('Iterations: {0}' -f $env:EWS_ITERATIONS);
+Write-Output '';
 
 # Print the host information
-$cs = Get-WMIObject -Class Win32_ComputerSystem;
-Write-Host ('Host system');
-Write-Host ('Processors: {0}' -f $cs.NumberOfProcessors);
-Write-Host ('Logical processors: {0}' -f $cs.NumberOfLogicalProcessors);
-Write-Host ('Total Physical Memory: {0:f2}gb' -f ($cs.TotalPhysicalMemory /1Gb));
+$cs = Get-CimInstance -Class Win32_ComputerSystem;
+Write-Output ('Host system');
+Write-Output ('Processors: {0}' -f $cs.NumberOfProcessors);
+Write-Output ('Logical processors: {0}' -f $cs.NumberOfLogicalProcessors);
+Write-Output ('Total Physical Memory: {0:f2}gb' -f ($cs.TotalPhysicalMemory /1Gb));
 
-$ld = Get-WMIObject -Class Win32_LogicalDisk;
-Write-Host ('Disk information {0}' -f ($ld.DeviceID));
-Write-Host ('Total Disk Space: {0:f2}gb' -f ($ld.Size /1Gb));
-Write-Host ('Available Disk Space: {0:f2}gb' -f ($ld.FreeSpace /1Gb));
+$ld = Get-CimInstance -Class Win32_LogicalDisk;
+Write-Output ('Disk information {0}' -f ($ld.DeviceID));
+Write-Output ('Total Disk Space: {0:f2}gb' -f ($ld.Size /1Gb));
+Write-Output ('Available Disk Space: {0:f2}gb' -f ($ld.FreeSpace /1Gb));
+Write-Output '';
 
 # Sanity check the configuration to make sure it is setup properly
 $minProcessors = 4;
@@ -93,8 +94,69 @@ Make sure the amount of disk space is set in the storage-opts setting of the dae
   "storage-opts": [ "size={0}GB" ]' -f $minDiskSpace);
 }
 
+# Setup git
+Write-Output ('git config --global core.autocrlf false');
+Start-Process -FilePath 'git.exe' -ArgumentList @('config', '--global', 'core.autocrlf', 'false') -Wait -NoNewWindow;
+
+# Clone WebKit repository
+if (Test-Path env:WEBKIT_GIT_URL) {
+  $gitUrl = $env:WEBKIT_GIT_URL;
+} else {
+  $gitUrl = Get-WebKitGitUrl;
+}
+
+$cloneStdOut = 'git-out.txt';
+$cloneStdErr = 'git-err.txt';
+
+Write-Output ('git clone {0} WebKit' -f $gitUrl);
+$clone = Start-Process -FilePath 'git.exe' `
+  -ArgumentList @('clone', '--verbose', '--progress', $gitUrl, 'WebKit') `
+  -RedirectStandardOutput $cloneStdOut `
+  -RedirectStandardError $cloneStdErr `
+  -NoNewWindow `
+  -PassThru `
+  -Wait;
+
+# Stop execution if the clone failed
+if ($clone.ExitCode -ne 0) {
+  Write-Error 'Could not clone repository';
+  Get-Content -Path $cloneStdOut -Tail 100 | Write-Error;
+  Get-Content -Path $cloneStdErr -Tail 100 | Write-Error;
+  exit;
+}
+
+Remove-Item $cloneStdOut;
+Remove-Item $cloneStdErr;
+
+# Run any additional startup scripts
+$scriptPath = Join-Path $PSScriptRoot 'Scripts';
+
+Write-Output ('Looking in {0} for additional startup scripts' -f $scriptPath);
+
+$scripts = @();
+
+if (Test-Path $scriptPath) {
+  $scripts = Get-ChildItem -Path $scriptPath -Filter '*.ps1';
+}
+
+Write-Output ('{0} scripts found' -f $scripts.Count);
+
+foreach ($script in $scripts) {
+  $invocation = '& {0}' -f $script.FullName;
+  Write-Output $invocation;
+  Invoke-Expression $invocation;
+}
+
+# Setup credentials
+Set-Location WebKit;
+
+Write-Output ('git config bugzilla.username {0}' -f $env:BUGZILLA_USERNAME);
+Start-Process -FilePath 'git.exe' -ArgumentList @('config', 'bugzilla.username', $env:BUGZILLA_USERNAME) -Wait -NoNewWindow;
+Write-Output 'git config bugzilla.password ********'
+Start-Process -FilePath 'git.exe' -ArgumentList @('config', 'bugzilla.password', $env:BUGZILLA_PASSWORD) -Wait -NoNewWindow;
+
 # Initialize the Visual Studio environment
-Write-Host 'Initializing Visual Studio environment';
+Write-Output 'Initializing Visual Studio environment';
 Initialize-VSEnvironment -Architecture 'amd64' -Path (Get-VSBuildTools2019VCVarsAllPath);
 
 if ($env:COMPILER -eq 'Clang') {
@@ -105,50 +167,10 @@ if ($env:COMPILER -eq 'Clang') {
 
 $compilerPath = (Get-Command $compilerExe).Path;
 
-Write-Host ('Found compiler at {0}' -f $compilerPath);
+Write-Output ('Found compiler at {0}' -f $compilerPath);
 Initialize-NinjaEnvironment -CC $compilerPath -CXX $compilerPath;
 
-# Setup git
-Write-Host ('git config --global core.autocrlf false');
-git config --global core.autocrlf false;
-
-# Clone WebKit repository
-# 
-# There's an issue with the https clone from git.webkit.org within the container
-# so instead just use the git url.
-# $gitUrl = Get-WebKitGitUrl;
-$gitUrl = 'git://git.webkit.org/WebKit.git'
-Write-Host ('git clone {0} WebKit' -f $gitUrl);
-git clone $gitUrl WebKit
-
-# Run any additional startup scripts
-$scriptPath = Join-Path $PSScriptRoot 'Scripts';
-
-Write-Host ('Looking in {0} for additional startup scripts' -f $scriptPath);
-
-$scripts = @();
-
-if (Test-Path $scriptPath) {
-  $scripts = Get-ChildItem -Path $scriptPath -Filter '*.ps1';
-}
-
-Write-Host ('{0} scripts found' -f $scripts.Count);
-
-foreach ($script in $scripts) {
-  $invocation = '& {0}' -f $script.FullName;
-  Write-Host $invocation;
-  Invoke-Expression $invocation;
-}
-
-# Setup credentials
-Set-Location WebKit;
-
-Write-Host ('git config bugzilla.username {0}' -f $env:BUGZILLA_USERNAME);
-git config bugzilla.username $env:BUGZILLA_USERNAME;
-Write-Host 'git config bugzilla.password ********'
-git config bugzilla.password $env:BUGZILLA_PASSWORD;
-
 # Start the script
-Write-Host 'Starting EWS bot';
+Write-Output 'Starting EWS bot';
 
 & Tools/EWSTools/Start-Queue.ps1 -Queue $env:EWS_QUEUE_NAME -Name $env:EWS_SERVER_NAME -Iterations $env:EWS_ITERATIONS;
