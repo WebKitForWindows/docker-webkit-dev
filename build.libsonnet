@@ -2,12 +2,13 @@ local windows_pipe = '\\\\\\\\.\\\\pipe\\\\docker_engine';
 local windows_pipe_volume = 'docker_pipe';
 
 {
-  pipeline(name, steps, volumes, depends_on):: {
+  pipeline(name, steps, version, volumes, depends_on):: {
     kind: 'pipeline',
     name: name,
     platform: {
       os: 'windows',
       arch: 'amd64',
+      version: version,
     },
     steps: steps,
     volumes: if std.length(volumes) > 0 then volumes,
@@ -21,9 +22,12 @@ local windows_pipe_volume = 'docker_pipe';
   },
 
   docker_pipeline(name, images, tag)::
+    local windows_image = std.startsWith(tag, 'windows-');
+    local version = if windows_image then std.split(tag, '-')[1] else tag;
     self.pipeline(
         name, 
         self.docker_build_all(images, tag),
+        version,
         [{ name: windows_pipe_volume, host: { path: windows_pipe } }],
         []
     ),
@@ -38,7 +42,7 @@ local windows_pipe_volume = 'docker_pipe';
     local is_base = image == 'base',
     local dockerfile = if !is_base then 'Dockerfile' else 'Dockerfile.' + tag,
     name: 'build-' + image,
-    image: 'plugins/docker:windows-1809',
+    image: 'plugins/docker',
     pull: 'always',
     settings: {
       context: image,
@@ -58,7 +62,7 @@ local windows_pipe_volume = 'docker_pipe';
   },
 
   manifest_pipeline(name, images, depends_on)::
-    self.pipeline(name, self.manifest_publish_all(images), [], depends_on),
+    self.pipeline(name, self.manifest_publish_all(images), 1809, [], depends_on),
 
   manifest_publish_all(images)::
     [
