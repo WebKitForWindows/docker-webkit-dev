@@ -69,7 +69,7 @@ RUN Register-SystemPath -Path C:\tools\ninja; `
 # Install XAMPP
 #--------------------------------------------------------------------
 
-ENV XAMPP_VERSION 7.3.4
+ENV XAMPP_VERSION 7.3.2
 
 RUN Install-Xampp -Version $env:XAMPP_VERSION; `
     Update-XamppPerlLocation -perlPath C:\tools\perl;
