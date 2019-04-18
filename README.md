@@ -1,6 +1,8 @@
 # docker-webkit-dev
 Docker images for doing WebKit development
 
+[![Build Status](https://internal.cloud.drone.ci/api/badges/WebKitForWindows/docker-webkit-dev/status.svg)](https://internal.cloud.drone.ci/WebKitForWindows/docker-webkit-dev)
+
 ## Windows development
 
 The `webkitdev` images contain the tools necessary to build WebKit on Windows.
