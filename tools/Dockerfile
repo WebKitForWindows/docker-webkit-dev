@@ -23,7 +23,7 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 
 ENV PYTHON_VERSION 2.7.16
 ENV PYTHONIOENCODING utf-8
-ENV PYTHON_PIP_VERSION 19.0.3
+ENV PYTHON_PIP_VERSION 19.1.0
 
 RUN Install-Python `
     -Version $env:PYTHON_VERSION `
@@ -52,7 +52,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.14.2
+ENV CMAKE_VERSION 3.14.3
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
