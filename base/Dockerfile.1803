@@ -1,1 +1,1 @@
-FROM microsoft/dotnet-framework:4.7.2-runtime-windowsservercore-1803@sha256:3a64401ca64425c1c68e2ca81b8a6cf9c8981a5bd48a9d9a3a795c16462829ea
+FROM microsoft/dotnet-framework:4.7.2-runtime-windowsservercore-1803@sha256:aa30dbae2ddbf252d288aef831a5f431ad91bc6929857e35ee2404adf39e198c
