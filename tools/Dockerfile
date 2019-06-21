@@ -13,7 +13,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # technically use it for a build-bot.
 #--------------------------------------------------------------------
 
-ENV PERL_VERSION 5.28.1.1
+ENV PERL_VERSION 5.30.0.1
 
 RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 
@@ -23,7 +23,7 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 
 ENV PYTHON_VERSION 2.7.16
 ENV PYTHONIOENCODING utf-8
-ENV PYTHON_PIP_VERSION 19.1.0
+ENV PYTHON_PIP_VERSION 19.1.1
 
 RUN Install-Python `
     -Version $env:PYTHON_VERSION `
@@ -52,7 +52,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.14.3
+ENV CMAKE_VERSION 3.14.5
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -69,7 +69,7 @@ RUN Register-SystemPath -Path C:\tools\ninja; `
 # Install XAMPP
 #--------------------------------------------------------------------
 
-ENV XAMPP_VERSION 7.3.2
+ENV XAMPP_VERSION 7.3.6
 
 RUN Install-Xampp -Version $env:XAMPP_VERSION; `
     Update-XamppPerlLocation -perlPath C:\tools\perl;

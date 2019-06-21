@@ -20,7 +20,7 @@ RUN Install-PackageProvider NuGet `
 # Install WebKitDev Module
 #--------------------------------------------------------------------
 
-ENV WEBKIT_DEV_VERSION 0.1.18
+ENV WEBKIT_DEV_VERSION 0.1.19
 
 RUN Install-Module WebKitDev `
     -Scope AllUsers `
