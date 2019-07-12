@@ -22,7 +22,7 @@ RUN Write-Host 'Installing twisted ...'; `
 ENV BUILDBOT_VERSION 1.8.2
 
 RUN Write-Host 'Installing buildbot ...'; `
-    pip install -q ('buildbot=={0}' -f $env:BUILDBOT_VERSION); `
+    pip install -q ('buildbot-worker=={0}' -f $env:BUILDBOT_VERSION); `
     pip show buildbot; `
     buildbot-worker --version;
 
