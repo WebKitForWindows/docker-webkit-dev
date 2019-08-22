@@ -9,7 +9,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # Install twisted
 #--------------------------------------------------------------------
 
-ENV TWISTED_VERSION 19.2.1
+ENV TWISTED_VERSION 19.7.0
 
 RUN Write-Host 'Installing twisted ...'; `
     pip install -q ('Twisted=={0}' -f $env:TWISTED_VERSION); `
