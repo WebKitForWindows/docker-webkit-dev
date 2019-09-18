@@ -6,6 +6,7 @@ local images = [
   'scm',
   'tools',
   'msbuild',
+  'msbuild-2017',
   'buildbot',
   'ews',
 ];
