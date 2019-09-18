@@ -111,6 +111,27 @@ steps:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
+- name: build-msbuild-2017
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1803
+    build_args:
+    - IMAGE_TAG=1803
+    context: msbuild-2017
+    daemon_off: true
+    dockerfile: msbuild-2017/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/msbuild-2017
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
 - name: build-buildbot
   pull: always
   image: plugins/docker
@@ -270,6 +291,27 @@ steps:
       from_secret: docker_password
     purge: false
     repo: webkitdev/msbuild
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
+- name: build-msbuild-2017
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: 1809
+    build_args:
+    - IMAGE_TAG=1809
+    context: msbuild-2017
+    daemon_off: true
+    dockerfile: msbuild-2017/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/msbuild-2017
     username:
       from_secret: docker_username
   volumes:
@@ -441,6 +483,27 @@ steps:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
+- name: build-msbuild-2017
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: windows-1809
+    build_args:
+    - IMAGE_TAG=windows-1809
+    context: msbuild-2017
+    daemon_off: true
+    dockerfile: msbuild-2017/Dockerfile
+    password:
+      from_secret: docker_password
+    purge: false
+    repo: webkitdev/msbuild-2017
+    username:
+      from_secret: docker_username
+  volumes:
+  - name: docker_pipe
+    path: \\\\.\\pipe\\docker_engine
+
 - name: build-buildbot
   pull: always
   image: plugins/docker
@@ -555,6 +618,17 @@ steps:
     password:
       from_secret: docker_password
     spec: msbuild/manifest.tmpl
+    username:
+      from_secret: docker_username
+
+- name: publish-manifest-msbuild-2017
+  pull: always
+  image: plugins/manifest
+  settings:
+    ignore_missing: true
+    password:
+      from_secret: docker_password
+    spec: msbuild-2017/manifest.tmpl
     username:
       from_secret: docker_username
 
