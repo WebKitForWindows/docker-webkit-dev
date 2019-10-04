@@ -6,6 +6,25 @@ FROM webkitdev/scm:$IMAGE_TAG
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 #--------------------------------------------------------------------
+# Install MSYS2
+#--------------------------------------------------------------------
+
+ENV MSYS2_VERSION 20190524
+
+RUN Install-MSYS2 -Version $env:MSYS2_VERSION -InstallationPath C:\tools\msys2;
+
+#--------------------------------------------------------------------
+# Install GNU tools
+#--------------------------------------------------------------------
+
+RUN Install-Gperf; `
+    Install-Flex; `
+    Install-Bison; `
+    Install-DiffUtils; `
+    Install-Make; `
+    Install-Patch;
+
+#--------------------------------------------------------------------
 # Install Strawberry Perl x64
 #
 # ActivePerl is recommended in the WebKit documentation but won't
@@ -62,8 +81,7 @@ RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
 ENV NINJA_VERSION 1.9.0
 
-RUN Register-SystemPath -Path C:\tools\ninja; `
-    Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
+RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 
 #--------------------------------------------------------------------
 # Install XAMPP
@@ -79,37 +97,3 @@ RUN Install-Xampp -Version $env:XAMPP_VERSION; `
 #--------------------------------------------------------------------
 
 RUN Install-AhemFont;
-
-#--------------------------------------------------------------------
-# Install GNU tools
-#--------------------------------------------------------------------
-
-ENV GPERF_VERSION 3.0.1
-
-RUN Register-SystemPath -Path C:\tools\gperf\bin; `
-    Install-Gperf -Version $env:GPERF_VERSION -InstallationPath C:\tools\gperf;
-
-ENV FLEX_VERSION 2.5.4a-1
-
-RUN Register-SystemPath -Path C:\tools\flex\bin; `
-    Install-Flex -Version $env:FLEX_VERSION -InstallationPath C:\tools\flex;
-
-ENV BISON_VERSION 2.4.1
-
-RUN Register-SystemPath -Path C:\tools\bison\bin; `
-    Install-Bison -Version $env:BISON_VERSION -InstallationPath C:\tools\bison;
-
-ENV DIFFUTILS_VERSION 2.8.7.1
-
-RUN Register-SystemPath -Path C:\tools\diffutils\bin; `
-    Install-DiffUtils -Version $env:DIFFUTILS_VERSION -InstallationPath C:\tools\diffutils;
-
-ENV MAKE_VERSION 3.81
-
-RUN Register-SystemPath -Path C:\tools\make\bin; `
-    Install-Make -Version $env:MAKE_VERSION -InstallationPath C:\tools\make;
-
-ENV PATCH_VERSION 2.5.9
-
-RUN Register-SystemPath -Path C:\tools\patch\bin; `
-    Install-Patch -Version $env:PATCH_VERSION -InstallationPath C:\tools\patch;
