@@ -40,9 +40,9 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 # Install Python
 #--------------------------------------------------------------------
 
-ENV PYTHON_VERSION 2.7.16
+ENV PYTHON_VERSION 2.7.17
 ENV PYTHONIOENCODING utf-8
-ENV PYTHON_PIP_VERSION 19.2.3
+ENV PYTHON_PIP_VERSION 19.3.1
 
 RUN Install-Python `
     -Version $env:PYTHON_VERSION `
@@ -53,7 +53,7 @@ RUN Install-Python `
 # Install pywin32
 #--------------------------------------------------------------------
 
-ENV PYWIN32_VERSION 225
+ENV PYWIN32_VERSION 227
 
 RUN Write-Host Write-Host 'Installing pywin32 ...'; `
     pip install -q ('pywin32=={0}' -f $env:PYWIN32_VERSION); `
@@ -71,7 +71,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.15.4
+ENV CMAKE_VERSION 3.15.5
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -87,7 +87,7 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 # Install XAMPP
 #--------------------------------------------------------------------
 
-ENV XAMPP_VERSION 7.3.9
+ENV XAMPP_VERSION 7.3.11
 
 RUN Install-Xampp -Version $env:XAMPP_VERSION; `
     Update-XamppPerlLocation -perlPath C:\tools\perl;

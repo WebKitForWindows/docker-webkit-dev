@@ -27,7 +27,7 @@ RUN Install-VSBuildTools2017 -InstallationPath C:\MSVS -Workloads `
 # Install LLVM for Clang tooling support
 #--------------------------------------------------------------------
 
-ENV LLVM_VERSION 8.0.0
+ENV LLVM_VERSION 9.0.0
 
 RUN Register-SystemPath -Path C:\LLVM\bin; `
     Install-LLVM -Version $env:LLVM_VERSION -InstallationPath C:\LLVM;
