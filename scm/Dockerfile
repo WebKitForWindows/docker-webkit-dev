@@ -9,7 +9,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # Install TortoiseSVN x64 CLI
 #--------------------------------------------------------------------
 
-ENV SVN_VERSION 1.13.1.28686
+ENV SVN_VERSION 1.13.0.28678
 
 RUN Install-SVN -Version $env:SVN_VERSION;
 
