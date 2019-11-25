@@ -1,28 +1,51 @@
 # escape=`
 
 ARG IMAGE_TAG
+
+#--------------------------------------------------------------------
+# Intermediate build image for GNU tools
+#--------------------------------------------------------------------
+
+FROM webkitdev/scm:$IMAGE_TAG as msys2
+
+#--------------------------------------------------------------------
+# Install GNU tools from MSYS2 into build image
+#
+# Currently the tools are just copied but in the future MSYS2 should
+# be installed into the container and then those files can be copied
+# directly
+#--------------------------------------------------------------------
+COPY msys2 C:/msys2
+
+RUN Register-SystemPath -Path C:\msys2\usr\bin; `
+    flex --version; `
+    bison --version; `
+    diff3 --version; `
+    make --version; `
+    gperf --version; `
+    patch --version;
+
+#--------------------------------------------------------------------
+# Tools image
+#--------------------------------------------------------------------
+
 FROM webkitdev/scm:$IMAGE_TAG
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 #--------------------------------------------------------------------
-# Install MSYS2
+# Copy GNU tools from MSYS2 from build image
 #--------------------------------------------------------------------
 
-ENV MSYS2_VERSION 20190524
+COPY --from=msys2 C:/msys2 C:/tools/msys2
 
-RUN Install-MSYS2 -Version $env:MSYS2_VERSION -InstallationPath C:\tools\msys2;
-
-#--------------------------------------------------------------------
-# Install GNU tools
-#--------------------------------------------------------------------
-
-RUN Install-Gperf; `
-    Install-Flex; `
-    Install-Bison; `
-    Install-DiffUtils; `
-    Install-Make; `
-    Install-Patch;
+RUN Register-SystemPath -Path C:\tools\msys2\usr\bin; `
+    flex --version; `
+    bison --version; `
+    diff3 --version; `
+    make --version; `
+    gperf --version; `
+    patch --version;
 
 #--------------------------------------------------------------------
 # Install Strawberry Perl x64
