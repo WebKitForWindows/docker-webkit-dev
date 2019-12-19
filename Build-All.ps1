@@ -1,17 +1,17 @@
-Param(
+param(
   [Parameter(Mandatory)]
   [ValidateSet('1803','1809','1903','1909','windows-1809','windows-1903','windows-1909')]
-  [string] $tag
+  [string]$tag
 )
 
 $ErrorActionPreference = 'Stop';
 
-Function Build-WebKitDockerImage {
-  Param(
+function Build-WebKitDockerImage {
+  param(
     [Parameter(Mandatory)]
-    [string] $image,
+    [string]$image,
     [Parameter(Mandatory)]
-    [string] $tag
+    [string]$tag
   )
 
   $path = Join-Path $PSScriptRoot $image;
@@ -23,13 +23,13 @@ Function Build-WebKitDockerImage {
     $buildArgs = ('--build-arg IMAGE_TAG={0}' -f $tag);
   }
 
-  $cmd = 'docker build -t webkitdev/{0}:{1} {2} -f {3} -m 2GB {4}' -f $image, $tag, $buildArgs, $file, $path;
+  $cmd = 'docker build -t webkitdev/{0}:{1} {2} -f {3} -m 2GB {4}' -f $image,$tag,$buildArgs,$file,$path;
 
   Write-Host ('Starting build at {0}' -f (Get-Date))
   Write-Host $cmd;
   Invoke-Expression $cmd;
 
-  if($LASTEXITCODE -ne 0) {
+  if ($LASTEXITCODE -ne 0) {
     Write-Error "docker build failed"
   }
 }

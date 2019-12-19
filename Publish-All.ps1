@@ -1,25 +1,25 @@
-Param(
+param(
   [Parameter(Mandatory)]
   [ValidateSet('1803','1809','1903','1909','windows-1809','windows-1903','windows-1909')]
-  [string] $tag
+  [string]$tag
 )
 
 $ErrorActionPreference = 'Stop';
 
-Function Publish-WebKitDockerImage {
-  Param(
+function Publish-WebKitDockerImage {
+  param(
     [Parameter(Mandatory)]
-    [string] $image,
+    [string]$image,
     [Parameter(Mandatory)]
-    [string] $tag
+    [string]$tag
   )
 
-  $cmd = 'docker push webkitdev/{0}:{1}' -f $image, $tag;
+  $cmd = 'docker push webkitdev/{0}:{1}' -f $image,$tag;
 
   Write-Host $cmd;
   Invoke-Expression $cmd;
 
-  if($LASTEXITCODE -ne 0) {
+  if ($LASTEXITCODE -ne 0) {
     Write-Error "docker push failed"
   }
 }
