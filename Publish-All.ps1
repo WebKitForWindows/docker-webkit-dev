@@ -18,6 +18,10 @@ Function Publish-WebKitDockerImage {
 
   Write-Host $cmd;
   Invoke-Expression $cmd;
+
+  if($LASTEXITCODE -ne 0) {
+    Write-Error "docker push failed"
+  }
 }
 
 Publish-WebKitDockerImage -Image base -Tag $tag;

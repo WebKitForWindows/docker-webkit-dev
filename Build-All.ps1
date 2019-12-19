@@ -28,6 +28,10 @@ Function Build-WebKitDockerImage {
   Write-Host ('Starting build at {0}' -f (Get-Date))
   Write-Host $cmd;
   Invoke-Expression $cmd;
+
+  if($LASTEXITCODE -ne 0) {
+    Write-Error "docker build failed"
+  }
 }
 
 Build-WebKitDockerImage -Image base -Tag $tag;
