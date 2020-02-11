@@ -18,11 +18,7 @@ FROM webkitdev/scm:$IMAGE_TAG as msys2
 COPY msys2 C:/msys2
 
 RUN Register-SystemPath -Path C:\msys2\usr\bin; `
-    flex --version; `
-    bison --version; `
-    diff3 --version; `
     make --version; `
-    gperf --version; `
     patch --version;
 
 #--------------------------------------------------------------------
@@ -40,12 +36,20 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 COPY --from=msys2 C:/msys2 C:/tools/msys2
 
 RUN Register-SystemPath -Path C:\tools\msys2\usr\bin; `
-    flex --version; `
-    bison --version; `
-    diff3 --version; `
     make --version; `
-    gperf --version; `
     patch --version;
+
+#--------------------------------------------------------------------
+# Copy GNU tools from GnuWin32 from build image
+#--------------------------------------------------------------------
+
+COPY diffutils C:/tools/diffutils
+RUN Register-SystemPath -Path C:\Tools\diffutils\bin; `
+    diff3 --version;
+
+COPY gperf C:/tools/gperf
+RUN Register-SystemPath -Path C:\Tools\gperf\bin; `
+    gperf --version;
 
 #--------------------------------------------------------------------
 # Install Strawberry Perl x64
@@ -94,7 +98,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.16.2
+ENV CMAKE_VERSION 3.16.4
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -102,7 +106,7 @@ RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 # Install Ninja build system
 #--------------------------------------------------------------------
 
-ENV NINJA_VERSION 1.9.0
+ENV NINJA_VERSION 1.10.0
 
 RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 
