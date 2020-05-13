@@ -1,0 +1,84 @@
+trigger:
+- master
+
+resources:
+- repo: self
+
+stages:
+- stage: build_1809
+  displayName: Build 1809 Image
+  jobs:
+  - job: build_1809_images
+    displayName: Build
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - task: Docker@2
+      displayName: Build webkitdev/base:1809 image
+      inputs:
+        command: build
+        repository: webkitdev/base
+        dockerfile: '$(Build.SourcesDirectory)/base/Dockerfile.1809'
+        buildContext: '$(Build.SourcesDirectory)/base'
+        tags: |
+          1809
+    - task: Docker@2
+      displayName: Build webkitdev/scripts:1809 image
+      inputs:
+        command: build
+        repository: webkitdev/scripts
+        dockerfile: '$(Build.SourcesDirectory)/scripts/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)/scripts'
+        arguments: --build-arg IMAGE_TAG=1809
+        tags: |
+          1809
+    - task: Docker@2
+      displayName: Build webkitdev/scm:1809 image
+      inputs:
+        command: build
+        repository: webkitdev/scm
+        dockerfile: '$(Build.SourcesDirectory)/scm/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)/scm'
+        arguments: --build-arg IMAGE_TAG=1809
+        tags: |
+          1809
+    - task: Docker@2
+      displayName: Build webkitdev/tools:1809 image
+      inputs:
+        command: build
+        repository: webkitdev/tools
+        dockerfile: '$(Build.SourcesDirectory)/tools/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)/tools'
+        arguments: --build-arg IMAGE_TAG=1809
+        tags: |
+          1809
+    - task: Docker@2
+      displayName: Build webkitdev/msbuild:1809 image
+      inputs:
+        command: build
+        repository: webkitdev/msbuild
+        dockerfile: '$(Build.SourcesDirectory)/msbuild/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)/msbuild'
+        arguments: --build-arg IMAGE_TAG=1809
+        tags: |
+          1809
+    - task: Docker@2
+      displayName: Build webkitdev/buildbot:1809 image
+      inputs:
+        command: build
+        repository: webkitdev/buildbot
+        dockerfile: '$(Build.SourcesDirectory)/buildbot/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)/buildbot'
+        arguments: --build-arg IMAGE_TAG=1809
+        tags: |
+          1809
+    - task: Docker@2
+      displayName: Build webkitdev/ews:1809 image
+      inputs:
+        command: build
+        repository: webkitdev/ews
+        dockerfile: '$(Build.SourcesDirectory)/ews/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)/ews'
+        arguments: --build-arg IMAGE_TAG=1809
+        tags: |
+          1809
