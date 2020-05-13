@@ -15,6 +15,7 @@ FROM webkitdev/scm:$IMAGE_TAG as msys2
 # be installed into the container and then those files can be copied
 # directly
 #--------------------------------------------------------------------
+
 COPY msys2 C:/msys2
 
 RUN Register-SystemPath -Path C:\msys2\usr\bin; `
@@ -59,7 +60,7 @@ RUN Register-SystemPath -Path C:\Tools\gperf\bin; `
 # technically use it for a build-bot.
 #--------------------------------------------------------------------
 
-ENV PERL_VERSION 5.30.0.1
+ENV PERL_VERSION 5.30.2.1
 
 RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 
@@ -67,9 +68,9 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 # Install Python
 #--------------------------------------------------------------------
 
-ENV PYTHON_VERSION 2.7.17
+ENV PYTHON_VERSION 2.7.18
 ENV PYTHONIOENCODING utf-8
-ENV PYTHON_PIP_VERSION 19.3.1
+ENV PYTHON_PIP_VERSION 20.1.0
 
 RUN Install-Python `
     -Version $env:PYTHON_VERSION `
@@ -90,7 +91,7 @@ RUN Write-Host Write-Host 'Installing pywin32 ...'; `
 # Install Ruby
 #--------------------------------------------------------------------
 
-ENV RUBY_VERSION 2.6.5-1
+ENV RUBY_VERSION 2.7.1-1
 
 RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 
@@ -98,7 +99,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.16.4
+ENV CMAKE_VERSION 3.17.2
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -114,7 +115,7 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 # Install XAMPP
 #--------------------------------------------------------------------
 
-ENV XAMPP_VERSION 7.3.12
+ENV XAMPP_VERSION 7.4.5
 
 RUN Install-Xampp -Version $env:XAMPP_VERSION; `
     Update-XamppPerlLocation -perlPath C:\tools\perl;
