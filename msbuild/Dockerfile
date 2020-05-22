@@ -31,6 +31,14 @@ RUN Register-SystemPath -Path C:\LLVM\bin; `
     Install-LLVM -Version $env:LLVM_VERSION -InstallationPath C:\LLVM;
 
 #--------------------------------------------------------------------
+# Install include-what-you-use
+#--------------------------------------------------------------------
+
+COPY include-what-you-use C:/tools/include-what-you-use
+RUN Register-SystemPath -Path C:\Tools\include-what-you-use\bin; `
+    include-what-you-use --version;
+
+#--------------------------------------------------------------------
 # Install Debugging Tools for Windows
 #--------------------------------------------------------------------
 
