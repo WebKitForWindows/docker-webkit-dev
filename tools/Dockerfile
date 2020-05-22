@@ -70,7 +70,7 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 
 ENV PYTHON_VERSION 2.7.18
 ENV PYTHONIOENCODING utf-8
-ENV PYTHON_PIP_VERSION 20.1.0
+ENV PYTHON_PIP_VERSION 20.1.1
 
 RUN Install-Python `
     -Version $env:PYTHON_VERSION `
@@ -115,7 +115,7 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 # Install XAMPP
 #--------------------------------------------------------------------
 
-ENV XAMPP_VERSION 7.4.5
+ENV XAMPP_VERSION 7.4.6
 
 RUN Install-Xampp -Version $env:XAMPP_VERSION; `
     Update-XamppPerlLocation -perlPath C:\tools\perl;
