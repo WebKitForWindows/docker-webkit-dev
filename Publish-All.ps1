@@ -1,6 +1,6 @@
 param(
   [Parameter(Mandatory)]
-  [ValidateSet('1803','1809','1903','1909','2004','windows-1809','windows-1903','windows-1909','windows-2004')]
+  [ValidateSet('1809','1903','1909','2004','windows-1809','windows-1903','windows-1909','windows-2004')]
   [string]$tag
 )
 

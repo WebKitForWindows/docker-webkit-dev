@@ -7,12 +7,6 @@ tags:
 {{/if}}
 manifests:
   -
-    image: webkitdev/tools:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}1803
-    platform:
-      architecture: amd64
-      os: windows
-      version: 1803
-  -
     image: webkitdev/tools:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}1809
     platform:
       architecture: amd64
