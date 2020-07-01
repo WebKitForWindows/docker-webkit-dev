@@ -34,11 +34,11 @@ RUN Write-Host 'Installing buildbot ...'; `
 # Copy files
 #--------------------------------------------------------------------
 
-COPY WebKit-BuildWorker C:/WebKit-BuildWorker
+COPY WebKit-BuildWorker C:/BW
 
 #--------------------------------------------------------------------
 # Entrypoint
 #--------------------------------------------------------------------
 
-WORKDIR C:\\WebKit-BuildWorker
+WORKDIR C:\\BW
 CMD powershell .\\Run-BuildbotWorker.ps1
