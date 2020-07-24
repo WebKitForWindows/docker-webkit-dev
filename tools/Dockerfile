@@ -99,7 +99,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.17.3
+ENV CMAKE_VERSION 3.18.0
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -115,7 +115,7 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 # Install XAMPP
 #--------------------------------------------------------------------
 
-ENV XAMPP_VERSION 7.4.6
+ENV XAMPP_VERSION 7.4.8
 
 RUN Install-Xampp -Version $env:XAMPP_VERSION; `
     Update-XamppPerlLocation -perlPath C:\tools\perl;
