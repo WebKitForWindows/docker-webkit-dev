@@ -1,1 +1,1 @@
-FROM mcr.microsoft.com/dotnet/framework/runtime:4.8-windowsservercore-ltsc2019@sha256:576253ce15707ddf9c4fa5e29bf7e9aef5a71d2e89fa29dd3f6e67cb4b2411a9
+FROM mcr.microsoft.com/dotnet/framework/runtime:4.8-windowsservercore-ltsc2019@sha256:b523bc2b878f41d0a428a8fd3679f829039f07a458af9f08b0e859e23b33295a
