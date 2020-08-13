@@ -12,8 +12,8 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 ENV TWISTED_VERSION 20.3.0
 
 RUN Write-Host 'Installing twisted ...'; `
-    pip install -q ('Twisted=={0}' -f $env:TWISTED_VERSION); `
-    pip show Twisted;
+    pip2 install -q ('Twisted=={0}' -f $env:TWISTED_VERSION); `
+    pip2 show Twisted;
 
 #--------------------------------------------------------------------
 # Install buildbot
@@ -22,12 +22,12 @@ RUN Write-Host 'Installing twisted ...'; `
 ENV BUILDBOT_VERSION 0.8.14
 
 RUN Write-Host 'Installing buildbot ...'; `
-    pip install -q ('buildbot=={0}' -f $env:BUILDBOT_VERSION); `
-    pip show buildbot; `
+    pip2 install -q ('buildbot=={0}' -f $env:BUILDBOT_VERSION); `
+    pip2 show buildbot; `
     buildbot --version; `
     `
-    pip install -q ('buildbot-slave=={0}' -f $env:BUILDBOT_VERSION); `
-    pip show buildbot-slave; `
+    pip2 install -q ('buildbot-slave=={0}' -f $env:BUILDBOT_VERSION); `
+    pip2 show buildbot-slave; `
     buildslave --version;
 
 #--------------------------------------------------------------------

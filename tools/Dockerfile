@@ -65,27 +65,51 @@ ENV PERL_VERSION 5.30.2.1
 RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 
 #--------------------------------------------------------------------
-# Install Python
+# Install Python 3
 #--------------------------------------------------------------------
 
-ENV PYTHON_VERSION 2.7.18
-ENV PYTHONIOENCODING utf-8
-ENV PYTHON_PIP_VERSION 20.1.1
+ENV PYTHON3_VERSION 3.8.5
+ENV PYTHON3_PIP_VERSION 20.1.1
 
 RUN Install-Python `
-    -Version $env:PYTHON_VERSION `
-    -PipVersion $env:PYTHON_PIP_VERSION `
-    -InstallationPath C:\tools\python;
+    -Version $env:PYTHON3_VERSION `
+    -PipVersion $env:PYTHON3_PIP_VERSION `
+    -InstallationPath C:\tools\python3;
+RUN copy-item C:\tools\python3\python.exe C:\tools\python3\python3.exe
 
 #--------------------------------------------------------------------
-# Install pywin32
+# Install pywin32 for python 3
 #--------------------------------------------------------------------
 
 ENV PYWIN32_VERSION 227
 
 RUN Write-Host Write-Host 'Installing pywin32 ...'; `
-    pip install -q ('pywin32=={0}' -f $env:PYWIN32_VERSION); `
-    pip show pywin32;
+    pip3 install -q ('pywin32=={0}' -f $env:PYWIN32_VERSION); `
+    pip3 show pywin32;
+
+#--------------------------------------------------------------------
+# Install Python2
+#--------------------------------------------------------------------
+
+ENV PYTHON2_VERSION 2.7.18
+ENV PYTHONIOENCODING utf-8
+ENV PYTHON2_PIP_VERSION 20.1.1
+
+RUN Install-Python `
+    -Version $env:PYTHON2_VERSION `
+    -PipVersion $env:PYTHON2_PIP_VERSION `
+    -InstallationPath C:\tools\python;
+RUN copy-item C:\tools\python\python.exe C:\tools\python\python2.exe
+
+#--------------------------------------------------------------------
+# Install pywin32 for python 2
+#--------------------------------------------------------------------
+
+ENV PYWIN32_VERSION 227
+
+RUN Write-Host Write-Host 'Installing pywin32 for python 2...'; `
+    pip2 install -q ('pywin32=={0}' -f $env:PYWIN32_VERSION); `
+    pip2 show pywin32;
 
 #--------------------------------------------------------------------
 # Install Ruby
