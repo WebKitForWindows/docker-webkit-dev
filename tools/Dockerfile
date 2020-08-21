@@ -81,7 +81,7 @@ RUN copy-item C:\tools\python3\python.exe C:\tools\python3\python3.exe
 # Install pywin32 for python 3
 #--------------------------------------------------------------------
 
-ENV PYWIN32_VERSION 227
+ENV PYWIN32_VERSION 228
 
 RUN Write-Host Write-Host 'Installing pywin32 ...'; `
     pip3 install -q ('pywin32=={0}' -f $env:PYWIN32_VERSION); `
@@ -105,7 +105,7 @@ RUN copy-item C:\tools\python\python.exe C:\tools\python\python2.exe
 # Install pywin32 for python 2
 #--------------------------------------------------------------------
 
-ENV PYWIN32_VERSION 227
+ENV PYWIN32_VERSION 228
 
 RUN Write-Host Write-Host 'Installing pywin32 for python 2...'; `
     pip2 install -q ('pywin32=={0}' -f $env:PYWIN32_VERSION); `
