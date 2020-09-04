@@ -131,7 +131,7 @@ RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 # Install Ninja build system
 #--------------------------------------------------------------------
 
-ENV NINJA_VERSION 1.10.0
+ENV NINJA_VERSION 1.10.1
 
 RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 
