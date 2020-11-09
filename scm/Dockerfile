@@ -20,3 +20,9 @@ RUN Install-SVN -Version $env:SVN_VERSION;
 ENV GIT_VERSION 2.29.0.1
 
 RUN Install-Git -Version $env:GIT_VERSION;
+
+#--------------------------------------------------------------------
+# Configure git for long filename support
+#--------------------------------------------------------------------
+
+RUN git config --system core.longpaths true
