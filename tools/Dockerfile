@@ -68,8 +68,8 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 # Install Python 3
 #--------------------------------------------------------------------
 
-ENV PYTHON3_VERSION 3.9.0
-ENV PYTHON3_PIP_VERSION 20.2.4
+ENV PYTHON3_VERSION 3.9.1
+ENV PYTHON3_PIP_VERSION 20.3.1
 
 RUN Install-Python `
     -Version $env:PYTHON3_VERSION `
@@ -81,7 +81,7 @@ RUN copy-item C:\tools\python3\python.exe C:\tools\python3\python3.exe
 # Install pywin32 for python 3
 #--------------------------------------------------------------------
 
-ENV PYWIN32_VERSION 228
+ENV PYWIN32_VERSION 300
 
 RUN Write-Host Write-Host 'Installing pywin32 ...'; `
     pip3 install -q ('pywin32=={0}' -f $env:PYWIN32_VERSION); `
@@ -93,7 +93,7 @@ RUN Write-Host Write-Host 'Installing pywin32 ...'; `
 
 ENV PYTHON2_VERSION 2.7.18
 ENV PYTHONIOENCODING utf-8
-ENV PYTHON2_PIP_VERSION 20.2.4
+ENV PYTHON2_PIP_VERSION 20.3.1
 
 RUN Install-Python `
     -Version $env:PYTHON2_VERSION `
@@ -105,6 +105,7 @@ RUN copy-item C:\tools\python\python.exe C:\tools\python\python2.exe
 # Install pywin32 for python 2
 #--------------------------------------------------------------------
 
+# Python 2 support removed with 300
 ENV PYWIN32_VERSION 228
 
 RUN Write-Host Write-Host 'Installing pywin32 for python 2...'; `
@@ -123,7 +124,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.18.4
+ENV CMAKE_VERSION 3.19.1
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -131,7 +132,7 @@ RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 # Install Ninja build system
 #--------------------------------------------------------------------
 
-ENV NINJA_VERSION 1.10.1
+ENV NINJA_VERSION 1.10.2
 
 RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 
@@ -139,7 +140,7 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 # Install XAMPP
 #--------------------------------------------------------------------
 
-ENV XAMPP_VERSION 7.4.11
+ENV XAMPP_VERSION 7.4.13
 
 RUN Install-Xampp -Version $env:XAMPP_VERSION; `
     Update-XamppPerlLocation -perlPath C:\tools\perl;
