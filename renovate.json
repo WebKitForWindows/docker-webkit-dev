@@ -3,9 +3,19 @@
     "config:base",
     ":automergeDigest"
   ],
+  "enabledManagers": ["dockerfile"],
   "dockerfile": {
-    "includePaths": ["base/"],
-    "ignorePaths": ["base/Dockerfile.aws"],
+    "ignorePaths": [
+      "base/Dockerfile.aws",
+      "scripts/",
+      "scm/",
+      "tools/",
+      "msbuild/",
+      "msbuild-2017/",
+      "buildbot/",
+      "ews/",
+      "ews-legacy/"
+    ],
     "pinDigests": true
   },
   "labels": [
