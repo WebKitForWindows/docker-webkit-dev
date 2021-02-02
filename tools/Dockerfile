@@ -143,7 +143,8 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 ENV XAMPP_VERSION 7.4.13
 
 RUN Install-Xampp -Version $env:XAMPP_VERSION; `
-    Update-XamppPerlLocation -perlPath C:\tools\perl;
+    Update-XamppPerlLocation -perlPath C:\tools\perl; `
+    Update-XamppPythonLocation -pythonPath C:\tools\python3;
 
 #--------------------------------------------------------------------
 # Install Fonts
