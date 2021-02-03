@@ -12,15 +12,16 @@ local images = [
 ];
 
 local tags = [
-  '1803',
   '1809',
   '1903',
   '1909',
   '2004',
+  '20H2',
   'windows-1809',
   'windows-1903',
   'windows-1909',
   'windows-2004',
+  'windows-20H2',
 ];
 
 local pipeline_name(tag) =
