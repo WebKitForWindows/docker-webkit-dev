@@ -6,16 +6,6 @@ FROM webkitdev/msbuild:$IMAGE_TAG
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 #--------------------------------------------------------------------
-# Install twisted
-#--------------------------------------------------------------------
-
-ENV TWISTED_VERSION 20.3.0
-
-RUN Write-Host 'Installing twisted ...'; `
-    pip2 install -q ('Twisted=={0}' -f $env:TWISTED_VERSION); `
-    pip2 show Twisted;
-
-#--------------------------------------------------------------------
 # Install buildbot
 #--------------------------------------------------------------------
 
