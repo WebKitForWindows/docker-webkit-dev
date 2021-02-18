@@ -9,7 +9,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # Install TortoiseSVN x64 CLI
 #--------------------------------------------------------------------
 
-ENV SVN_VERSION 1.14.0.28885
+ENV SVN_VERSION 1.14.1.29085
 
 RUN Install-SVN -Version $env:SVN_VERSION;
 
@@ -17,7 +17,7 @@ RUN Install-SVN -Version $env:SVN_VERSION;
 # Install Git for Windows x64 CLI
 #--------------------------------------------------------------------
 
-ENV GIT_VERSION 2.30.0.2
+ENV GIT_VERSION 2.30.1.1
 
 RUN Install-Git -Version $env:GIT_VERSION;
 

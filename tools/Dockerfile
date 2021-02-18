@@ -60,7 +60,7 @@ RUN Register-SystemPath -Path C:\Tools\gperf\bin; `
 # technically use it for a build-bot.
 #--------------------------------------------------------------------
 
-ENV PERL_VERSION 5.30.2.1
+ENV PERL_VERSION 5.32.1.1
 
 RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 
@@ -68,7 +68,7 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 # Install Python 3
 #--------------------------------------------------------------------
 
-ENV PYTHON3_VERSION 3.9.1
+ENV PYTHON3_VERSION 3.9.2
 ENV PYTHON3_PIP_VERSION 21.0.1
 
 RUN Install-Python `
@@ -78,7 +78,7 @@ RUN Install-Python `
 RUN copy-item C:\tools\python3\python.exe C:\tools\python3\python3.exe
 
 #--------------------------------------------------------------------
-# Install pywin32 for python 3
+# Install pywin32 for Python 3
 #--------------------------------------------------------------------
 
 ENV PYWIN32_VERSION 300
@@ -124,7 +124,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.19.4
+ENV CMAKE_VERSION 3.19.5
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -140,7 +140,7 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 # Install XAMPP
 #--------------------------------------------------------------------
 
-ENV XAMPP_VERSION 7.4.14.1
+ENV XAMPP_VERSION 7.4.15.0
 
 RUN Install-Xampp -Version $env:XAMPP_VERSION; `
     Update-XamppPerlLocation -perlPath C:\tools\perl; `
