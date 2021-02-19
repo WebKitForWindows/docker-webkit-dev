@@ -88,31 +88,6 @@ RUN Write-Host Write-Host 'Installing pywin32 ...'; `
     pip3 show pywin32;
 
 #--------------------------------------------------------------------
-# Install Python2
-#--------------------------------------------------------------------
-
-ENV PYTHON2_VERSION 2.7.18
-ENV PYTHONIOENCODING utf-8
-ENV PYTHON2_PIP_VERSION 20.3.4
-
-RUN Install-Python `
-    -Version $env:PYTHON2_VERSION `
-    -PipVersion $env:PYTHON2_PIP_VERSION `
-    -InstallationPath C:\tools\python;
-RUN copy-item C:\tools\python\python.exe C:\tools\python\python2.exe
-
-#--------------------------------------------------------------------
-# Install pywin32 for python 2
-#--------------------------------------------------------------------
-
-# Python 2 support removed with 300
-ENV PYWIN32_VERSION 228
-
-RUN Write-Host Write-Host 'Installing pywin32 for python 2...'; `
-    pip2 install -q ('pywin32=={0}' -f $env:PYWIN32_VERSION); `
-    pip2 show pywin32;
-
-#--------------------------------------------------------------------
 # Install Ruby
 #--------------------------------------------------------------------
 
