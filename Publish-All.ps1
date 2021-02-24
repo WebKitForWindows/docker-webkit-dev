@@ -30,5 +30,5 @@ Publish-WebKitDockerImage -Image scm -Tag $tag;
 Publish-WebKitDockerImage -Image tools -Tag $tag;
 Publish-WebKitDockerImage -Image msbuild -Tag $tag;
 Publish-WebKitDockerImage -Image msbuild-2017 -Tag $tag;
+Publish-WebKitDockerImage -Image buildbot-worker -Tag $tag;
 Publish-WebKitDockerImage -Image buildbot -Tag $tag;
-Publish-WebKitDockerImage -Image ews -Tag $tag;

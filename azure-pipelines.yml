@@ -63,22 +63,22 @@ stages:
         tags: |
           1809
     - task: Docker@2
+      displayName: Build webkitdev/buildbot-worker:1809 image
+      inputs:
+        command: build
+        repository: webkitdev/buildbot-worker
+        dockerfile: '$(Build.SourcesDirectory)/buildbot-worker/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)/buildbot-worker'
+        arguments: --build-arg IMAGE_TAG=1809
+        tags: |
+          1809
+    - task: Docker@2
       displayName: Build webkitdev/buildbot:1809 image
       inputs:
         command: build
         repository: webkitdev/buildbot
         dockerfile: '$(Build.SourcesDirectory)/buildbot/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/buildbot'
-        arguments: --build-arg IMAGE_TAG=1809
-        tags: |
-          1809
-    - task: Docker@2
-      displayName: Build webkitdev/ews:1809 image
-      inputs:
-        command: build
-        repository: webkitdev/ews
-        dockerfile: '$(Build.SourcesDirectory)/ews/Dockerfile'
-        buildContext: '$(Build.SourcesDirectory)/ews'
         arguments: --build-arg IMAGE_TAG=1809
         tags: |
           1809
