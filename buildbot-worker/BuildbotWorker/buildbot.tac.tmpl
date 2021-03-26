@@ -3,7 +3,7 @@ import os
 from buildbot_worker.bot import Worker
 from twisted.application import service
 
-basedir = 'C:\\Buildbot'
+basedir = 'C:\\BW'
 rotateLength = 10000000
 maxRotatedFiles = 10
 
@@ -13,7 +13,6 @@ if basedir == '.':
     basedir = os.path.abspath(os.path.dirname(__file__))
 
 # note: this line is matched against to check that this is a worker
-# directory; do not edit it.
 application = service.Application('buildbot-worker')
 
 from twisted.python.logfile import LogFile
@@ -23,19 +22,22 @@ logfile = LogFile.fromFullPath(
     maxRotatedFiles=maxRotatedFiles)
 application.setComponent(ILogObserver, FileLogObserver(logfile).emit)
 
-buildmaster_host = '$master'
+buildmaster_host = '$host'
 port = $port
 workername = '$worker'
 passwd = '$password'
 keepalive = 600
-umask = 022
+umask = 0o22
 maxdelay = 300
 numcpus = None
 allow_shutdown = None
 maxretries = None
+use_tls = 0
+delete_leftover_dirs = 0
 
 s = Worker(buildmaster_host, port, workername, passwd, basedir,
            keepalive, umask=umask, maxdelay=maxdelay,
            numcpus=numcpus, allow_shutdown=allow_shutdown,
-           maxRetries=maxretries)
+           maxRetries=maxretries, useTls=use_tls,
+           delete_leftover_dirs=delete_leftover_dirs)
 s.setServiceParent(application)

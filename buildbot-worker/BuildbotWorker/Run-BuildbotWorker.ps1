@@ -2,9 +2,16 @@
 
 $ErrorActionPreference = 'Stop';
 
+# Verify that a build host name is present
+if (-not (Test-Path Env:BUILD_HOST_NAME)) {
+  Write-Error ('WebKit buildbots require a name for the host to connect to.
+For local development set the BUILD_HOST_NAME environment variable using
+  docker run -e BUILD_HOST_NAME=<host-name>')
+}
+
 # Verify that a build worker name is present
 if (-not (Test-Path Env:BUILD_WORKER_NAME)) {
-  Write-Error('WebKit buildbots require a name for the worker to connect.
+  Write-Error ('WebKit buildbots require a name for the worker to connect.
 For local development set the BUILD_WORKER_NAME environment variable using
   docker run -e BUILD_WORKER_NAME=<worker-name>');
 }
@@ -12,34 +19,34 @@ For local development set the BUILD_WORKER_NAME environment variable using
 # Verify that a password is present
 if (-not (Test-Path Env:BUILD_WORKER_PASSWORD)) {
   if (-not (Test-Path Env:BUILD_WORKER_PASSWORD_FILE)) {
-    Write-Error('WebKit buildbots require a password to connect.
+    Write-Error ('WebKit buildbots require a password to connect.
 For local development set the BUILD_WORKER_PASSWORD environment variable using
   docker run -e BUILD_WORKER_PASSWORD=<worker-password>
 While in production use docker secrets and set the location of the file using the BUILD_WORKER_PASSWORD_FILE environment variable');
   }
 
-  Write-Host ('Loading password from {0}', $env:BUILD_WORKER_PASSWORD_FILE);
+  Write-Host ('Loading password from {0}',$env:BUILD_WORKER_PASSWORD_FILE);
   $Env:BUILD_WORKER_PASSWORD = Get-Content -Path $env:BUILD_WORKER_PASSWORD_FILE;
 }
 
 # Output information
 Write-Host 'Buildbot information';
 Write-Host ('Name: {0}' -f $env:BUILD_WORKER_NAME);
-Write-Host ('Admin: {0} <{1}>' -f $env:ADMIN_NAME, $env:ADMIN_EMAIL);
+Write-Host ('Admin: {0} <{1}>' -f $env:ADMIN_NAME,$env:ADMIN_EMAIL);
 Write-Host ('Description: {0}' -f $env:HOST_DESCRIPTION);
 
 # Print the host information
-$cs = Get-WMIObject -Class Win32_ComputerSystem;
+$cs = Get-WmiObject -Class Win32_ComputerSystem;
 Write-Host ('Host system');
 Write-Host ('Processors: {0}' -f $cs.NumberOfProcessors);
 Write-Host ('Logical processors: {0}' -f $cs.NumberOfLogicalProcessors);
-Write-Host ('Total Physical Memory: {0:f2}gb' -f ($cs.TotalPhysicalMemory /1Gb));
+Write-Host ('Total Physical Memory: {0:f2}gb' -f ($cs.TotalPhysicalMemory / 1Gb));
 
-$ld = Get-WMIObject -Class Win32_LogicalDisk;
+$ld = Get-WmiObject -Class Win32_LogicalDisk;
 Write-Host $ld;
 Write-Host ('Disk information {0}' -f ($ld.DeviceID));
-Write-Host ('Total Disk Space: {0:f2}gb' -f ($ld.Size /1Gb));
-Write-Host ('Available Disk Space: {0:f2}gb' -f ($ld.FreeSpace /1Gb));
+Write-Host ('Total Disk Space: {0:f2}gb' -f ($ld.Size / 1Gb));
+Write-Host ('Available Disk Space: {0:f2}gb' -f ($ld.FreeSpace / 1Gb));
 
 # Sanity check the configuration to make sure it is setup properly
 $minProcessors = 4;
@@ -79,7 +86,7 @@ if ($env:COMPILER -eq 'Clang') {
 $compilerPath = (Get-Command $compilerExe).Path;
 
 Write-Host ('Found compiler at {0}' -f $compilerPath);
-Initialize-NinjaEnvironment -CC $compilerPath -CXX $compilerPath;
+Initialize-NinjaEnvironment -Cc $compilerPath -CXX $compilerPath;
 
 # Create the configuration
 #
@@ -87,7 +94,7 @@ Initialize-NinjaEnvironment -CC $compilerPath -CXX $compilerPath;
 # as buildbot will print the entire environment and leak the
 # information.
 Write-Host 'Initializing buildbot configuration';
-python buildbot.py;
+python3 buildbot.py;
 
 Remove-Item Env:BUILD_WORKER_PASSWORD;
 
