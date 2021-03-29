@@ -17,7 +17,7 @@ RUN Install-SVN -Version $env:SVN_VERSION;
 # Install Git for Windows x64 CLI
 #--------------------------------------------------------------------
 
-ENV GIT_VERSION 2.30.1.1
+ENV GIT_VERSION 2.31.1.1
 
 RUN Install-Git -Version $env:GIT_VERSION;
 
