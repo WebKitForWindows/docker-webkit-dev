@@ -68,8 +68,8 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 # Install Python 3
 #--------------------------------------------------------------------
 
-ENV PYTHON3_VERSION 3.9.4
-ENV PYTHON3_PIP_VERSION 21.0.1
+ENV PYTHON3_VERSION 3.9.5
+ENV PYTHON3_PIP_VERSION 21.1.1
 
 RUN Install-Python `
     -Version $env:PYTHON3_VERSION `
@@ -124,7 +124,7 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.20.1
+ENV CMAKE_VERSION 3.20.2
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -140,7 +140,7 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 # Install XAMPP
 #--------------------------------------------------------------------
 
-ENV XAMPP_VERSION 7.4.15.0
+ENV XAMPP_VERSION 7.4.18.0
 
 RUN Install-Xampp -Version $env:XAMPP_VERSION; `
     Update-XamppPerlLocation -perlPath C:\tools\perl; `
