@@ -22,6 +22,8 @@ local tags = [
   'windows-1909',
   'windows-2004',
   'windows-20H2',
+  'aws',
+  'windows-aws'
 ];
 
 local pipeline_name(tag) =
