@@ -124,7 +124,9 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 # Install webrick gem
 #--------------------------------------------------------------------
 
-RUN gem install webrick
+ENV WEBRICK_VERSION 1.7.0
+
+RUN gem install webrick -v $env:WEBRICK_VERSION
 
 #--------------------------------------------------------------------
 # Install CMake
