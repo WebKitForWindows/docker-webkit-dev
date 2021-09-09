@@ -68,8 +68,8 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 # Install Python 3
 #--------------------------------------------------------------------
 
-ENV PYTHON3_VERSION 3.9.5
-ENV PYTHON3_PIP_VERSION 21.1.2
+ENV PYTHON3_VERSION 3.9.7
+ENV PYTHON3_PIP_VERSION 21.2.4
 
 RUN Install-Python `
     -Version $env:PYTHON3_VERSION `
@@ -81,7 +81,7 @@ RUN copy-item C:\tools\python3\python.exe C:\tools\python3\python3.exe
 # Install pywin32 for Python 3
 #--------------------------------------------------------------------
 
-ENV PYWIN32_VERSION 300
+ENV PYWIN32_VERSION 301
 
 RUN Write-Host Write-Host 'Installing pywin32 ...'; `
     pip3 install -q ('pywin32=={0}' -f $env:PYWIN32_VERSION); `
@@ -116,7 +116,7 @@ RUN Write-Host Write-Host 'Installing pywin32 for python 2...'; `
 # Install Ruby
 #--------------------------------------------------------------------
 
-ENV RUBY_VERSION 3.0.0-1
+ENV RUBY_VERSION 3.0.2-1
 
 RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 
@@ -132,7 +132,7 @@ RUN gem install webrick -v $env:WEBRICK_VERSION
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.20.4
+ENV CMAKE_VERSION 3.21.2
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -148,7 +148,7 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 # Install XAMPP
 #--------------------------------------------------------------------
 
-ENV XAMPP_VERSION 7.4.20.0
+ENV XAMPP_VERSION 7.4.23.0
 
 RUN Install-Xampp -Version $env:XAMPP_VERSION; `
     Update-XamppPerlLocation -perlPath C:\tools\perl; `
