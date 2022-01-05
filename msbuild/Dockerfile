@@ -7,6 +7,10 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 
 #--------------------------------------------------------------------
 # Install MS Build Tools 2019
+#
+# Using Windows SDK 10.0.18362 rather than 10.0.17763 to avoid
+#  error C2039: 'CheckForDuplicateEntries': is not a member of 'Microsoft::WRL::Details'
+# errors with /permissive- on ANGLE compile
 #--------------------------------------------------------------------
 
 RUN Install-VSBuildTools2019 -InstallationPath C:\MSVS -Workloads `
