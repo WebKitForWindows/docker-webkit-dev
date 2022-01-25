@@ -53,12 +53,12 @@ stages:
         tags: |
           1809
     - task: Docker@2
-      displayName: Build webkitdev/msbuild:1809 image
+      displayName: Build webkitdev/msbuild-2022:1809 image
       inputs:
         command: build
-        repository: webkitdev/msbuild
-        dockerfile: '$(Build.SourcesDirectory)/msbuild/Dockerfile'
-        buildContext: '$(Build.SourcesDirectory)/msbuild'
+        repository: webkitdev/msbuild-2022
+        dockerfile: '$(Build.SourcesDirectory)/msbuild-2022/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)/msbuild-2022'
         arguments: --build-arg IMAGE_TAG=1809
         tags: |
           1809

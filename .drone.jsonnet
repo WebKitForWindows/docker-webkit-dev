@@ -7,6 +7,7 @@ local images = [
   'tools',
   'msbuild',
   'msbuild-2017',
+  'msbuild-2022',
   'buildbot',
   'ews',
 ];
