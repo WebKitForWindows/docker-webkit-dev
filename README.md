@@ -16,7 +16,7 @@ Currently 1.13.1 is the tested version. The beta channel has not been tested.
 
 ### Building WinCairo
 
-With the `webkitdev/msbuild` image everything is there to do a build of 
+With the `webkitdev/msbuild-2022` image everything is there to do a build of 
 WinCairo. To start run the following command replacing `X` with the number of
 CPUs you'd like to have running the build, and `Y` with the number of GBs that
 should be available for the build. The defaults for the container are not enough
@@ -28,10 +28,10 @@ CPU to make sure the build completes.
 
 ```powershell
 # Pulls the latest image
-docker pull webkitdev/msbuild
+docker pull webkitdev/msbuild-2022
 
 # Runs an interactive shell which will remove itself when completed
-docker run --name build --rm -it --cpu-count=X --memory=Yg webkitdev/msbuild cmd
+docker run --name build --rm -it --cpu-count=X --memory=Yg webkitdev/msbuild-2022 cmd
 ```
 
 Once the command is run it will place you into a Windows Command Prompt.
