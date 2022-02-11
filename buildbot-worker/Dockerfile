@@ -1,7 +1,7 @@
 # escape=`
 
 ARG IMAGE_TAG
-FROM webkitdev/msbuild:$IMAGE_TAG
+FROM webkitdev/msbuild-2022:$IMAGE_TAG
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
