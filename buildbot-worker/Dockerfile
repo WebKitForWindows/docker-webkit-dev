@@ -23,6 +23,13 @@ RUN Write-Host 'Installing buildbot ...'; `
 COPY BuildbotWorker C:/BW
 
 #--------------------------------------------------------------------
+# Make git sh available in path for branch cleanup
+#--------------------------------------------------------------------
+
+RUN Register-SystemPath -path 'C:\program files\git\bin'; `
+    sh --version
+
+#--------------------------------------------------------------------
 # Entrypoint
 #--------------------------------------------------------------------
 
