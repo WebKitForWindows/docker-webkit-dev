@@ -31,8 +31,14 @@ manifests:
       os: windows
       version: 2004
   -
-    image: webkitdev/ews-legacy:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}20H2
+    image: webkitdev/msbuild-2019:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}20H2
     platform:
       architecture: amd64
       os: windows
       version: 20H2
+  -
+    image: webkitdev/msbuild-2019:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}2022
+    platform:
+      architecture: amd64
+      os: windows
+      version: 2022

@@ -36,3 +36,9 @@ manifests:
       architecture: amd64
       os: windows
       version: 20H2
+  -
+    image: webkitdev/scripts:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}2022
+    platform:
+      architecture: amd64
+      os: windows
+      version: 20H2
