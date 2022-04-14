@@ -11,7 +11,7 @@ stages:
   - job: build_1809_images
     displayName: Build
     pool:
-      vmImage: 'windows-latest'
+      vmImage: 'windows-2019'
     steps:
     - task: Docker@2
       displayName: Build webkitdev/base:1809 image
