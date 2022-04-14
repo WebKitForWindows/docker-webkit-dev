@@ -5,11 +5,11 @@ local images = [
   'scripts',
   'scm',
   'tools',
-  'msbuild',
   'msbuild-2017',
+  'msbuild-2019',
   'msbuild-2022',
+  'buildbot-worker',
   'buildbot',
-  'ews',
 ];
 
 local tags = [
@@ -18,6 +18,7 @@ local tags = [
   '1909',
   '2004',
   '20H2',
+  '2022',
   'windows-1809',
   'windows-1903',
   'windows-1909',
