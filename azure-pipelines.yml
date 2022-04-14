@@ -86,16 +86,6 @@ stages:
         arguments: --build-arg IMAGE_TAG=1809
         tags: |
           1809
-    - task: Docker@2
-      displayName: Build webkitdev/buildbot:1809 image
-      inputs:
-        command: build
-        repository: webkitdev/buildbot
-        dockerfile: '$(Build.SourcesDirectory)/buildbot/Dockerfile'
-        buildContext: '$(Build.SourcesDirectory)/buildbot'
-        arguments: --build-arg IMAGE_TAG=1809
-        tags: |
-          1809
     #------------------------------------------------
     # Push images (push to default branch only)
     #------------------------------------------------
@@ -166,14 +156,5 @@ stages:
         command: push
         containerRegistry: DockerHub
         repository: webkitdev/buildbot-worker
-        tags: |
-          1809
-    - task: Docker@2
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
-      displayName: Push webkitdev/buildbot:1809 image
-      inputs:
-        command: push
-        containerRegistry: DockerHub
-        repository: webkitdev/buildbot
         tags: |
           1809

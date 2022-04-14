@@ -9,7 +9,6 @@ local images = [
   'msbuild-2019',
   'msbuild-2022',
   'buildbot-worker',
-  'buildbot',
 ];
 
 local tags = [
