@@ -68,8 +68,8 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 # Install Python 3
 #--------------------------------------------------------------------
 
-ENV PYTHON3_VERSION 3.10.2
-ENV PYTHON3_PIP_VERSION 22.0.3
+ENV PYTHON3_VERSION 3.10.4
+ENV PYTHON3_PIP_VERSION 22.0.4
 
 RUN Install-Python `
     -Version $env:PYTHON3_VERSION `
@@ -116,7 +116,7 @@ RUN Write-Host Write-Host 'Installing pywin32 for python 2...'; `
 # Install Ruby
 #--------------------------------------------------------------------
 
-ENV RUBY_VERSION 3.0.3-1
+ENV RUBY_VERSION 3.1.2-1
 
 RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 
@@ -132,7 +132,7 @@ RUN gem install webrick -v $env:WEBRICK_VERSION
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.22.2
+ENV CMAKE_VERSION 3.23.1
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -148,7 +148,7 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 # Install XAMPP
 #--------------------------------------------------------------------
 
-ENV XAMPP_VERSION 7.4.27.2
+ENV XAMPP_VERSION 7.4.28.1
 
 RUN Install-Xampp -Version $env:XAMPP_VERSION; `
     Update-XamppPerlLocation -perlPath C:\tools\perl; `
