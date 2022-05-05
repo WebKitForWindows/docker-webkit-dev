@@ -32,4 +32,3 @@ Publish-WebKitDockerImage -Image msbuild-2017 -Tag $tag;
 Publish-WebKitDockerImage -Image msbuild-2019 -Tag $tag;
 Publish-WebKitDockerImage -Image msbuild-2022 -Tag $tag;
 Publish-WebKitDockerImage -Image buildbot-worker -Tag $tag;
-Publish-WebKitDockerImage -Image buildbot -Tag $tag;

@@ -6,14 +6,6 @@ FROM webkitdev/scripts:$IMAGE_TAG
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 #--------------------------------------------------------------------
-# Install TortoiseSVN x64 CLI
-#--------------------------------------------------------------------
-
-ENV SVN_VERSION 1.14.1.29085
-
-RUN Install-SVN -Version $env:SVN_VERSION;
-
-#--------------------------------------------------------------------
 # Install Git for Windows x64 CLI
 #--------------------------------------------------------------------
 
