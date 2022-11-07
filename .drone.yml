@@ -90,7 +90,7 @@ steps:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-msbuild
+- name: build-msbuild-2019
   pull: always
   image: plugins/docker
   settings:
@@ -100,18 +100,18 @@ steps:
     - IMAGE_TAG=1809
     context: msbuild
     daemon_off: true
-    dockerfile: msbuild/Dockerfile
+    dockerfile: msbuild-2019/Dockerfile
     password:
       from_secret: docker_password
     purge: false
-    repo: webkitdev/msbuild
+    repo: webkitdev/msbuild-2019
     username:
       from_secret: docker_username
   volumes:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-msbuild-2017
+- name: build-msbuild-2022
   pull: always
   image: plugins/docker
   settings:
@@ -119,20 +119,20 @@ steps:
     auto_tag_suffix: 1809
     build_args:
     - IMAGE_TAG=1809
-    context: msbuild-2017
+    context: msbuild-2022
     daemon_off: true
-    dockerfile: msbuild-2017/Dockerfile
+    dockerfile: msbuild-2022/Dockerfile
     password:
       from_secret: docker_password
     purge: false
-    repo: webkitdev/msbuild-2017
+    repo: webkitdev/msbuild-2022
     username:
       from_secret: docker_username
   volumes:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-buildbot
+- name: build-buildbot-worker
   pull: always
   image: plugins/docker
   settings:
@@ -147,27 +147,6 @@ steps:
       from_secret: docker_password
     purge: false
     repo: webkitdev/buildbot
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-ews
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 1809
-    build_args:
-    - IMAGE_TAG=1809
-    context: ews
-    daemon_off: true
-    dockerfile: ews/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/ews
     username:
       from_secret: docker_username
   volumes:
@@ -186,12 +165,12 @@ trigger:
 
 ---
 kind: pipeline
-name: ServerCore 1903 Images
+name: ServerCore 2022 Images
 
 platform:
   os: windows
   arch: amd64
-  version: 1903
+  version: 2022
 
 steps:
 - name: build-base
@@ -199,10 +178,10 @@ steps:
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: 1903
+    auto_tag_suffix: 2022
     context: base
     daemon_off: true
-    dockerfile: base/Dockerfile.1903
+    dockerfile: base/Dockerfile.2022
     password:
       from_secret: docker_password
     purge: false
@@ -218,9 +197,9 @@ steps:
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: 1903
+    auto_tag_suffix: 2022
     build_args:
-    - IMAGE_TAG=1903
+    - IMAGE_TAG=2022
     context: scripts
     daemon_off: true
     dockerfile: scripts/Dockerfile
@@ -239,9 +218,9 @@ steps:
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: 1903
+    auto_tag_suffix: 2022
     build_args:
-    - IMAGE_TAG=1903
+    - IMAGE_TAG=2022
     context: scm
     daemon_off: true
     dockerfile: scm/Dockerfile
@@ -260,9 +239,9 @@ steps:
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: 1903
+    auto_tag_suffix: 2022
     build_args:
-    - IMAGE_TAG=1903
+    - IMAGE_TAG=2022
     context: tools
     daemon_off: true
     dockerfile: tools/Dockerfile
@@ -276,56 +255,56 @@ steps:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-msbuild
+- name: build-msbuild-2019
   pull: always
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: 1903
+    auto_tag_suffix: 2022
     build_args:
-    - IMAGE_TAG=1903
+    - IMAGE_TAG=2022
     context: msbuild
     daemon_off: true
-    dockerfile: msbuild/Dockerfile
+    dockerfile: msbuild-2019/Dockerfile
     password:
       from_secret: docker_password
     purge: false
-    repo: webkitdev/msbuild
+    repo: webkitdev/msbuild-2019
     username:
       from_secret: docker_username
   volumes:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-msbuild-2017
+- name: build-msbuild-2022
   pull: always
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: 1903
+    auto_tag_suffix: 2022
     build_args:
-    - IMAGE_TAG=1903
-    context: msbuild-2017
+    - IMAGE_TAG=2022
+    context: msbuild-2022
     daemon_off: true
-    dockerfile: msbuild-2017/Dockerfile
+    dockerfile: msbuild-2022/Dockerfile
     password:
       from_secret: docker_password
     purge: false
-    repo: webkitdev/msbuild-2017
+    repo: webkitdev/msbuild-2022
     username:
       from_secret: docker_username
   volumes:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-buildbot
+- name: build-buildbot-worker
   pull: always
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: 1903
+    auto_tag_suffix: 2022
     build_args:
-    - IMAGE_TAG=1903
+    - IMAGE_TAG=2022
     context: buildbot
     daemon_off: true
     dockerfile: buildbot/Dockerfile
@@ -333,27 +312,6 @@ steps:
       from_secret: docker_password
     purge: false
     repo: webkitdev/buildbot
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-ews
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 1903
-    build_args:
-    - IMAGE_TAG=1903
-    context: ews
-    daemon_off: true
-    dockerfile: ews/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/ews
     username:
       from_secret: docker_username
   volumes:
@@ -372,12 +330,12 @@ trigger:
 
 ---
 kind: pipeline
-name: ServerCore 1909 Images
+name: ServerCore AWS Images
 
 platform:
   os: windows
   arch: amd64
-  version: 1909
+  version: 1809
 
 steps:
 - name: build-base
@@ -385,10 +343,10 @@ steps:
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: 1909
+    auto_tag_suffix: aws
     context: base
     daemon_off: true
-    dockerfile: base/Dockerfile.1909
+    dockerfile: base/Dockerfile.aws
     password:
       from_secret: docker_password
     purge: false
@@ -404,9 +362,9 @@ steps:
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: 1909
+    auto_tag_suffix: aws
     build_args:
-    - IMAGE_TAG=1909
+    - IMAGE_TAG=aws
     context: scripts
     daemon_off: true
     dockerfile: scripts/Dockerfile
@@ -425,9 +383,9 @@ steps:
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: 1909
+    auto_tag_suffix: aws
     build_args:
-    - IMAGE_TAG=1909
+    - IMAGE_TAG=aws
     context: scm
     daemon_off: true
     dockerfile: scm/Dockerfile
@@ -446,9 +404,9 @@ steps:
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: 1909
+    auto_tag_suffix: aws
     build_args:
-    - IMAGE_TAG=1909
+    - IMAGE_TAG=aws
     context: tools
     daemon_off: true
     dockerfile: tools/Dockerfile
@@ -462,56 +420,56 @@ steps:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-msbuild
+- name: build-msbuild-2019
   pull: always
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: 1909
+    auto_tag_suffix: aws
     build_args:
-    - IMAGE_TAG=1909
+    - IMAGE_TAG=aws
     context: msbuild
     daemon_off: true
-    dockerfile: msbuild/Dockerfile
+    dockerfile: msbuild-2019/Dockerfile
     password:
       from_secret: docker_password
     purge: false
-    repo: webkitdev/msbuild
+    repo: webkitdev/msbuild-2019
     username:
       from_secret: docker_username
   volumes:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-msbuild-2017
+- name: build-msbuild-aws
   pull: always
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: 1909
+    auto_tag_suffix: aws
     build_args:
-    - IMAGE_TAG=1909
-    context: msbuild-2017
+    - IMAGE_TAG=aws
+    context: msbuild-aws
     daemon_off: true
-    dockerfile: msbuild-2017/Dockerfile
+    dockerfile: msbuild-aws/Dockerfile
     password:
       from_secret: docker_password
     purge: false
-    repo: webkitdev/msbuild-2017
+    repo: webkitdev/msbuild-aws
     username:
       from_secret: docker_username
   volumes:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-buildbot
+- name: build-buildbot-worker
   pull: always
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: 1909
+    auto_tag_suffix: aws
     build_args:
-    - IMAGE_TAG=1909
+    - IMAGE_TAG=aws
     context: buildbot
     daemon_off: true
     dockerfile: buildbot/Dockerfile
@@ -519,399 +477,6 @@ steps:
       from_secret: docker_password
     purge: false
     repo: webkitdev/buildbot
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-ews
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 1909
-    build_args:
-    - IMAGE_TAG=1909
-    context: ews
-    daemon_off: true
-    dockerfile: ews/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/ews
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-volumes:
-- name: docker_pipe
-  host:
-    path: \\\\.\\pipe\\docker_engine
-
-trigger:
-  ref:
-  - refs/heads/**
-  - refs/tags/**
-
----
-kind: pipeline
-name: ServerCore 2004 Images
-
-platform:
-  os: windows
-  arch: amd64
-  version: 2004
-
-steps:
-- name: build-base
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 2004
-    context: base
-    daemon_off: true
-    dockerfile: base/Dockerfile.2004
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/base
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-scripts
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 2004
-    build_args:
-    - IMAGE_TAG=2004
-    context: scripts
-    daemon_off: true
-    dockerfile: scripts/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/scripts
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-scm
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 2004
-    build_args:
-    - IMAGE_TAG=2004
-    context: scm
-    daemon_off: true
-    dockerfile: scm/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/scm
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-tools
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 2004
-    build_args:
-    - IMAGE_TAG=2004
-    context: tools
-    daemon_off: true
-    dockerfile: tools/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/tools
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-msbuild
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 2004
-    build_args:
-    - IMAGE_TAG=2004
-    context: msbuild
-    daemon_off: true
-    dockerfile: msbuild/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/msbuild
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-msbuild-2017
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 2004
-    build_args:
-    - IMAGE_TAG=2004
-    context: msbuild-2017
-    daemon_off: true
-    dockerfile: msbuild-2017/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/msbuild-2017
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-buildbot
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 2004
-    build_args:
-    - IMAGE_TAG=2004
-    context: buildbot
-    daemon_off: true
-    dockerfile: buildbot/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/buildbot
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-ews
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 2004
-    build_args:
-    - IMAGE_TAG=2004
-    context: ews
-    daemon_off: true
-    dockerfile: ews/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/ews
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-volumes:
-- name: docker_pipe
-  host:
-    path: \\\\.\\pipe\\docker_engine
-
-trigger:
-  ref:
-  - refs/heads/**
-  - refs/tags/**
-
----
-kind: pipeline
-name: ServerCore 20H2 Images
-
-platform:
-  os: windows
-  arch: amd64
-  version: 20H2
-
-steps:
-- name: build-base
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 20H2
-    context: base
-    daemon_off: true
-    dockerfile: base/Dockerfile.20H2
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/base
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-scripts
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 20H2
-    build_args:
-    - IMAGE_TAG=20H2
-    context: scripts
-    daemon_off: true
-    dockerfile: scripts/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/scripts
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-scm
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 20H2
-    build_args:
-    - IMAGE_TAG=20H2
-    context: scm
-    daemon_off: true
-    dockerfile: scm/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/scm
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-tools
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 20H2
-    build_args:
-    - IMAGE_TAG=20H2
-    context: tools
-    daemon_off: true
-    dockerfile: tools/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/tools
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-msbuild
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 20H2
-    build_args:
-    - IMAGE_TAG=20H2
-    context: msbuild
-    daemon_off: true
-    dockerfile: msbuild/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/msbuild
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-msbuild-2017
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 20H2
-    build_args:
-    - IMAGE_TAG=20H2
-    context: msbuild-2017
-    daemon_off: true
-    dockerfile: msbuild-2017/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/msbuild-2017
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-buildbot
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 20H2
-    build_args:
-    - IMAGE_TAG=20H2
-    context: buildbot
-    daemon_off: true
-    dockerfile: buildbot/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/buildbot
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-ews
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: 20H2
-    build_args:
-    - IMAGE_TAG=20H2
-    context: ews
-    daemon_off: true
-    dockerfile: ews/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/ews
     username:
       from_secret: docker_username
   volumes:
@@ -1020,7 +585,7 @@ steps:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-msbuild
+- name: build-msbuild-2019
   pull: always
   image: plugins/docker
   settings:
@@ -1030,18 +595,18 @@ steps:
     - IMAGE_TAG=windows-1809
     context: msbuild
     daemon_off: true
-    dockerfile: msbuild/Dockerfile
+    dockerfile: msbuild-2019/Dockerfile
     password:
       from_secret: docker_password
     purge: false
-    repo: webkitdev/msbuild
+    repo: webkitdev/msbuild-2019
     username:
       from_secret: docker_username
   volumes:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-msbuild-2017
+- name: build-msbuild-windows-1809
   pull: always
   image: plugins/docker
   settings:
@@ -1049,20 +614,20 @@ steps:
     auto_tag_suffix: windows-1809
     build_args:
     - IMAGE_TAG=windows-1809
-    context: msbuild-2017
+    context: msbuild-windows-1809
     daemon_off: true
-    dockerfile: msbuild-2017/Dockerfile
+    dockerfile: msbuild-windows-1809/Dockerfile
     password:
       from_secret: docker_password
     purge: false
-    repo: webkitdev/msbuild-2017
+    repo: webkitdev/msbuild-windows-1809
     username:
       from_secret: docker_username
   volumes:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-buildbot
+- name: build-buildbot-worker
   pull: always
   image: plugins/docker
   settings:
@@ -1077,27 +642,6 @@ steps:
       from_secret: docker_password
     purge: false
     repo: webkitdev/buildbot
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-ews
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-1809
-    build_args:
-    - IMAGE_TAG=windows-1809
-    context: ews
-    daemon_off: true
-    dockerfile: ews/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/ews
     username:
       from_secret: docker_username
   volumes:
@@ -1116,12 +660,12 @@ trigger:
 
 ---
 kind: pipeline
-name: Windows 1903 Images
+name: Windows AWS Images
 
 platform:
   os: windows
   arch: amd64
-  version: 1903
+  version: 1809
 
 steps:
 - name: build-base
@@ -1129,10 +673,10 @@ steps:
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: windows-1903
+    auto_tag_suffix: windows-aws
     context: base
     daemon_off: true
-    dockerfile: base/Dockerfile.windows-1903
+    dockerfile: base/Dockerfile.windows-aws
     password:
       from_secret: docker_password
     purge: false
@@ -1148,9 +692,9 @@ steps:
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: windows-1903
+    auto_tag_suffix: windows-aws
     build_args:
-    - IMAGE_TAG=windows-1903
+    - IMAGE_TAG=windows-aws
     context: scripts
     daemon_off: true
     dockerfile: scripts/Dockerfile
@@ -1169,9 +713,9 @@ steps:
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: windows-1903
+    auto_tag_suffix: windows-aws
     build_args:
-    - IMAGE_TAG=windows-1903
+    - IMAGE_TAG=windows-aws
     context: scm
     daemon_off: true
     dockerfile: scm/Dockerfile
@@ -1190,9 +734,9 @@ steps:
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: windows-1903
+    auto_tag_suffix: windows-aws
     build_args:
-    - IMAGE_TAG=windows-1903
+    - IMAGE_TAG=windows-aws
     context: tools
     daemon_off: true
     dockerfile: tools/Dockerfile
@@ -1206,56 +750,56 @@ steps:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-msbuild
+- name: build-msbuild-2019
   pull: always
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: windows-1903
+    auto_tag_suffix: windows-aws
     build_args:
-    - IMAGE_TAG=windows-1903
+    - IMAGE_TAG=windows-aws
     context: msbuild
     daemon_off: true
-    dockerfile: msbuild/Dockerfile
+    dockerfile: msbuild-2019/Dockerfile
     password:
       from_secret: docker_password
     purge: false
-    repo: webkitdev/msbuild
+    repo: webkitdev/msbuild-2019
     username:
       from_secret: docker_username
   volumes:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-msbuild-2017
+- name: build-msbuild-windows-aws
   pull: always
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: windows-1903
+    auto_tag_suffix: windows-aws
     build_args:
-    - IMAGE_TAG=windows-1903
-    context: msbuild-2017
+    - IMAGE_TAG=windows-aws
+    context: msbuild-windows-aws
     daemon_off: true
-    dockerfile: msbuild-2017/Dockerfile
+    dockerfile: msbuild-windows-aws/Dockerfile
     password:
       from_secret: docker_password
     purge: false
-    repo: webkitdev/msbuild-2017
+    repo: webkitdev/msbuild-windows-aws
     username:
       from_secret: docker_username
   volumes:
   - name: docker_pipe
     path: \\\\.\\pipe\\docker_engine
 
-- name: build-buildbot
+- name: build-buildbot-worker
   pull: always
   image: plugins/docker
   settings:
     auto_tag: true
-    auto_tag_suffix: windows-1903
+    auto_tag_suffix: windows-aws
     build_args:
-    - IMAGE_TAG=windows-1903
+    - IMAGE_TAG=windows-aws
     context: buildbot
     daemon_off: true
     dockerfile: buildbot/Dockerfile
@@ -1263,585 +807,6 @@ steps:
       from_secret: docker_password
     purge: false
     repo: webkitdev/buildbot
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-ews
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-1903
-    build_args:
-    - IMAGE_TAG=windows-1903
-    context: ews
-    daemon_off: true
-    dockerfile: ews/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/ews
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-volumes:
-- name: docker_pipe
-  host:
-    path: \\\\.\\pipe\\docker_engine
-
-trigger:
-  ref:
-  - refs/heads/**
-  - refs/tags/**
-
----
-kind: pipeline
-name: Windows 1909 Images
-
-platform:
-  os: windows
-  arch: amd64
-  version: 1909
-
-steps:
-- name: build-base
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-1909
-    context: base
-    daemon_off: true
-    dockerfile: base/Dockerfile.windows-1909
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/base
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-scripts
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-1909
-    build_args:
-    - IMAGE_TAG=windows-1909
-    context: scripts
-    daemon_off: true
-    dockerfile: scripts/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/scripts
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-scm
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-1909
-    build_args:
-    - IMAGE_TAG=windows-1909
-    context: scm
-    daemon_off: true
-    dockerfile: scm/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/scm
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-tools
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-1909
-    build_args:
-    - IMAGE_TAG=windows-1909
-    context: tools
-    daemon_off: true
-    dockerfile: tools/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/tools
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-msbuild
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-1909
-    build_args:
-    - IMAGE_TAG=windows-1909
-    context: msbuild
-    daemon_off: true
-    dockerfile: msbuild/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/msbuild
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-msbuild-2017
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-1909
-    build_args:
-    - IMAGE_TAG=windows-1909
-    context: msbuild-2017
-    daemon_off: true
-    dockerfile: msbuild-2017/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/msbuild-2017
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-buildbot
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-1909
-    build_args:
-    - IMAGE_TAG=windows-1909
-    context: buildbot
-    daemon_off: true
-    dockerfile: buildbot/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/buildbot
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-ews
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-1909
-    build_args:
-    - IMAGE_TAG=windows-1909
-    context: ews
-    daemon_off: true
-    dockerfile: ews/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/ews
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-volumes:
-- name: docker_pipe
-  host:
-    path: \\\\.\\pipe\\docker_engine
-
-trigger:
-  ref:
-  - refs/heads/**
-  - refs/tags/**
-
----
-kind: pipeline
-name: Windows 2004 Images
-
-platform:
-  os: windows
-  arch: amd64
-  version: 2004
-
-steps:
-- name: build-base
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-2004
-    context: base
-    daemon_off: true
-    dockerfile: base/Dockerfile.windows-2004
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/base
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-scripts
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-2004
-    build_args:
-    - IMAGE_TAG=windows-2004
-    context: scripts
-    daemon_off: true
-    dockerfile: scripts/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/scripts
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-scm
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-2004
-    build_args:
-    - IMAGE_TAG=windows-2004
-    context: scm
-    daemon_off: true
-    dockerfile: scm/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/scm
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-tools
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-2004
-    build_args:
-    - IMAGE_TAG=windows-2004
-    context: tools
-    daemon_off: true
-    dockerfile: tools/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/tools
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-msbuild
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-2004
-    build_args:
-    - IMAGE_TAG=windows-2004
-    context: msbuild
-    daemon_off: true
-    dockerfile: msbuild/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/msbuild
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-msbuild-2017
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-2004
-    build_args:
-    - IMAGE_TAG=windows-2004
-    context: msbuild-2017
-    daemon_off: true
-    dockerfile: msbuild-2017/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/msbuild-2017
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-buildbot
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-2004
-    build_args:
-    - IMAGE_TAG=windows-2004
-    context: buildbot
-    daemon_off: true
-    dockerfile: buildbot/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/buildbot
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-ews
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-2004
-    build_args:
-    - IMAGE_TAG=windows-2004
-    context: ews
-    daemon_off: true
-    dockerfile: ews/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/ews
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-volumes:
-- name: docker_pipe
-  host:
-    path: \\\\.\\pipe\\docker_engine
-
-trigger:
-  ref:
-  - refs/heads/**
-  - refs/tags/**
-
----
-kind: pipeline
-name: Windows 20H2 Images
-
-platform:
-  os: windows
-  arch: amd64
-  version: 20H2
-
-steps:
-- name: build-base
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-20H2
-    context: base
-    daemon_off: true
-    dockerfile: base/Dockerfile.windows-20H2
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/base
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-scripts
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-20H2
-    build_args:
-    - IMAGE_TAG=windows-20H2
-    context: scripts
-    daemon_off: true
-    dockerfile: scripts/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/scripts
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-scm
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-20H2
-    build_args:
-    - IMAGE_TAG=windows-20H2
-    context: scm
-    daemon_off: true
-    dockerfile: scm/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/scm
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-tools
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-20H2
-    build_args:
-    - IMAGE_TAG=windows-20H2
-    context: tools
-    daemon_off: true
-    dockerfile: tools/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/tools
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-msbuild
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-20H2
-    build_args:
-    - IMAGE_TAG=windows-20H2
-    context: msbuild
-    daemon_off: true
-    dockerfile: msbuild/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/msbuild
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-msbuild-2017
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-20H2
-    build_args:
-    - IMAGE_TAG=windows-20H2
-    context: msbuild-2017
-    daemon_off: true
-    dockerfile: msbuild-2017/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/msbuild-2017
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-buildbot
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-20H2
-    build_args:
-    - IMAGE_TAG=windows-20H2
-    context: buildbot
-    daemon_off: true
-    dockerfile: buildbot/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/buildbot
-    username:
-      from_secret: docker_username
-  volumes:
-  - name: docker_pipe
-    path: \\\\.\\pipe\\docker_engine
-
-- name: build-ews
-  pull: always
-  image: plugins/docker
-  settings:
-    auto_tag: true
-    auto_tag_suffix: windows-20H2
-    build_args:
-    - IMAGE_TAG=windows-20H2
-    context: ews
-    daemon_off: true
-    dockerfile: ews/Dockerfile
-    password:
-      from_secret: docker_password
-    purge: false
-    repo: webkitdev/ews
     username:
       from_secret: docker_username
   volumes:
@@ -1912,29 +877,29 @@ steps:
     username:
       from_secret: docker_username
 
-- name: publish-manifest-msbuild
+- name: publish-manifest-msbuild-2019
   pull: always
   image: plugins/manifest
   settings:
     ignore_missing: true
     password:
       from_secret: docker_password
-    spec: msbuild/manifest.tmpl
+    spec: msbuild-2019/manifest.tmpl
     username:
       from_secret: docker_username
 
-- name: publish-manifest-msbuild-2017
+- name: publish-manifest-msbuild-2022
   pull: always
   image: plugins/manifest
   settings:
     ignore_missing: true
     password:
       from_secret: docker_password
-    spec: msbuild-2017/manifest.tmpl
+    spec: msbuild-2022/manifest.tmpl
     username:
       from_secret: docker_username
 
-- name: publish-manifest-buildbot
+- name: publish-manifest-buildbot-worker
   pull: always
   image: plugins/manifest
   settings:
@@ -1945,17 +910,6 @@ steps:
     username:
       from_secret: docker_username
 
-- name: publish-manifest-ews
-  pull: always
-  image: plugins/manifest
-  settings:
-    ignore_missing: true
-    password:
-      from_secret: docker_password
-    spec: ews/manifest.tmpl
-    username:
-      from_secret: docker_username
-
 trigger:
   ref:
   - refs/heads/**
@@ -1963,14 +917,9 @@ trigger:
 
 depends_on:
 - ServerCore 1809 Images
-- ServerCore 1903 Images
-- ServerCore 1909 Images
-- ServerCore 2004 Images
-- ServerCore 20H2 Images
+- ServerCore 2022 Images
+- ServerCore AWS Images
 - Windows 1809 Images
-- Windows 1903 Images
-- Windows 1909 Images
-- Windows 2004 Images
-- Windows 20H2 Images
+- Windows AWS Images
 
 ...

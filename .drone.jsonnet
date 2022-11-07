@@ -5,7 +5,6 @@ local images = [
   'scripts',
   'scm',
   'tools',
-  'msbuild-2017',
   'msbuild-2019',
   'msbuild-2022',
   'buildbot-worker',
@@ -13,17 +12,9 @@ local images = [
 
 local tags = [
   '1809',
-  '1903',
-  '1909',
-  '2004',
-  '20H2',
   '2022',
-  'windows-1809',
-  'windows-1903',
-  'windows-1909',
-  'windows-2004',
-  'windows-20H2',
   'aws',
+  'windows-1809',
   'windows-aws'
 ];
 

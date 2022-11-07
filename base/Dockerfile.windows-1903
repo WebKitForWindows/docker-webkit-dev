@@ -1,5 +1,0 @@
-FROM mcr.microsoft.com/windows:1903@sha256:7d21f0d4818e98bf9ebd1a8fbdd5899f9b1c41c55cdb6c75a8a4c035d34fa10e
-
-SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
-
-RUN Set-ExecutionPolicy -ExecutionPolicy RemoteSigned;
