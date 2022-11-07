@@ -38,7 +38,6 @@ Build-WebKitDockerImage -Image base -Tag $tag;
 Build-WebKitDockerImage -Image scripts -Tag $tag;
 Build-WebKitDockerImage -Image scm -Tag $tag;
 Build-WebKitDockerImage -Image tools -Tag $tag;
-Build-WebKitDockerImage -Image msbuild-2017 -Tag $tag;
 Build-WebKitDockerImage -Image msbuild-2019 -Tag $tag;
 Build-WebKitDockerImage -Image msbuild-2022 -Tag $tag;
 Build-WebKitDockerImage -Image buildbot-worker -Tag $tag;
