@@ -5,87 +5,87 @@ resources:
 - repo: self
 
 stages:
-- stage: build_1809
-  displayName: Build 1809 Image
+- stage: build_2022
+  displayName: Build 2022 Image
   jobs:
-  - job: build_1809_images
+  - job: build_2022_images
     displayName: Build
     pool:
-      vmImage: 'windows-2019'
+      vmImage: 'windows-2022'
     timeoutInMinutes: 120
     steps:
     #------------------------------------------------
     # Build images
     #------------------------------------------------
     - task: Docker@2
-      displayName: Build webkitdev/base:1809 image
+      displayName: Build webkitdev/base:2022 image
       inputs:
         command: build
         repository: webkitdev/base
-        dockerfile: '$(Build.SourcesDirectory)/base/Dockerfile.1809'
+        dockerfile: '$(Build.SourcesDirectory)/base/Dockerfile.2022'
         buildContext: '$(Build.SourcesDirectory)/base'
         tags: |
-          1809
+          2022
     - task: Docker@2
-      displayName: Build webkitdev/scripts:1809 image
+      displayName: Build webkitdev/scripts:2022 image
       inputs:
         command: build
         repository: webkitdev/scripts
         dockerfile: '$(Build.SourcesDirectory)/scripts/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/scripts'
-        arguments: --build-arg IMAGE_TAG=1809
+        arguments: --build-arg IMAGE_TAG=2022
         tags: |
-          1809
+          2022
     - task: Docker@2
-      displayName: Build webkitdev/scm:1809 image
+      displayName: Build webkitdev/scm:2022 image
       inputs:
         command: build
         repository: webkitdev/scm
         dockerfile: '$(Build.SourcesDirectory)/scm/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/scm'
-        arguments: --build-arg IMAGE_TAG=1809
+        arguments: --build-arg IMAGE_TAG=2022
         tags: |
-          1809
+          2022
     - task: Docker@2
-      displayName: Build webkitdev/tools:1809 image
+      displayName: Build webkitdev/tools:2022 image
       inputs:
         command: build
         repository: webkitdev/tools
         dockerfile: '$(Build.SourcesDirectory)/tools/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/tools'
-        arguments: --build-arg IMAGE_TAG=1809
+        arguments: --build-arg IMAGE_TAG=2022
         tags: |
-          1809
+          2022
     - task: Docker@2
-      displayName: Build webkitdev/msbuild-2019:1809 image
+      displayName: Build webkitdev/msbuild-2019:2022 image
       inputs:
         command: build
         repository: webkitdev/msbuild-2019
         dockerfile: '$(Build.SourcesDirectory)/msbuild-2019/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/msbuild-2019'
-        arguments: --build-arg IMAGE_TAG=1809
+        arguments: --build-arg IMAGE_TAG=2022
         tags: |
-          1809
+          2022
     - task: Docker@2
-      displayName: Build webkitdev/msbuild-2022:1809 image
+      displayName: Build webkitdev/msbuild-2022:2022 image
       inputs:
         command: build
         repository: webkitdev/msbuild-2022
         dockerfile: '$(Build.SourcesDirectory)/msbuild-2022/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/msbuild-2022'
-        arguments: --build-arg IMAGE_TAG=1809
+        arguments: --build-arg IMAGE_TAG=2022
         tags: |
-          1809
+          2022
     - task: Docker@2
-      displayName: Build webkitdev/buildbot-worker:1809 image
+      displayName: Build webkitdev/buildbot-worker:2022 image
       inputs:
         command: build
         repository: webkitdev/buildbot-worker
         dockerfile: '$(Build.SourcesDirectory)/buildbot-worker/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/buildbot-worker'
-        arguments: --build-arg IMAGE_TAG=1809
+        arguments: --build-arg IMAGE_TAG=2022
         tags: |
-          1809
+          2022
     #------------------------------------------------
     # Push images (push to default branch only)
     #------------------------------------------------
@@ -97,64 +97,64 @@ stages:
         containerRegistry: DockerHub
     - task: Docker@2
       condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
-      displayName: Push webkitdev/base:1809 image
+      displayName: Push webkitdev/base:2022 image
       inputs:
         command: push
         containerRegistry: DockerHub
         repository: webkitdev/base
         tags: |
-          1809
+          2022
     - task: Docker@2
       condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
-      displayName: Push webkitdev/scripts:1809 image
+      displayName: Push webkitdev/scripts:2022 image
       inputs:
         command: push
         containerRegistry: DockerHub
         repository: webkitdev/scripts
         tags: |
-          1809
+          2022
     - task: Docker@2
       condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
-      displayName: Push webkitdev/scm:1809 image
+      displayName: Push webkitdev/scm:2022 image
       inputs:
         command: push
         containerRegistry: DockerHub
         repository: webkitdev/scm
         tags: |
-          1809
+          2022
     - task: Docker@2
       condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
-      displayName: Push webkitdev/tools:1809 image
+      displayName: Push webkitdev/tools:2022 image
       inputs:
         command: push
         containerRegistry: DockerHub
         repository: webkitdev/tools
         tags: |
-          1809
+          2022
     - task: Docker@2
       condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
-      displayName: Push webkitdev/msbuild-2019:1809 image
+      displayName: Push webkitdev/msbuild-2019:2022 image
       inputs:
         command: push
         containerRegistry: DockerHub
         repository: webkitdev/msbuild-2019
         tags: |
-          1809
+          2022
     - task: Docker@2
       condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
-      displayName: Push webkitdev/msbuild-2022:1809 image
+      displayName: Push webkitdev/msbuild-2022:2022 image
       inputs:
         command: push
         containerRegistry: DockerHub
         repository: webkitdev/msbuild-2022
         tags: |
-          1809
+          2022
     - task: Docker@2
       condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
-      displayName: Push webkitdev/buildbot-worker:1809 image
+      displayName: Push webkitdev/buildbot-worker:2022 image
       inputs:
         command: push
         containerRegistry: DockerHub
         repository: webkitdev/buildbot-worker
         tags: |
-          1809
+          2022
