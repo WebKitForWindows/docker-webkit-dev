@@ -1,1 +1,0 @@
-FROM mcr.microsoft.com/dotnet/framework/runtime:4.8-windowsservercore-20H2@sha256:dcd68b97f186b8f5630a6e5ab0e09b511fbd1af3c4a624096b0c193d6457b53c
