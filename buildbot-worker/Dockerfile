@@ -34,6 +34,11 @@ RUN Register-SystemPath -path 'C:\program files\git\bin'; `
 #--------------------------------------------------------------------
 RUN git config --system core.autocrlf false
 
+#----------------------------------------------------------------------
+# Unset credential.helper for git due to issues for EWS to apple/WebKit
+#----------------------------------------------------------------------
+RUN git config --system --unset credential.helper
+
 #--------------------------------------------------------------------
 # Entrypoint
 #--------------------------------------------------------------------
