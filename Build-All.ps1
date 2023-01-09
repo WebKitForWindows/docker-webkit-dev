@@ -23,7 +23,7 @@ function Build-WebKitDockerImage {
     $buildArgs = ('--build-arg IMAGE_TAG={0}' -f $tag);
   }
 
-  $cmd = 'docker build -t webkitdev/{0}:{1} {2} -f {3} -e HTTPS_PROXY=$env:HTTPS_PROXY -e HTTP_PROXY=$env:HTTP_PROXY -m 2GB {4}' -f $image,$tag,$buildArgs,$file,$path;
+  $cmd = 'docker build -t webkitdev/{0}:{1} {2} -f {3} --build-arg HTTPS_PROXY=$env:HTTPS_PROXY --build-arg HTTP_PROXY=$env:HTTP_PROXY -m 2GB {4}' -f $image,$tag,$buildArgs,$file,$path;
 
   Write-Host ('Starting build at {0}' -f (Get-Date))
   Write-Host $cmd;

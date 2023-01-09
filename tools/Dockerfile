@@ -8,6 +8,11 @@ ARG IMAGE_TAG
 
 FROM webkitdev/scm:$IMAGE_TAG as msys2
 
+ARG HTTP_PROXY
+ENV HTTP_PROXY=$HTTP_PROXY
+ARG HTTPS_PROXY
+ENV HTTPS_PROXY=$HTTPS_PROXY
+
 #--------------------------------------------------------------------
 # Install GNU tools from MSYS2 into build image
 #
@@ -27,6 +32,11 @@ RUN Register-SystemPath -Path C:\msys2\usr\bin; `
 #--------------------------------------------------------------------
 
 FROM webkitdev/scm:$IMAGE_TAG
+
+ARG HTTP_PROXY
+ENV HTTP_PROXY=$HTTP_PROXY
+ARG HTTPS_PROXY
+ENV HTTPS_PROXY=$HTTPS_PROXY
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 

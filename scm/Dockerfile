@@ -3,6 +3,11 @@
 ARG IMAGE_TAG
 FROM webkitdev/scripts:$IMAGE_TAG
 
+ARG HTTP_PROXY
+ENV HTTP_PROXY=$HTTP_PROXY
+ARG HTTPS_PROXY
+ENV HTTPS_PROXY=$HTTPS_PROXY
+
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 #--------------------------------------------------------------------
