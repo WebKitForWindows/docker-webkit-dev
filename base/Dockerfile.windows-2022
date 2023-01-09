@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/windows/server:2022
+FROM mcr.microsoft.com/windows/server:ltsc2022
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
