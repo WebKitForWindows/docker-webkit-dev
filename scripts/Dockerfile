@@ -35,7 +35,17 @@ RUN $scriptArgs = @{ `
 # Trust Powershell Gallery
 #--------------------------------------------------------------------
 
-RuN Register-PSRepository -Default -Verbose
+RUN $scriptArgs = @{ `
+        Default = $true; `
+        Verbose = $true; `
+    }; `
+    `
+    if (Test-Path env:HTTPS_PROXY) { `
+        $scriptArgs['Proxy'] = $env:HTTPS_PROXY; `
+    } `
+    `
+    Register-PSRepository @scriptArgs;
+
 RUN Get-PSRepository
 
 RUN $scriptArgs = @{ `
