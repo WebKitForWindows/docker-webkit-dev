@@ -14,6 +14,8 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # Install MS Build Tools 2022
 #--------------------------------------------------------------------
 
+RUN [system.net.webrequest]::defaultwebproxy  = New-Object System.Net.WebProxy($env:HTTPS_PROXY, $true)
+
 RUN Install-VSBuildTools2022 -InstallationPath C:\MSVS -Workloads `
     Microsoft.VisualStudio.Component.Roslyn.Compiler, `
     Microsoft.Component.MSBuild, `

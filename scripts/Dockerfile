@@ -16,6 +16,9 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 
 ENV NUGET_VERSION 2.8.5.208
 
+RUN [system.net.webrequest]::defaultwebproxy  = New-Object System.Net.WebProxy($env:HTTPS_PROXY, $true)
+RuN Register-PSRepository -Default -Verbose
+
 RUN $scriptArgs = @{ `
         Name = 'NuGet'; `
         Scope = 'AllUsers'; `
