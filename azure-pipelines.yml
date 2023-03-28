@@ -1,5 +1,5 @@
 trigger:
-- master
+- main
 
 resources:
 - repo: self
@@ -90,13 +90,13 @@ stages:
     # Push images (push to default branch only)
     #------------------------------------------------
     - task: Docker@2
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
       displayName: Login to Docker Hub
       inputs:
         command: login
         containerRegistry: DockerHub
     - task: Docker@2
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
       displayName: Push webkitdev/base:2022 image
       inputs:
         command: push
@@ -105,7 +105,7 @@ stages:
         tags: |
           2022
     - task: Docker@2
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
       displayName: Push webkitdev/scripts:2022 image
       inputs:
         command: push
@@ -114,7 +114,7 @@ stages:
         tags: |
           2022
     - task: Docker@2
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
       displayName: Push webkitdev/scm:2022 image
       inputs:
         command: push
@@ -123,7 +123,7 @@ stages:
         tags: |
           2022
     - task: Docker@2
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
       displayName: Push webkitdev/tools:2022 image
       inputs:
         command: push
@@ -132,7 +132,7 @@ stages:
         tags: |
           2022
     - task: Docker@2
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
       displayName: Push webkitdev/msbuild-2019:2022 image
       inputs:
         command: push
@@ -141,7 +141,7 @@ stages:
         tags: |
           2022
     - task: Docker@2
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
       displayName: Push webkitdev/msbuild-2022:2022 image
       inputs:
         command: push
@@ -150,7 +150,7 @@ stages:
         tags: |
           2022
     - task: Docker@2
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
       displayName: Push webkitdev/buildbot-worker:2022 image
       inputs:
         command: push
