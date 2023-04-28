@@ -121,6 +121,14 @@ ENV NINJA_VERSION 1.11.1
 RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 
 #--------------------------------------------------------------------
+# Install NuGet CLI
+#--------------------------------------------------------------------
+
+ENV NUGET_VERSION 6.5.0
+
+RUN Install-NuGet -Version $env:NUGET_VERSION -InstallationPath C:\tools\nuget;
+
+#--------------------------------------------------------------------
 # Install XAMPP
 #--------------------------------------------------------------------
 
