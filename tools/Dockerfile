@@ -68,8 +68,8 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 # Install Python 3
 #--------------------------------------------------------------------
 
-ENV PYTHON3_VERSION 3.11.4
-ENV PYTHON3_PIP_VERSION 23.2.1
+ENV PYTHON3_VERSION 3.11.8
+ENV PYTHON3_PIP_VERSION 24.0
 
 RUN Install-Python `
     -Version $env:PYTHON3_VERSION `
@@ -108,7 +108,7 @@ RUN gem install webrick -v $env:WEBRICK_VERSION
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.27.1
+ENV CMAKE_VERSION 3.28.3
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -124,7 +124,7 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 # Install NuGet CLI
 #--------------------------------------------------------------------
 
-ENV NUGET_VERSION 6.6.1
+ENV NUGET_VERSION 6.9.1
 
 RUN Install-NuGet -Version $env:NUGET_VERSION -InstallationPath C:\tools\nuget;
 
