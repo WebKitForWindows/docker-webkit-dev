@@ -34,6 +34,7 @@ Write-Host 'Buildbot information';
 Write-Host ('Name: {0}' -f $env:BUILD_WORKER_NAME);
 Write-Host ('Admin: {0} <{1}>' -f $env:ADMIN_NAME,$env:ADMIN_EMAIL);
 Write-Host ('Description: {0}' -f $env:HOST_DESCRIPTION);
+Write-Host ('Keep-alive: {0}' -f $env:BUILD_WORKER_KEEPALIVE);
 
 # Print the host information
 $cs = Get-WmiObject -Class Win32_ComputerSystem;

@@ -12,6 +12,7 @@ def _get_options():
         'port': os.environ.get('BUILD_HOST_PORT', '17000'),
         'worker': os.environ.get('BUILD_WORKER_NAME'),
         'password': os.environ.get('BUILD_WORKER_PASSWORD'),
+        'keepalive': os.environ.get('BUILD_WORKER_KEEPALIVE', '240'),
         # info/admin
         'name': os.environ.get('ADMIN_NAME'),
         'email': os.environ.get('ADMIN_EMAIL'),
