@@ -29,7 +29,7 @@ RUN Install-VSBuildTools2019 -InstallationPath C:\MSVS -Workloads `
 # Install LLVM for Clang tooling support
 #--------------------------------------------------------------------
 
-ENV LLVM_VERSION 18.1.2
+ENV LLVM_VERSION 18.1.4
 
 RUN Register-SystemPath -Path C:\LLVM\bin; `
     Install-LLVM -Version $env:LLVM_VERSION -InstallationPath C:\LLVM;
