@@ -9,7 +9,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # Install Git for Windows x64 CLI
 #--------------------------------------------------------------------
 
-ENV GIT_VERSION 2.44.0.1
+ENV GIT_VERSION 2.45.2.1
 
 RUN Install-Git -Version $env:GIT_VERSION;
 
