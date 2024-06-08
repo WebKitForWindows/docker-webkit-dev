@@ -108,7 +108,7 @@ RUN gem install webrick -v $env:WEBRICK_VERSION
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.29.2
+ENV CMAKE_VERSION 3.29.5
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -116,7 +116,7 @@ RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 # Install Ninja build system
 #--------------------------------------------------------------------
 
-ENV NINJA_VERSION 1.12.0
+ENV NINJA_VERSION 1.12.1
 
 RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 
@@ -124,7 +124,7 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 # Install NuGet CLI
 #--------------------------------------------------------------------
 
-ENV NUGET_VERSION 6.9.1
+ENV NUGET_VERSION 6.10.0
 
 RUN Install-NuGet -Version $env:NUGET_VERSION -InstallationPath C:\tools\nuget;
 
