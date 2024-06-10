@@ -34,6 +34,8 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/scripts/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/scripts'
         arguments: --build-arg IMAGE_TAG=2022
+        addPipelineData: false
+        addBaseImageData: false
         tags: |
           2022
     - task: Docker@2
@@ -44,6 +46,8 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/scm/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/scm'
         arguments: --build-arg IMAGE_TAG=2022
+        addPipelineData: false
+        addBaseImageData: false
         tags: |
           2022
     - task: Docker@2
@@ -54,6 +58,8 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/tools/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/tools'
         arguments: --build-arg IMAGE_TAG=2022
+        addPipelineData: false
+        addBaseImageData: false
         tags: |
           2022
     - task: Docker@2
@@ -64,6 +70,8 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/msbuild-2019/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/msbuild-2019'
         arguments: --build-arg IMAGE_TAG=2022
+        addPipelineData: false
+        addBaseImageData: false
         tags: |
           2022
     - task: Docker@2
@@ -74,6 +82,8 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/msbuild-2022/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/msbuild-2022'
         arguments: --build-arg IMAGE_TAG=2022
+        addPipelineData: false
+        addBaseImageData: false
         tags: |
           2022
     - task: Docker@2
@@ -84,6 +94,8 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/buildbot-worker/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/buildbot-worker'
         arguments: --build-arg IMAGE_TAG=2022
+        addPipelineData: false
+        addBaseImageData: false
         tags: |
           2022
     #------------------------------------------------
