@@ -5,7 +5,6 @@ local images = [
   'scripts',
   'scm',
   'tools',
-  'msbuild-2019',
   'msbuild-2022',
   'buildbot-worker',
 ];

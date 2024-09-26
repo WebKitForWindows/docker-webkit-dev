@@ -11,12 +11,8 @@
       "scripts/",
       "scm/",
       "tools/",
-      "msbuild-2017/",
-      "msbuild-2019/",
       "msbuild-2022/",
-      "buildbot/",
-      "ews/",
-      "ews-legacy/"
+      "buildbot-worker/"
     ],
     "pinDigests": true
   },
