@@ -13,3 +13,6 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build webkitdev/base
       run: docker build --tag webkitdev/base:2022 --file base/Dockerfile.2022 base
+    - name: Build webkitdev/scripts
+      run: docker build --tag webkitdev/scripts:2022 --build-arg IMAGE_TAG=2022 scripts
+      
