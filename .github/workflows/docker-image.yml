@@ -17,7 +17,7 @@ jobs:
 
     # Build Docker images
     - name: Build webkitdev/base
-      run: docker build --tag webkitdev/base:${{ matrix.tag }} --file base/Dockerfile.:${{ matrix.tag }} base
+      run: docker build --tag webkitdev/base:${{ matrix.tag }} --file base/Dockerfile.${{ matrix.tag }} base
     - name: Build webkitdev/scripts
       run: docker build --tag webkitdev/scripts:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} scripts
     - name: Build webkitdev/scm
