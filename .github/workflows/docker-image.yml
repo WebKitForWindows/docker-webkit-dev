@@ -11,8 +11,17 @@ jobs:
     runs-on: windows-2022
     steps:
     - uses: actions/checkout@v4
+
+    # Build Docker images
     - name: Build webkitdev/base
       run: docker build --tag webkitdev/base:2022 --file base/Dockerfile.2022 base
     - name: Build webkitdev/scripts
       run: docker build --tag webkitdev/scripts:2022 --build-arg IMAGE_TAG=2022 scripts
-      
+    - name: Build webkitdev/scm
+      run: docker build --tag webkitdev/scm:2022 --build-arg IMAGE_TAG=2022 scm      
+    - name: Build webkitdev/tools
+      run: docker build --tag webkitdev/tools:2022 --build-arg IMAGE_TAG=2022 tools
+    - name: Build webkitdev/msbuild-2022
+      run: docker build --tag webkitdev/msbuild-2022:2022 --build-arg IMAGE_TAG=2022 msbuild-2022
+    - name: Build webkitdev/buildbot-worker
+      run: docker build --tag webkitdev/buildbot-worker:2022 --build-arg IMAGE_TAG=2022 buildbot-worker
