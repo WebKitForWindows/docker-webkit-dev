@@ -135,9 +135,9 @@ RUN Install-NuGet -Version $env:NUGET_VERSION -InstallationPath C:\tools\nuget;
 # Locked version due to later versions not installing in container
 ENV XAMPP_VERSION 7.4.29.1
 
-RUN Install-Xampp -Version $env:XAMPP_VERSION; `
-    Update-XamppPerlLocation -perlPath C:\tools\perl; `
-    Update-XamppPythonLocation -pythonPath C:\tools\python3;
+#RUN Install-Xampp -Version $env:XAMPP_VERSION; `
+#    Update-XamppPerlLocation -perlPath C:\tools\perl; `
+#    Update-XamppPythonLocation -pythonPath C:\tools\python3;
 
 #--------------------------------------------------------------------
 # Install Fonts
