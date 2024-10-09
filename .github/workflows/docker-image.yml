@@ -1,0 +1,30 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-2022
+    strategy:
+      matrix:
+        tag: ['2022', 'windows-2022']
+    steps:
+    - uses: actions/checkout@v4
+
+    # Build Docker images
+    - name: Build webkitdev/base
+      run: docker build --tag webkitdev/base:${{ matrix.tag }} --file base/Dockerfile.${{ matrix.tag }} base
+    - name: Build webkitdev/scripts
+      run: docker build --tag webkitdev/scripts:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} scripts
+    - name: Build webkitdev/scm
+      run: docker build --tag webkitdev/scm:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} scm      
+    - name: Build webkitdev/tools
+      run: docker build --tag webkitdev/tools:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} tools
+    - name: Build webkitdev/msbuild-2022
+      run: docker build --tag webkitdev/msbuild-2022:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} msbuild-2022
+    - name: Build webkitdev/buildbot-worker
+      run: docker build --tag webkitdev/buildbot-worker:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} buildbot-worker
