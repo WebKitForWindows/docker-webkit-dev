@@ -63,18 +63,6 @@ stages:
         tags: |
           2022
     - task: Docker@2
-      displayName: Build webkitdev/msbuild-2019:2022 image
-      inputs:
-        command: build
-        repository: webkitdev/msbuild-2019
-        dockerfile: '$(Build.SourcesDirectory)/msbuild-2019/Dockerfile'
-        buildContext: '$(Build.SourcesDirectory)/msbuild-2019'
-        arguments: --build-arg IMAGE_TAG=2022
-        addPipelineData: false
-        addBaseImageData: false
-        tags: |
-          2022
-    - task: Docker@2
       displayName: Build webkitdev/msbuild-2022:2022 image
       inputs:
         command: build
@@ -141,15 +129,6 @@ stages:
         command: push
         containerRegistry: DockerHub
         repository: webkitdev/tools
-        tags: |
-          2022
-    - task: Docker@2
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
-      displayName: Push webkitdev/msbuild-2019:2022 image
-      inputs:
-        command: push
-        containerRegistry: DockerHub
-        repository: webkitdev/msbuild-2019
         tags: |
           2022
     - task: Docker@2
