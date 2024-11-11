@@ -57,3 +57,12 @@ RUN $scriptArgs = @{ `
     } `
     `
     Install-Module @scriptArgs;
+
+#--------------------------------------------------------------------
+# Install Chocolatey
+#--------------------------------------------------------------------
+
+RUN Invoke-WebFileRequest -Url https://community.chocolatey.org/install.ps1 -DestinationPath C:install.ps1; `
+    C:\install.ps1; `
+    Remove-Item C:\install.ps1; `
+    choco --version;
