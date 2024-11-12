@@ -1,0 +1,62 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+        - tag: 2022
+          os: windows-2022
+        - tag: windows-2022
+          os: windows-2022
+        - tag: 1809
+          os: windows-2019
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v4
+
+    # Build Docker images
+    - name: Build webkitdev/base
+      run: docker build --tag webkitdev/base:${{ matrix.tag }} --file base/Dockerfile.${{ matrix.tag }} base
+    - name: Build webkitdev/scripts
+      run: docker build --tag webkitdev/scripts:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} scripts
+    - name: Build webkitdev/scm
+      run: docker build --tag webkitdev/scm:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} scm      
+    - name: Build webkitdev/tools
+      run: docker build --tag webkitdev/tools:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} tools
+    - name: Build webkitdev/msbuild-2022
+      run: docker build --tag webkitdev/msbuild-2022:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} msbuild-2022
+    - name: Build webkitdev/buildbot-worker
+      run: docker build --tag webkitdev/buildbot-worker:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} buildbot-worker
+
+    # Publish Docker images
+    - name: Dockerhub login
+      if: github.ref_name == github.event.repository.default_branch
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Publish webkitdev/base
+      if: github.ref_name == github.event.repository.default_branch
+      run: docker push webkitdev/base:${{ matrix.tag }}
+    - name: Publish webkitdev/scripts
+      if: github.ref_name == github.event.repository.default_branch
+      run: docker push webkitdev/scripts:${{ matrix.tag }}
+    - name: Publish webkitdev/scm
+      if: github.ref_name == github.event.repository.default_branch
+      run: docker push webkitdev/scm:${{ matrix.tag }}
+    - name: Publish webkitdev/tools
+      if: github.ref_name == github.event.repository.default_branch
+      run: docker push webkitdev/tools:${{ matrix.tag }}
+    - name: Publish webkitdev/msbuild-2022
+      if: github.ref_name == github.event.repository.default_branch
+      run: docker push webkitdev/msbuild-2022:${{ matrix.tag }}
+    - name: Publish webkitdev/buildbot-worker
+      if: github.ref_name == github.event.repository.default_branch
+      run: docker push webkitdev/buildbot-worker:${{ matrix.tag }}
