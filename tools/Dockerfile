@@ -108,7 +108,7 @@ RUN gem install webrick -v $env:WEBRICK_VERSION
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.31.0
+ENV CMAKE_VERSION 3.31.1
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -124,7 +124,7 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 # Install NuGet CLI
 #--------------------------------------------------------------------
 
-ENV NUGET_VERSION 6.11.1
+ENV NUGET_VERSION 6.12.1
 
 RUN Install-NuGet -Version $env:NUGET_VERSION -InstallationPath C:\tools\nuget;
 
@@ -135,7 +135,9 @@ RUN Install-NuGet -Version $env:NUGET_VERSION -InstallationPath C:\tools\nuget;
 # Locked version due to later versions not installing in container
 ENV XAMPP_VERSION 8.1.6
 
-RUN choco install xampp-81 --confirm --version=$env:XAMPP_VERSION;
+RUN choco install xampp-81 --confirm --version=$env:XAMPP_VERSION; `
+    Update-XamppPerlLocation -perlPath C:\tools\perl; `
+    Update-XamppPythonLocation -pythonPath C:\tools\python3;
 
 #--------------------------------------------------------------------
 # Install Fonts
