@@ -12,7 +12,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # workload. At this time the workload isn't present for Build Tools
 #--------------------------------------------------------------------
 
-ENV VCPKG_VERSION 2024.11.16
+ENV VCPKG_VERSION 2024.12.16
 ENV VCPKG_ROOT C:\vcpkg
 
 RUN Install-FromArchive -Name 'vcpkg' -url ('https://github.com/microsoft/vcpkg/archive/refs/tags/{0}.zip' -f $env:VCPKG_VERSION) -archiveRoot ('vcpkg-{0}' -f $env:VCPKG_VERSION) -installationPath $env:VCPKG_ROOT -NoVerify; `
@@ -28,7 +28,7 @@ RUN Install-FromArchive -Name 'vcpkg' -url ('https://github.com/microsoft/vcpkg/
 # Install buildbot
 #--------------------------------------------------------------------
 
-ENV BUILDBOT_VERSION 4.2.0
+ENV BUILDBOT_VERSION 4.2.1
 
 RUN Write-Host 'Installing buildbot ...'; `
     pip3 install -q ('buildbot-worker=={0}' -f $env:BUILDBOT_VERSION); `
