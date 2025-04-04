@@ -1,7 +1,7 @@
 # docker-webkit-dev
 Docker images for local WebKit development and CI/CD on Windows.
 
-[![Build Status](https://dev.azure.com/donjolmstead/Docker%20WebKit%20Dev/_apis/build/status%2FWebKitForWindows.docker-webkit-dev?branchName=main)](https://dev.azure.com/donjolmstead/Docker%20WebKit%20Dev/_build/latest?definitionId=1&branchName=main)
+[![Docker Image CI](https://github.com/WebKitForWindows/docker-webkit-dev/actions/workflows/docker-image.yml/badge.svg)](https://github.com/WebKitForWindows/docker-webkit-dev/actions/workflows/docker-image.yml)
 
 ## Host Setup
 Using the `webkitdev` Docker images requires a Windows host, ideally Windows 11
