@@ -68,8 +68,8 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 # Install Python 3
 #--------------------------------------------------------------------
 
-ENV PYTHON3_VERSION 3.12.8
-ENV PYTHON3_PIP_VERSION 24.3.1
+ENV PYTHON3_VERSION 3.12.9
+ENV PYTHON3_PIP_VERSION 25.0.1
 
 RUN Install-Python `
     -Version $env:PYTHON3_VERSION `
@@ -81,7 +81,7 @@ RUN copy-item C:\tools\python3\python.exe C:\tools\python3\python3.exe
 # Install pywin32 for Python 3
 #--------------------------------------------------------------------
 
-ENV PYWIN32_VERSION 308
+ENV PYWIN32_VERSION 310
 
 RUN Write-Host Write-Host 'Installing pywin32 ...'; `
     pip3 install -q ('pywin32=={0}' -f $env:PYWIN32_VERSION); `
@@ -108,7 +108,7 @@ RUN gem install webrick -v $env:WEBRICK_VERSION
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.31.4
+ENV CMAKE_VERSION 3.31.6
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -124,7 +124,7 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 # Install NuGet CLI
 #--------------------------------------------------------------------
 
-ENV NUGET_VERSION 6.12.2
+ENV NUGET_VERSION 6.13.2
 
 RUN Install-NuGet -Version $env:NUGET_VERSION -InstallationPath C:\tools\nuget;
 
