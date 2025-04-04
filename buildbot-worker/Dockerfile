@@ -12,7 +12,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 # workload. At this time the workload isn't present for Build Tools
 #--------------------------------------------------------------------
 
-ENV VCPKG_VERSION 2024.12.16
+ENV VCPKG_VERSION 2025.03.19
 ENV VCPKG_ROOT C:\vcpkg
 
 RUN Install-FromArchive -Name 'vcpkg' -url ('https://github.com/microsoft/vcpkg/archive/refs/tags/{0}.zip' -f $env:VCPKG_VERSION) -archiveRoot ('vcpkg-{0}' -f $env:VCPKG_VERSION) -installationPath $env:VCPKG_ROOT -NoVerify; `
