@@ -99,6 +99,50 @@ python3 buildbot.py;
 
 Remove-Item Env:BUILD_WORKER_PASSWORD;
 
+# Add NuGet vcpkg feeds
+#
+# Remove the token environment variable after configuration
+# as buildbot will print the entire environment and leak the
+# information.
+if (Test-Path Env:GH_PACKAGES_FEED) {
+  if (-not (Test-Path Env:GH_PACKAGES_USERNAME)) {
+    Write-Error ('WebKit buildbots require a username to connect to a vcpkg feed.
+For local development set the GH_PACKAGES_USERNAME environment variable using
+  docker run -e GH_PACKAGES_USERNAME=<gh-packages-username>');
+  }
+  if (Test-Path Env:GH_PACKAGES_TOKEN) {
+    $ghToken = $Env:GH_PACKAGES_TOKEN;
+    Remove-Item Env:GH_PACKAGES_TOKEN;
+  } elseif (Test-Path Env:GH_PACKAGES_TOKEN_FILE) {
+    Write-Host ('Loading token from {0}',$env:GH_PACKAGES_TOKEN_FILE);
+    $ghToken = Get-Content -Path $env:GH_PACKAGES_TOKEN_FILE;
+  } else {
+    Write-Error ('WebKit buildbots require a token to connect to a vcpkg feed
+For local development set the GH_PACKAGES_TOKEN environment variable using
+  docker run -e GH_PACKAGES_TOKEN=<gh-packages-token>
+While in production use docker secrets and set the location of the file using the GH_PACKAGES_TOKEN_FILE environment variable');
+  }
+
+  if (Test-Path Env:GH_PACKAGES_CACHE_TYPE) {
+    $ghCacheType = $env:GH_PACKAGES_CACHE_TYPE;
+  } else {
+    $ghCacheType = 'readwrite';
+  }
+
+  nuget sources add `
+    -Source $env:GH_PACKAGES_FEED `
+    -Name GitHubPackages `
+    -Username $env:GH_PACKAGES_USERNAME `
+    -Password $ghToken;
+
+  nuget setapikey $ghToken -Source $env:GH_PACKAGES_FEED;
+
+  Write-Host ('Vcpkg configured to use {0} as a cache with {1} access' -f $env:GH_PACKAGES_FEED,$ghCacheType);
+  $env:VCPKG_BINARY_SOURCES = ('clear;nuget,{0},{1}' -f $env:GH_PACKAGES_FEED,$ghCacheType);
+} else {
+  Write-Warning ('WebKit buildbot is not using a cache for vcpkg');
+}
+
 # Run any additional startup scripts
 $scriptPath = Join-Path $PSScriptRoot 'Scripts';
 
