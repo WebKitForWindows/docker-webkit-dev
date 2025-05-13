@@ -68,8 +68,8 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 # Install Python 3
 #--------------------------------------------------------------------
 
-ENV PYTHON3_VERSION 3.12.9
-ENV PYTHON3_PIP_VERSION 25.0.1
+ENV PYTHON3_VERSION 3.12.10
+ENV PYTHON3_PIP_VERSION 25.1.1
 
 RUN Install-Python `
     -Version $env:PYTHON3_VERSION `
@@ -108,7 +108,7 @@ RUN gem install webrick -v $env:WEBRICK_VERSION
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.31.6
+ENV CMAKE_VERSION 3.31.7
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
