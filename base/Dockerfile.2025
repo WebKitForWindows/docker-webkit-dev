@@ -1,0 +1,2 @@
+# TODO: Update to a looser tag once available! Testing 2025 can build 
+FROM mcr.microsoft.com/dotnet/framework/runtime:4.8.1-20250513-windowsservercore-ltsc2025
