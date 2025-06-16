@@ -16,8 +16,6 @@ jobs:
           os: windows-2022
         - tag: windows-2022
           os: windows-2022
-        - tag: 1809
-          os: windows-2019
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
