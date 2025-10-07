@@ -20,7 +20,7 @@ RUN Install-VSBuildTools2022 -InstallationPath C:\MSVS -Workloads `
 # Install LLVM for Clang tooling support
 #--------------------------------------------------------------------
 
-ENV LLVM_VERSION 20.1.4
+ENV LLVM_VERSION 21.1.0
 
 RUN Install-LLVM -Version $env:LLVM_VERSION -InstallationPath C:\LLVM;
 
