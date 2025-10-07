@@ -27,8 +27,7 @@ RUN Install-VSBuildTools2022 -InstallationPath C:\MSVS -Workloads `
 
 ENV LLVM_VERSION 20.1.4
 
-RUN Register-SystemPath -Path C:\LLVM\bin; `
-    Install-LLVM -Version $env:LLVM_VERSION -InstallationPath C:\LLVM;
+RUN Install-LLVM -Version $env:LLVM_VERSION -InstallationPath C:\LLVM;
 
 #--------------------------------------------------------------------
 # Install Debugging Tools for Windows

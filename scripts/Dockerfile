@@ -43,7 +43,7 @@ RUN $scriptArgs = @{ `
 # Install WebKitDev Module
 #--------------------------------------------------------------------
 
-ENV WEBKIT_DEV_VERSION 0.5.2
+ENV WEBKIT_DEV_VERSION 0.6.2
 
 RUN $scriptArgs = @{ `
         Name = 'WebKitDev'; `
