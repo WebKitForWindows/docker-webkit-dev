@@ -34,6 +34,10 @@ jobs:
     - name: Build webkitdev/buildbot-worker
       run: docker build --tag webkitdev/buildbot-worker:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} buildbot-worker
 
+    # Verify Docker image
+    - name: Verify webkitdev/buildbot-worker
+      run: docker run --rm webkitdev/buildbot-worker:${{ matrix.tag }} cmake --system-information
+
     # Publish Docker images
     - name: Dockerhub login
       if: github.ref_name == github.event.repository.default_branch
