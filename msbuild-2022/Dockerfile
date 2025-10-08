@@ -10,16 +10,11 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 #--------------------------------------------------------------------
 
 RUN Install-VSBuildTools2022 -InstallationPath C:\MSVS -Workloads `
-    Microsoft.VisualStudio.Component.Roslyn.Compiler, `
-    Microsoft.Component.MSBuild, `
-    Microsoft.VisualStudio.Component.CoreBuildTools, `
     Microsoft.VisualStudio.Workload.MSBuildTools, `
-    Microsoft.VisualStudio.Component.Windows10SDK, `
-    Microsoft.VisualStudio.Component.VC.CoreBuildTools, `
-    Microsoft.VisualStudio.Component.VC.Tools.x86.x64, `
-    Microsoft.VisualStudio.Component.VC.Redist.14.Latest, `
-    Microsoft.VisualStudio.Component.Windows10SDK.18362, `
-    Microsoft.VisualStudio.Workload.VCTools
+    Microsoft.VisualStudio.Workload.VCTools, `
+    Microsoft.VisualStudio.Component.VC.Tools.x86.x64,`
+    Microsoft.VisualStudio.Component.Windows11SDK.26100, `
+    Microsoft.VisualStudio.Component.Windows10SDK.18362;
 
 #--------------------------------------------------------------------
 # Install LLVM for Clang tooling support
