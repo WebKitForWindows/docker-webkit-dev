@@ -92,7 +92,7 @@ RUN Write-Host Write-Host 'Installing pywin32 ...'; `
 #--------------------------------------------------------------------
 
 # Locked version due to later versions not installing in container
-ENV RUBY_VERSION 3.1.3-1
+ENV RUBY_VERSION 3.1.3.1
 
 RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 
@@ -135,7 +135,7 @@ RUN Install-NuGet -Version $env:NUGET_VERSION -InstallationPath C:\tools\nuget;
 # Locked version due to later versions not installing in container
 ENV XAMPP_VERSION 8.1.6
 
-RUN choco install xampp-81 --confirm --version=$env:XAMPP_VERSION; `
+RUN Install-Xampp -Version $env:XAMPP_VERSION; `
     Update-XamppPerlLocation -perlPath C:\tools\perl; `
     Update-XamppPythonLocation -pythonPath C:\tools\python3;
 
