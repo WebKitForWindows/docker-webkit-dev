@@ -54,13 +54,9 @@ RUN Register-SystemPath -Path C:\Tools\gperf\bin; `
 
 #--------------------------------------------------------------------
 # Install Strawberry Perl x64
-#
-# ActivePerl is recommended in the WebKit documentation but won't
-# install into a docker container. Also its not free so can't
-# technically use it for a build-bot.
 #--------------------------------------------------------------------
 
-ENV PERL_VERSION 5.32.1.1
+ENV PERL_VERSION 5.42.0.1
 
 RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 
@@ -68,8 +64,10 @@ RUN Install-Perl -Version $env:PERL_VERSION -InstallationPath C:\tools\perl;
 # Install Python 3
 #--------------------------------------------------------------------
 
+# Python 3.12.x will get some security releases but no additional installers
+# Verify if 3.13.x or 3.14.x can be used with the bots before updating further
 ENV PYTHON3_VERSION 3.12.10
-ENV PYTHON3_PIP_VERSION 25.1.1
+ENV PYTHON3_PIP_VERSION 25.2
 
 RUN Install-Python `
     -Version $env:PYTHON3_VERSION `
@@ -81,7 +79,7 @@ RUN copy-item C:\tools\python3\python.exe C:\tools\python3\python3.exe
 # Install pywin32 for Python 3
 #--------------------------------------------------------------------
 
-ENV PYWIN32_VERSION 310
+ENV PYWIN32_VERSION 311
 
 RUN Write-Host Write-Host 'Installing pywin32 ...'; `
     pip3 install -q ('pywin32=={0}' -f $env:PYWIN32_VERSION); `
@@ -91,8 +89,7 @@ RUN Write-Host Write-Host 'Installing pywin32 ...'; `
 # Install Ruby
 #--------------------------------------------------------------------
 
-# Locked version due to later versions not installing in container
-ENV RUBY_VERSION 3.1.3.1
+ENV RUBY_VERSION 3.4.6.1
 
 RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 
@@ -108,7 +105,7 @@ RUN gem install webrick -v $env:WEBRICK_VERSION
 # Install CMake
 #--------------------------------------------------------------------
 
-ENV CMAKE_VERSION 3.31.7
+ENV CMAKE_VERSION 3.31.9
 
 RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 
@@ -116,7 +113,7 @@ RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
 # Install Ninja build system
 #--------------------------------------------------------------------
 
-ENV NINJA_VERSION 1.12.1
+ENV NINJA_VERSION 1.13.1
 
 RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 
@@ -124,7 +121,7 @@ RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 # Install NuGet CLI
 #--------------------------------------------------------------------
 
-ENV NUGET_VERSION 6.13.2
+ENV NUGET_VERSION 6.14.0
 
 RUN Install-NuGet -Version $env:NUGET_VERSION -InstallationPath C:\tools\nuget;
 

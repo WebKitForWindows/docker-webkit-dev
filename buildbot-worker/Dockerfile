@@ -28,7 +28,7 @@ RUN Install-FromArchive -Name 'vcpkg' -url ('https://github.com/microsoft/vcpkg/
 # Install buildbot
 #--------------------------------------------------------------------
 
-ENV BUILDBOT_VERSION 4.2.1
+ENV BUILDBOT_VERSION 4.3.0
 
 RUN Write-Host 'Installing buildbot ...'; `
     pip3 install -q ('buildbot-worker=={0}' -f $env:BUILDBOT_VERSION); `
