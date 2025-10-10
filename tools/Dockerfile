@@ -53,6 +53,30 @@ RUN Register-SystemPath -Path C:\Tools\gperf\bin; `
     gperf --version;
 
 #--------------------------------------------------------------------
+# Install CMake
+#--------------------------------------------------------------------
+
+ENV CMAKE_VERSION 3.31.9
+
+RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
+
+#--------------------------------------------------------------------
+# Install Ninja build system
+#--------------------------------------------------------------------
+
+ENV NINJA_VERSION 1.13.1
+
+RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
+
+#--------------------------------------------------------------------
+# Install NuGet CLI
+#--------------------------------------------------------------------
+
+ENV NUGET_VERSION 6.14.0
+
+RUN Install-NuGet -Version $env:NUGET_VERSION -InstallationPath C:\tools\nuget;
+
+#--------------------------------------------------------------------
 # Install Strawberry Perl x64
 #--------------------------------------------------------------------
 
@@ -100,30 +124,6 @@ RUN Install-Ruby -Version $env:RUBY_VERSION -InstallationPath C:\tools\ruby;
 ENV WEBRICK_VERSION 1.9.1
 
 RUN gem install webrick -v $env:WEBRICK_VERSION
-
-#--------------------------------------------------------------------
-# Install CMake
-#--------------------------------------------------------------------
-
-ENV CMAKE_VERSION 3.31.9
-
-RUN Install-CMake -Version $env:CMAKE_VERSION -InstallationPath C:\tools\cmake;
-
-#--------------------------------------------------------------------
-# Install Ninja build system
-#--------------------------------------------------------------------
-
-ENV NINJA_VERSION 1.13.1
-
-RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
-
-#--------------------------------------------------------------------
-# Install NuGet CLI
-#--------------------------------------------------------------------
-
-ENV NUGET_VERSION 6.14.0
-
-RUN Install-NuGet -Version $env:NUGET_VERSION -InstallationPath C:\tools\nuget;
 
 #--------------------------------------------------------------------
 # Install XAMPP
