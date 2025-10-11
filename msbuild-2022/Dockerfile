@@ -13,6 +13,7 @@ RUN Install-VSBuildTools2022 -InstallationPath C:\MSVS -Workloads `
     Microsoft.VisualStudio.Workload.MSBuildTools, `
     Microsoft.VisualStudio.Workload.VCTools, `
     Microsoft.VisualStudio.Component.VC.Tools.x86.x64,`
+    Microsoft.VisualStudio.Component.Vcpkg, `
     Microsoft.VisualStudio.Component.Windows11SDK.26100, `
     Microsoft.VisualStudio.Component.Windows10SDK.18362;
 
