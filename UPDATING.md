@@ -45,7 +45,7 @@ Use the `Build-All.ps1` PowerShell script to build the images. Again it expects
 a single argument `-Tag` which specifies the tag to build.
 
 ```powershell
-./Build-All -tag 2022
+./Build-All -tag 2025
 ```
 
 Executing the script will create all the `webkitdev` images. Most of `RUN`

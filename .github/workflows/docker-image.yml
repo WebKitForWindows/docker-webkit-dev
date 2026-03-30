@@ -16,9 +16,44 @@ jobs:
           os: windows-2022
         - tag: windows-2022
           os: windows-2022
+        - tag: 2025
+          os: windows-2025
+        - tag: windows-2025
+          os: windows-2025
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
+
+    # Free disk space by removing pre-installed software we don't need
+    - name: Free disk space
+      run: |
+        Write-Host "Disk space before cleanup:"
+        Get-PSDrive C | Select-Object Used, Free | Format-Table
+        $paths = @(
+          'C:\Android',
+          'C:\Program Files\dotnet',
+          'C:\Program Files\MongoDB',
+          'C:\Program Files\PostgreSQL',
+          'C:\Selenium',
+          'C:\hostedtoolcache',
+          'C:\Program Files\Microsoft Visual Studio',
+          'C:\vcpkg',
+          'C:\Miniconda',
+          'C:\Program Files\Go',
+          'C:\Program Files\Node.js',
+          'C:\Program Files\Ruby',
+          'C:\Program Files\Java',
+          'C:\Program Files\Eclipse Adoptium'
+        )
+        foreach ($path in $paths) {
+          if (Test-Path $path) {
+            Write-Host "Removing $path ..."
+            Remove-Item -Recurse -Force $path -ErrorAction SilentlyContinue
+          }
+        }
+        docker system prune -a -f
+        Write-Host "Disk space after cleanup:"
+        Get-PSDrive C | Select-Object Used, Free | Format-Table
 
     # Build Docker images
     - name: Build webkitdev/base
@@ -26,7 +61,7 @@ jobs:
     - name: Build webkitdev/scripts
       run: docker build --tag webkitdev/scripts:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} scripts
     - name: Build webkitdev/scm
-      run: docker build --tag webkitdev/scm:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} scm      
+      run: docker build --tag webkitdev/scm:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} scm
     - name: Build webkitdev/tools
       run: docker build --tag webkitdev/tools:${{ matrix.tag }} --build-arg IMAGE_TAG=${{ matrix.tag }} tools
     - name: Build webkitdev/msbuild-2022
@@ -38,7 +73,7 @@ jobs:
     - name: Verify webkitdev/buildbot-worker
       run: docker run --rm webkitdev/buildbot-worker:${{ matrix.tag }} cmake --system-information
 
-    # Publish Docker images
+    # Publish Docker images to DockerHub
     - name: Dockerhub login
       if: github.ref_name == github.event.repository.default_branch
       uses: docker/login-action@v3
