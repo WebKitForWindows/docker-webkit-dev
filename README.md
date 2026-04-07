@@ -5,9 +5,9 @@ Docker images for local WebKit development and CI/CD on Windows.
 
 ## Host Setup
 Using the `webkitdev` Docker images requires a Windows host, ideally Windows 11
-or Windows Server 2022 but Windows 10 and Windows Server 2019 can also be used,
-with [Docker](https://www.docker.com/) installed and targeting Windows
-containers. For new installs follow the latest documentation to setup
+or Windows Server 2022/2025, with [Docker](https://www.docker.com/) installed
+and targeting Windows containers. For new installs follow the latest
+documentation to setup
 [Windows for containers](https://learn.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment).
 
 ## Images
@@ -29,18 +29,16 @@ WebKit infrastructure.
 | [buildbot-worker](https://hub.docker.com/r/webkitdev/buildbot-worker) | Contains Buildbot and scripts to connect to WebKit CI/CD infrastructure |
 
 Docker images support tagging. For Windows images the tag references the version
-of the container base image, Windows Server 2022 and Windows Server 2019.
-Compatibility depends on what the host OS is. In general Windows 11 needs to
-target 2022 tags and Windows 10 needs to target 2019 tags. For the latest
-information on Windows container version compatibility see the
+of the container base image. Compatibility depends on what the host OS is. For
+the latest information on Windows container version compatibility see the
 [documentation](https://learn.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/version-compatibility).
 
-| Tag | Automated | Win 11 | Win 10 | Description |
-|---|:---:|:---:|:---:|---|
-| 2022 | :white_check_mark: | :white_check_mark: | :x: | A Windows 2022 server container |
-| windows-2022 | :x: | :white_check_mark: | :x: | A Windows container, used for Layout Tests |
-| 1809 | :x: | :white_check_mark: | :white_check_mark: | A Windows 2019 server container |
-| windows-1809 | :x: | :white_check_mark: | :white_check_mark: | A Windows container, used for Layout Tests |
+| Tag | Automated | Description |
+|---|:---:|---|
+| 2022 | :white_check_mark: | A Windows Server 2022 container |
+| windows-2022 | :x: | A Windows container, used for Layout Tests |
+| 2025 | :white_check_mark: | A Windows Server 2025 container |
+| windows-2025 | :x: | A Windows container, used for Layout Tests |
 
 The `windows-<version>` have a larger base image containing more Windows OS
 components making them ideal for testing WebKit. The other tags use Windows
@@ -48,7 +46,7 @@ Server Core and are suitable for building WebKit.
 
 ### Building locally
 > [!IMPORTANT]
-> Windows 11 and Windows Server 2022 users should pull the images directly from
+> Windows 11 and Windows Server 2022/2025 users should pull the images directly from
 > DockerHub rather than building locally. The only exception is when
 > [updating the images](UPDATING.md).
 
@@ -61,7 +59,7 @@ and tagged. The created time should be within the time frame the script was
 executing in.
 
 ## Building the Windows WebKit port
-With the `webkitdev/msbuild-2022` image everything is there to do a build of 
+With the `webkitdev/msbuild-2022` image everything is there to do a build of
 the Windows WebKit port. Start out by doing a local checkout of the
 [WebKit repository](https://github.com/WebKit/WebKit). The `docker run` command
 needs to be populated with the following fields.
@@ -70,7 +68,7 @@ needs to be populated with the following fields.
 |---|---|
 | tag | The tag to use |
 | cpu-count | The number of CPUs to dedicate to the container (optional on a Windows Server host) |
-| [memory](https://docs.docker.com/reference/cli/docker/container/run/#memory) | The memory limit for the container (optional on a Windows Server host) | 
+| [memory](https://docs.docker.com/reference/cli/docker/container/run/#memory) | The memory limit for the container (optional on a Windows Server host) |
 | [volume](https://docs.docker.com/reference/cli/docker/container/run/#volume) | A local path containing the WebKit checkout, use `/` over `\` |
 
 ```powershell
@@ -88,7 +86,7 @@ like this :point_down:.
 docker run --name build --rm -it `
     --cpu-count=6 --memory=16g `
     --volume C:/GitHub/webkit:C:/webkit `
-    webkitdev/msbuild-2022:2022 powershell
+    webkitdev/msbuild-2022:2025 powershell
 ```
 
 Once the command is run it will place you into a Powershell session. From there
@@ -103,9 +101,9 @@ perl Tools\Scripts\build-webkit
 ```
 
 > [!NOTE]
-> Building in a container in Hyper-V isolation, the default for Windows 11 and
-> 10, will take longer than a local build. Building in a container in process
-> mode, the default for Windows Server 2022 and 2019, will build in a similar
+> Building in a container in Hyper-V isolation, the default for Windows 11,
+> will take longer than a local build. Building in a container in process
+> mode, the default for Windows Server 2022 and 2025, will build in a similar
 > time as a local build.
 >
 > Ideally dedicate a large amount of resources when running in Hyper-V to reduce

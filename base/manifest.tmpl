@@ -7,14 +7,14 @@ tags:
 {{/if}}
 manifests:
   -
-    image: webkitdev/base:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}1809
-    platform:
-      architecture: amd64
-      os: windows
-      version: 1809
-  -
     image: webkitdev/base:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}2022
     platform:
       architecture: amd64
       os: windows
       version: 2022
+  -
+    image: webkitdev/base:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}2025
+    platform:
+      architecture: amd64
+      os: windows
+      version: 2025

@@ -6,8 +6,6 @@
   "enabledManagers": ["dockerfile"],
   "dockerfile": {
     "ignorePaths": [
-      "base/Dockerfile.aws",
-      "base/Dockerfile.windows-aws",
       "scripts/",
       "scm/",
       "tools/",

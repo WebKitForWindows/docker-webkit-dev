@@ -3,7 +3,7 @@ The `docker-webkit-dev` project contains Docker images for running Buildbot
 workers that connect to WebKit infrastructure. The Windows WebKit port builds
 happen within Docker containers running the `webkitdev/buildbot-worker` image.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > To connect to WebKit infrastructure credentials are required.
 > Contact the infrastructure team on [Slack](https://webkit.slack.com) by
 > dropping a message in the `#dev` channel for assistance in connecting new
@@ -18,9 +18,10 @@ compatibility see the
 
 | Tag Name  | Automated | Description |
 |---|:---:|---|
-| 2022 | :white_check_mark: | A Windows 2022 server container |
+| 2022 | :white_check_mark: | A Windows Server 2022 container |
 | windows-2022 | :x: | A Windows container, used for Layout Tests |
-| 1809 | :x: | A Windows 2019 server container |
+| 2025 | :white_check_mark: | A Windows Server 2025 container |
+| windows-2025 | :x: | A Windows container, used for Layout Tests |
 
 Visit [Docker Hub](https://hub.docker.com/r/webkitdev/buildbot-worker/tags) to
 see when the last build happened for the image's tags.
@@ -39,7 +40,7 @@ for more details.
 | BUILD_WORKER_NAME | :white_check_mark: | Name for the worker, provided by infrastructure team  |
 | BUILD_WORKER_PASSWORD | :white_check_mark: | Password for the worker, provided by infrastructure team |
 | BUILD_WORKER_KEEPALIVE | :x: | Time in seconds that messages should be sent by the worker to the server, defaults to 240 |
-| ADMIN_NAME | :x:| Contact name for the admin of the worker | 
+| ADMIN_NAME | :x:| Contact name for the admin of the worker |
 | ADMIN_EMAIL | :x: | Contact e-mail address for the admin of the worker |
 | HOST_DESCRIPTION |:x: | A description of the host running the worker |
 | COMPILER | :white_check_mark: | Needs to be set to `Clang` since the alternative, `cl`, is no longer able to build WebKit |
@@ -60,8 +61,8 @@ COMPILER=Clang
 ```
 
 ## Running the Buildbot worker
-On a Windows Server 2022 machine run the following in a powershell session. On
-Windows Server 2022 the Docker container runs in process isolation mode which
+On a Windows Server 2022/2025 machine run the following in a powershell session.
+On Windows Server 2022/2025 the Docker container runs in process isolation mode which
 gives it access to all the resources of the host.
 
 > [!NOTE]
