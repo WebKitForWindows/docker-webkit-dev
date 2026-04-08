@@ -69,6 +69,14 @@ ENV NINJA_VERSION 1.13.1
 RUN Install-Ninja -Version $env:NINJA_VERSION -InstallationPath C:\tools\ninja;
 
 #--------------------------------------------------------------------
+# Install ccache
+#--------------------------------------------------------------------
+
+ENV CCACHE_VERSION 4.13.2
+
+RUN Install-Ccache -Version $env:CCACHE_VERSION;
+
+#--------------------------------------------------------------------
 # Install NuGet CLI
 #--------------------------------------------------------------------
 
