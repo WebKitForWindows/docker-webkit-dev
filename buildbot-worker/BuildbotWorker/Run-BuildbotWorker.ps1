@@ -78,12 +78,7 @@ Make sure the amount of disk space is set in the storage-opts setting of the dae
 Write-Host 'Initializing Visual Studio environment';
 Initialize-VSEnvironment -Architecture 'amd64' -Path (Get-VSBuildTools2022VCVarsAllPath);
 
-if ($env:COMPILER -eq 'Clang') {
-  $compilerExe = 'clang-cl.exe';
-} else {
-  $compilerExe = 'cl.exe';
-}
-
+$compilerExe = 'clang-cl.exe';
 $compilerPath = (Get-Command $compilerExe).Path;
 
 Write-Host ('Found compiler at {0}' -f $compilerPath);
