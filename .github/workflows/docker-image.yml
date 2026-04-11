@@ -24,6 +24,43 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    # Wait for Docker daemon to be ready
+    - name: Wait for Docker
+      run: |
+        Write-Host "Waiting for Docker to be ready..."
+        for ($i = 1; $i -le 60; $i++) {
+          $output = docker info 2>&1
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "Docker is ready!"
+            break
+          }
+          if ($i -eq 1) {
+            Write-Host "Docker not ready. Checking for Docker services..."
+            $dockerServices = Get-Service | Where-Object { $_.Name -like '*docker*' -or $_.DisplayName -like '*docker*' }
+            if ($dockerServices) {
+              Write-Host "Available Docker services:"
+              $dockerServices | Format-Table Name, Status, DisplayName -AutoSize
+              $dockerServices | Where-Object { $_.Status -ne 'Running' } | ForEach-Object {
+                Write-Host "Starting service: $($_.Name)"
+                Start-Service $_.Name -ErrorAction SilentlyContinue
+              }
+            } else {
+              Write-Error "No Docker services found."
+              exit 1
+            }
+          }
+          if ($i % 10 -eq 0) {
+            Write-Host "Attempt $i/60 - Still waiting... Error: $output"
+          } else {
+            Write-Host "Attempt $i/60"
+          }
+          if ($i -eq 60) {
+            Write-Error "Docker failed to start after 60 attempts"
+            exit 1
+          }
+          Start-Sleep -Seconds 2
+        }
+
     # Free disk space by removing pre-installed software we don't need
     - name: Free disk space
       run: |
