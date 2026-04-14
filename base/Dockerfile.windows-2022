@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/windows/server:ltsc2022@sha256:03b35230c22f744aea88e633344f5d1d3c96655d73bab918afa1728ceb29e3cd
+FROM mcr.microsoft.com/windows/server:ltsc2022@sha256:4e2ca3ffa1e8fc4dba682b73da11f778ea0cdf3a5099db6ea52f8036a2d594e5
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
