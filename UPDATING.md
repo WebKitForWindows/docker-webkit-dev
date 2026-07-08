@@ -25,6 +25,7 @@ site for updates using the :point_down: table.
 | cmake | https://cmake.org/download |
 | ninja | https://ninja-build.org |
 | nuget | https://www.nuget.org/downloads |
+| swift | https://www.swift.org/install/windows |
 | llvm | https://github.com/llvm/llvm-project/releases |
 
 Every software in the Dockerfile has a corresponding `_VERSION` environment
