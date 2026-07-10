@@ -26,6 +26,17 @@ ENV LLVM_VERSION 21.1.8
 RUN Install-LLVM -Version $env:LLVM_VERSION -InstallationPath C:\LLVM;
 
 #--------------------------------------------------------------------
+# Install Swift toolchain
+#
+# Swift is becoming a required component for building WebKit. It relies
+# on the MSVC toolchain and Windows SDK installed above.
+#--------------------------------------------------------------------
+
+ENV SWIFT_VERSION 6.3.3
+
+RUN Install-Swift -Version $env:SWIFT_VERSION;
+
+#--------------------------------------------------------------------
 # Install Debugging Tools for Windows
 #--------------------------------------------------------------------
 
