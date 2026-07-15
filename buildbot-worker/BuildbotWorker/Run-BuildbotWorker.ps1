@@ -74,6 +74,34 @@ Make sure the amount of disk space is set in the storage-opts setting of the dae
   "storage-opts": [ "size={0}GB" ]' -f $minDiskSpace);
 }
 
+# Make a request to aws.amazon.com to prevent certificate errors when interacting with S3
+Write-Host 'Make a HTTP request to aws.amazon.com to prevent S3 certificate errors';
+$commandletArgs = @{
+  UseBasicParsing = $true;
+  Method = 'Head'
+};
+$urls = @(
+  'https://aws.amazon.com'
+);
+
+if (Test-Path env:HTTPS_PROXY) {
+  $commandletArgs['Proxy'] = $env:HTTPS_PROXY;
+}
+
+foreach ($url in $urls) {
+  $commandletArgs['Uri'] = $url;
+  Write-Host ('Requesting {0}' -f $url);
+  Invoke-WebRequest @commandletArgs;
+}
+
+# Move the git bash msys perl out of the way, so strawberry perl is on the path
+Write-Host "Rename git bash msys perl, so strawberry perl is picked up first on PATH"
+bash -c "test -f /usr/bin/perl && mv /usr/bin/perl /usr/bin/perl-msys"
+
+# Clear ccache on restart
+Write-Host "Clearing ccache"
+ccache.exe -C
+
 # Initialize the Visual Studio environment
 Write-Host 'Initializing Visual Studio environment';
 Initialize-VSEnvironment -Architecture 'amd64' -Path (Get-VSBuildTools2022VCVarsAllPath);
